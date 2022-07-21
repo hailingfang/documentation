@@ -37,5 +37,7 @@ every of 2 bits of a byte for genotype.
 * 01: Missing
 
 ## reference
+
 [bed file](https://www.cog-genomics.org/plink/1.9/formats)
+
 [plink2R](https://github.com/gabraham/plink2R/blob/master/plink2R/src/data.cpp)
