@@ -29,6 +29,9 @@ header line, and each line contain six fields.
         ...
     }:(here are V time replication, each represent a variant of .bim)
 
+## individuals order across byte.
+
+![plink_bed_file](./imgs/plink_bed_file.svg)
 
 every of 2 bits of a byte for genotype.  
 * 00: Homozygous of first allele in .bim file.
