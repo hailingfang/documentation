@@ -1,5 +1,5 @@
 ==========
-blayout
+MLBF(Markup Language for Binary File)
 ==========
 
 A method/language to describe binary file orgnization.
@@ -65,7 +65,7 @@ Above is syntax of language. the [], <>, (), {} is conserved as key as syntex.
 
     "[...]<...>(...)" make up a block.
     
-    "{}" is used to grope them. It can have "[]" at start or have a "()" at end.
+    "{}" is used to group them. It can have "[]" at start or have a "()" at end.
 
 All characters between "[]", "<>", "()" and "{}" is ogmited.
 
