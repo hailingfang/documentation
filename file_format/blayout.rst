@@ -2,8 +2,8 @@
 blayout
 ==========
 
-One way to describe binary file orgnization.
----------------------------------------------
+A method/language to describe binary file orgnization.
+==========================================================
 
 Introduction
 ++++++++++++++++++
