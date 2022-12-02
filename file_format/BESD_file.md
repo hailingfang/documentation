@@ -24,42 +24,45 @@ There kinds of file format of besd file. First is Dense file type, and second is
 
 
 ## dense file format | SMR_DENSE_3
-    [1]<int32>(file type, 5 for dense file type)
-    [1]<int32>(sample sile, -9 for NA)
-    [1]<int32|$1>(esi number)
-    [1]<int32|$2>(epi number)
-    [12]<int32>(value is -9)
-    [$2]{
-        
-        {[$1]<float>(beta value of all snp of probe 1, -9 for NA), [$1]<float>(se value of all snp of probe 1, -9 for NA)}
-        {[$1]<float>(beta value of all snp of probe 2, -9 for NA), [$1]<float>(se value of all snp of probe 2, -9 for NA)}
-        ...
-    }
+    [1]<int32>(file type, 5 for dense file type;)
+    [1]<int32>(sample sile, -9 for NA;)
+    [1]<int32 | $esi_num>(esi number;)
+    [1]<int32 | $epi_num>(epi number;)
+    [12]<int32>(value is -9;)
+    [$epi_num]{
+        [1]{
+            [$esi_num]<float>(beta value, -9 for NA;)
+            [$esi_num]<float>(se value, -9 for NA;);
+        }(beta value and se vaule of same probe;)
+    }(the order if same consistent with epi file;)
 
 
 ## sparse file formate | SMR_SPARSE_3 SPARSE_BELT
-    [1]<int32>(file type, 3 for sparse file type)  
-    [1]<int32>(sample size, -9 for NA)  
-    [1]<int32>(number of esi)  
-    [1]<int32|$1>(number of probe)  
-    [12]<int32>(value is -9)  
-    [1]<uint64>(number of sparse beta se value)  
-    [1]<uint64>(value is 0)  
-    [$1]{  
-        {[1]<uint64|$2>(beta value offset of probe 1), [1]<uint64|$2>(se value offset of probe 1)}  
-        {[1]<uint64|$3>(beta value offset of probe 2), [1]<uint64|$3>(se value offset of probe 2)}  
-        ...  
-    }
-    [$1]{  
-        {[$2]<uint32>(beta corresponding snp/esi index of probe 1 ), [$2]<uint32>(se corresponding snp/esi index of probe 1)}  
-        {[$3]<uint32>(beta corresponding snp/esi index of probe 2 ), [$3]<uint32>(se corresponding snp/esi index of probe 2)}  
-        ...  
-    }  
-    [$1]{  
-        {[$2]<float>(beta value of probe 1), [$2]<float>(se value of probe 1)}  
-        {[$3]<float>(beta value of probe 2), [$3]<float>(se value of probe 2)}  
-        ...  
-    } 
+    [1]<int32>(file type, 3 for sparse file type;)  
+    [1]<int32>(sample size, -9 for NA;)  
+    [1]<int32>(number of esi;)  
+    [1]<int32 | $epi_num>(number of probe;)  
+    [12]<int32>(value is -9;)  
+    [1]<uint64>(number of sparse beta se value;)  
+    [1]<uint64>(value is 0;)  
+    [$epi_num]{  
+        [1]{
+            [1]<uint64|$beta_offset>(beta value offset of probe;)
+            [1]<uint64|$se_offset>(se value offset of probe;)
+        }(offset of beta se, $beta_offset should equal to $se_offset;) 
+    }()
+    [$epi_num]{  
+        {
+            [$beta_offset]<uint32>(beta corresponding snp/esi index of probe 1;)
+            [$se_offset]<uint32>(se corresponding snp/esi index of probe 1;)
+        }  
+    }()  
+    [$epi_num]{  
+        {
+            [$beta_offset]<float>(beta value of probe 1;)
+            [$se_offset]<float>(se value of probe 1;)
+        }  
+    }()
 
 ## SMR_SPARSE_3F 0x40400000
     [1]<int32>(file type, value is 0x40400000)

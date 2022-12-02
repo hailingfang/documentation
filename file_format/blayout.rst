@@ -33,6 +33,7 @@ Syntax
 
     }()
     [$flag > 0? 1: 0]<int32>()
+    [1]<int =$var1 * 10>()
 
 
 Above is a example to use this language. the [], <>, (), {} is conserved as key as syntex.
