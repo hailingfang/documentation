@@ -16,10 +16,68 @@ Syntax
 
 .. code-block::
 
+    [a_number; expression; @individual_name]
+    <block_type; $variable_value_assignedto; |expression>
+    (lable="";)
+    {...}
+
+
+Above is syntax of language. the [], <>, (), {} is conserved as key as syntex.
+
+
+1. [...] 
+
+    The repeat of unit.
+
+    "..."
+    
+    can be a number which reprent have repeat times;(required)
+
+    can  be a expression, the value of expression reprent the repeat times;
+
+    can be a symble which start with "@", this same is name of individual. 
+
+    each part is sperated by ";".
+
+2. <...>
+
+    Unit type.
+
+    "..."
+
+    can be a unit type, include: bit, byte, char, int, long, uint32, float et al;(required)
+
+    can be a symble which start with "$", this symble is variable reprent the value of the unit;
+
+    can be a expression start with "|", the value of expression will be assiigned to unit;
+
+    each part is sperated by ";".
+
+3. (...)
+
+    Atributes.
+
+    "..."
+
+    is saveral 'lable=""' part which sperated by ";".
+
+4. {...}
+
+    "[...]<...>(...)" make up a block.
+    
+    "{}" is used to grope them. It can have "[]" at start or have a "()" at end.
+
+All characters between "[]", "<>", "()" and "{}" is ogmited.
+
+Example
+++++++++++++++++++
+
+.. code-block::
+
     #Example:
 
-    [1]<uint32>()
-    [1]<uint32|$var1>()
+    [1]<uint32>(value="1, 2 ,3"; describe="head flag")
+    [1]<uint32; $var1>(describe="head size")
     [$var1 + 2]<char>()
     [12]{
         [3]<uint64>()
@@ -35,30 +93,5 @@ Syntax
     [$flag > 0? 1: 0]<int32>()
     [1]<int =$var1 * 10>()
 
-
-Above is a example to use this language. the [], <>, (), {} is conserved as key as syntex.
-
-
-1. [*Number*], The number of Unit 
-
-    Content within [] is *Number* a number, a variable or a expression. To reprent the
-    repeat of unit.
-
-2. <*Unit*>, The *Unit*
-
-    content within <> is Unit, can be bit, char, int, long, flaot, or int32, uint32 et al.
-    The value of this Uint can be represented by a variable. For example, <int | $myvar>.
-
-3. (*Describe*), The description of Unit
-
-    Conten within (), is description of unit.
-
-4. {*Group*}, Group the Unit
-
-    To group a set of units as a unit. The to describe its repeat and meaning.
-
-
-Example
-++++++++++++++++++
 
 Here are more example within this directory.
