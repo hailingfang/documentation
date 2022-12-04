@@ -24,6 +24,9 @@ There kinds of file format of besd file. First is Dense file type, and second is
 
 
 ## dense file format | SMR_DENSE_3
+
+```
+
     [1]<int32>(value="5"; name="besd type"; description="5 for dense")
     [1]<int32>(name="sample size"; NA="-9")
     [1]<int32; $esi_num>(name="number of esi")
@@ -36,8 +39,11 @@ There kinds of file format of besd file. First is Dense file type, and second is
         }(belong="@indi_epi"; NA="-9")
     }(order="@indi_epi is ordered as epi file")
 
+```
 
 ## sparse file formate | SMR_SPARSE_3 SPARSE_BELT
+
+```
     [1]<int32>(value="3"; name="besd type"; description="3 for sparse file type")  
     [1]<int32>(name="sample size", NA="-9";)  
     [1]<int32>(name="esi number")  
@@ -64,7 +70,12 @@ There kinds of file format of besd file. First is Dense file type, and second is
         }(belong="@indi_epi")  
     }order="epi file")
 
+```
+
 ## SMR_SPARSE_3F 0x40400000
+
+```
+
     (define="$epi_number=length of epi file")
     [1]<int32>(name="file type", value="0x40400000")
     [1]<uint64; =sigma(i = 1; i <= $epi_number; i++>)(esi numb of $i)>(name="number beta or se value")
@@ -85,4 +96,4 @@ There kinds of file format of besd file. First is Dense file type, and second is
         ...
     }
 
-
+```
