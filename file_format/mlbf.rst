@@ -1,6 +1,6 @@
-==========
+======================================
 MLBF(Markup Language for Binary File)
-==========
+======================================
 
 A method/language to describe binary file orgnization.
 ==========================================================
