@@ -15,8 +15,8 @@ first 12 bytes:
     [1]<char>(type of data. 0 for gene expression data, 1 for DNA methylation data, and 2 for any other type of data)
     [1]<char>(reserved)
     [1]<char>(reserved)
-    [1|$1]<int_32>(number of individual)
-    [1|$2]<int_32>(number of probe)
+    [1|$1]<int32>(number of individual)
+    [1|$2]<int32>(number of probe)
     [[$1] * [$2]]<double>(values, the length is equtal to number of individual * number of probe.)
 
 
