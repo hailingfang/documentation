@@ -83,22 +83,22 @@ Defined C macros for besd file format.
 ## SMR_SPARSE_3F 0x40400000
 
 ```
+    # !Need correct
 
-    (define="$epi_number=length of epi file")
-    [1]<int32>(name="file type", value="0x40400000")
-    [1]<uint64; =sigma(i = 1; i <= $epi_number; i++>)(esi numb of $i)>(name="number beta or se value")
-    [1]<uint64>(value="0", name="start beta se offset")
-    [$epi_number; @indi_epi]{
-        {[1]<uint64|$esi_num>(beta value offset of probe 1), [1]<uint64|$1>(se value offset of probe 1)}
-        {[1]<uint64|$esi_num>(beta value offset of probe 2), [1]<uint64|$2>(se value offset of probe 2)}
-        ...
-    }
-    [$epi number]{
+    []<>(%defvalue $epi_num "length of epi file")
+    [1]<int32>(dsp="file type"; value="0x40400000")
+    [1]<uint64; $value_num; $value_num = 0;  for(i = 1; i <= $epi_numr; i++>)($value_num += $beta_offset + $se_offset)>(dsp="number beta or se value")
+    [1]<uint64>(dsp="start beta se offset"; value="0")
+    [$epi_num; @]{
+        [1]<uint64; @epi_num.$beta_offset>(offset of beta value)
+        [1]<uint64; @epi_num.$se_offset>(offset of se value)
+    }(dsp="offset length or number of beta and se of each probe"; order="epi file")
+    [$epi num; @]{
         {[$1]<uint32>(beta esi file index of probe 1), [$1]<uint32>(se esi file index of probe 1)}
         {[$2]<uint32>(bete esi file index of probe 2), [$2]<uint32>(se esi file index of probe 2)}
         ...
     }
-    [$epi number]{
+    [$epi num; @]{
         {[$1]<float>(beta value of probe 1), [$1]<float>(se value of probe 1)}
         {[$2]<float>(beta value of probe 2), [$2]<float>(se value of probe 2)}
         ...
