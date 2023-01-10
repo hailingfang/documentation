@@ -27,7 +27,7 @@ Above is syntax of language. the :code:`[], <>, (), {}` is conserved as key as s
 :code:`[...]<...>(...)` or :code:`[...]{...}(...)`. The :code:`[]` and :code:`()` of second combination can be omited.
 
 
-\1. [...] 
+1. [...] 
 
     The number of block.
 
@@ -42,7 +42,7 @@ Above is syntax of language. the :code:`[], <>, (), {}` is conserved as key as s
     Each part is sperated by ";". Example :code:`[$var_a * 2; @ind_a]<int>(name="foo")`
 
 
-\2. <...>
+2. <...>
 
     block type.
 
@@ -56,7 +56,7 @@ Above is syntax of language. the :code:`[], <>, (), {}` is conserved as key as s
 
     Each part is sperated by ";".
 
-\3. (...)
+3. (...)
 
     Atributes.
 
@@ -64,7 +64,7 @@ Above is syntax of language. the :code:`[], <>, (), {}` is conserved as key as s
 
     is saveral 'lable=""' part which sperated by ";".
 
-\4. {...}
+4. {...}
 
     "[...]<...>(...)" make up a block.
     
