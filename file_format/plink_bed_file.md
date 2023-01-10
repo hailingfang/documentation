@@ -26,6 +26,8 @@ header line, and each line contain six fields.
 []<>(%defvalue $ind_num "length of .fam file")
 []<>(%defvalue $variant_num "length of .bim file")
 [3]<char>(dsp="magic number, in lasted plink version, them should be 0x6c, 0x1b, 0x01")
+
+[]<>(#--)
 [$variant_num]{
     [$ind_num]{
         [2]<bit>()
@@ -34,6 +36,16 @@ header line, and each line contain six fields.
         [2]<bit>()
     }(dsp="blank 2-bits block for aliging"; value="00")
 }(dsp="genotype data of each variant", order="bim file"; align="individual of each variant was aligned into 4 2-bits, if individual of variant is not divisible by 4, use blank block to make it alined")
+[]<>(--#)
+
+[$variant_num] {
+    [ceil($ind_num / 4); @ind_iter] {
+        [1]{[2]<bit>()}(dsp="genotype of individual @ind_item + 3"; char_bit_order="7-8")
+        [1]{[2]<bit>()}(dsp="genotype of individual @ind_item + 2"; char_bit_order="5-6")
+        [1]{[2]<bit>()}(dsp="genotype of individual @ind_item + 1"; char_bit_order="3-4")
+        [1]{[2]<bit>()}(dsp="genotype of individual @ind_item + 0"; char_bit_order="1-2")
+    }(dsp="genotype of 4 individuals, store by 4 2-bits block, or in other word a char"; order="fam file, step lenght is 4"; value_each="00: Homozygous of first allele in .bim file. 10: Heterozygous. 11: Homozygous of second allele in .bim file. 01: Missing"; align="aligned to a char for every 4 individual, if not 4 use blank block to fill up"; blank_block="00")
+}(dsp="genotype of each variant"; order="bim file")
 
 
 ```
