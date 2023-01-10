@@ -2,7 +2,7 @@
 MLBF(Markup Language for Binary File)
 ======================================
 
-version: 0.3.0; By Benjamin Fang
+version: 0.3.1; By Benjamin Fang
 
 **A method/language to describe binary file orgnization**.
 
@@ -120,7 +120,13 @@ Detials
 
 7. Comments
 
-    :code:`<>[](#this is a comment)`
+    :code:`[]<>(#this is a comment)`
+
+    .. code::
+
+        []<>(#--)
+            all content within this is commented
+        []<>(--#)
 
 
 All characters between "[]", "<>", "()" and "{}" is ogmited.
