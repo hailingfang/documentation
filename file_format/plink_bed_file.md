@@ -22,12 +22,21 @@ header line, and each line contain six fields.
 
 ## .bed file
 
-    [3]<char>(magic number, in lasted plink version, them should be 0x6c, 0x1b, 0x01)  
-    {
-        [N / 4]<char>(N is number of sample of .fam. if N is not divisible by 4, the extra high order bits in last byte of each block are always zero.)  
-        [N / 4]<char>()()  
-        ...
-    }:(here are V time replication, each represent a variant of .bim)
+```
+[]<>(%defvalue $ind_num "length of .fam file")
+[]<>(%defvalue $variant_num "length of .bim file")
+[3]<char>(dsp="magic number, in lasted plink version, them should be 0x6c, 0x1b, 0x01")
+[$variant_num]{
+    [$ind_num]{
+        [2]<bit>()
+    }(dsp="genotype of each individual", value="00: Homozygous of first allele in .bim file. 10: Heterozygous. 11: Homozygous of second allele in .bim file. 01: Missing"; order="fam file")
+    [ceil($ind_num / 4) * 4 - $ind_num]{
+        [2]<bit>()
+    }(dsp="blank 2-bits block for aliging"; value="00")
+}(dsp="genotype data of each variant", order="bim file"; align="individual of each variant was aligned into 4 2-bits, if individual of variant is not divisible by 4, use blank block to make it alined")
+
+
+```
 
 ## individuals order across byte.
 
