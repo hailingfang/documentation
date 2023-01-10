@@ -2,8 +2,9 @@
 MLBF(Markup Language for Binary File)
 ======================================
 
-A method/language to describe binary file orgnization.
-==========================================================
+version: 0.2; By Benjamin Fang
+
+**A method/language to describe binary file orgnization**.
 
 Introduction
 ++++++++++++++++++
@@ -16,44 +17,46 @@ Syntax
 
 .. code-block::
 
-    [a_number; expression; @individual_name]
-    <block_type; $variable_value_assignedto; |expression>
+    [a_number | expression; @individual_name]
+    <block_type | condition_expression; $variable_represent_value_of_this_block;>
     (lable="";)
     {...}
 
 
-Above is syntax of language. the [], <>, (), {} is conserved as key as syntex.
+Above is syntax of language. the :code:`[], <>, (), {}` is conserved as key as syntex. Those key make up
+:code:`[...]<...>(...)` or :code:`[...]{...}(...)`. The :code:`[]` and :code:`()` of second combination can be omited.
 
 
-1. [...] 
+\1. [...] 
 
-    The repeat of unit.
+    The number of block.
 
-    "..."
-    
-    can be a number which reprent have repeat times;(required)
+    "..." can be:
 
-    can  be a expression, the value of expression reprent the repeat times;
+    1. a number which represent the number of block. For example :code:`[3]<int>(name="foo")`.
 
-    can be a symble which start with "@", this same is name of individual. 
+    2. a expression consists constants and variables, the value of expression reprent the number of block. For example :code:`[$var_a * 2 + 3]<int>(name="foo")`
 
-    each part is sperated by ";".
+    3. a symble which start with "@", This is used to reprent the each block. Example :code:`[$var_a; @each_block]<int>(name="foo")` 
 
-2. <...>
+    Each part is sperated by ";". Example :code:`[$var_a * 2; @ind_a]<int>(name="foo")`
 
-    Unit type.
 
-    "..."
+\2. <...>
 
-    can be a unit type, include: bit, byte, char, int, long, uint32, float et al;(required)
+    block type.
 
-    can be a symble which start with "$", this symble is variable reprent the value of the unit;
+    "..." can be:
 
-    can be a expression start with "|", the value of expression will be assiigned to unit;
+    1. a block type. Anyone of :code:`bit, byte, char, uint8, int, long, int32, uint32, uint64, float, double` and so on. Example :code:`[7]<int32>(name="foo")`.
 
-    each part is sperated by ";".
+    2. a variable begain with '$'. For example :code:`[3]<long; $var_a>(name="foo")`.
 
-3. (...)
+    3. a expression start with :code:`|`, the value of expression will be assiigned to block. Example :code:`<int; |31>`.
+
+    Each part is sperated by ";".
+
+\3. (...)
 
     Atributes.
 
@@ -61,7 +64,7 @@ Above is syntax of language. the [], <>, (), {} is conserved as key as syntex.
 
     is saveral 'lable=""' part which sperated by ";".
 
-4. {...}
+\4. {...}
 
     "[...]<...>(...)" make up a block.
     
