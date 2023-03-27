@@ -78,6 +78,30 @@ Defined C macros for besd file format.
         [@epi_num.$se_offset]<float>(dsp="esi se value"; esi_index=$se_index)
     }(dsp="beta as se value", order="epi file")
 
+
+    [1]<int32; =3>(dsp="besd type")
+    [1]<int32>(dsp="sample number"; value="-9 if unknown")
+    [1]<int32; $esi_num>(dsp="esi_num")
+    [#>%assert]<$esi_num == >()
+    [<#]<>()
+    [1]<int32; $epi_num>(dsp="esi_num")
+    [12]<int32; =-9>(dsp="keeped for future")
+    [%let]<$value_num = 0>()
+    [1]<uint64; =:$value_num>(dsp="value number")
+    [1]<uint64; =0; @beta_se_offset; $se_offset>(dsp="first value of offset")
+    [$epi_num]{
+        [1]<uint64; +@beta_se_offset; +$value_num>(dsp="beta offset")
+        [1]<uint64; +@beta_se_offset; +$value_num>(dsp="se offset")
+    }
+    [$epi_num; ~i] {
+        [@beta_offset[2 * $i + 1] - @beta_offset[2 * $i]]<uint32>(dsp="index of beta")
+        [@beta_se_offset[2 * $i + 2] - @beta_se_offset[2 * $i + 1]]<uint32>(dsp="index of se")
+    }
+    [$epi_num; ~i] {
+        [@beta_offset[2 * $i + 1] - @beta_offset[2 * $i]]<float>(dsp="index of beta")
+        [@beta_se_offset[2 * $i + 2] - @beta_se_offset[2 * $i + 1]]<float>(dsp="index of se")   
+    }
+
 ```
 
 ## SMR_SPARSE_3F 0x40400000

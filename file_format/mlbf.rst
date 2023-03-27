@@ -2,7 +2,7 @@
 MLBF(Markup Language for Binary File)
 ======================================
 
-version: 0.3.1; By Benjamin Fang
+version: 0.4.0; By Benjamin Fang
 
 **A method/language to describe binary file orgnization**.
 
@@ -12,33 +12,17 @@ Introduction
 I need a method to describe the layout of binary file quickly. So I presented this
 method to do this.
 
-You can use other markup language to describe the structure of binary file, for example xml or even json.
-But this language is more same.
-
 For example, if you want to describe a binary organized as: :code:`"int(value is 222) int char(repeat 3 times) int(value is a) float(repeat a times)"`.
 
 You can reprent it by:
 
 .. code::
 
-    [1]<int>(dsp="file type" value="222")
+    [1]<int; =222>()
     [1]<int>(dsp="foo")
     [3]<char>(dsp="bar")
-    [1]<int; $var>(dsp="hi"; name="hello")
+    [1]<int; $var>()
     [$var]<float>()
-
-
-You maybe use xml to describe the file as following:
-
-.. code::
-
-    <file>
-        <FileType type="int" repeat="1">222<FileType>
-        <foo type="int" repeat="1"></foo>
-        <bar type="char" repeat="3"></bar>
-        <hi type="int" id="hi1"></hi>
-        <value type="float" repeat="#hi1"></value>
-    </file>
 
 
 Syntax
@@ -49,13 +33,72 @@ Syntax
     [a_number | expression; @individual_name]
     <block_type | condition_expression; $variable_represent_value_of_this_block;>
     (lable="";)
+    
     {...}
 
-converted characters:
+
+reserved characters:
+
+1. key words
+
+    key wrods of MLBF all begined with `%`
+
+    .. code-block::
+
+        %let
+            define a varible and assign value
+            example:
+                [%let]<$a = 3>(dsp="assign value 3 to $a")
+
+        %file
+            refer a varible to a file
+            example:
+                [%file]<$f>(file="a file")
+
+        %extern
+            declear a varible which value is offer by user
+            example:
+            [%extern]<%ex>()
+
+        %define
+
+        %deflable
+
+        %if %elif %else
+
+        %for
+
+        %while
+
+
+2. data type
+
+    (1) general varible
+
+    (2) array    
+
+
+3. standard lable
+
+    id
+
+    dsp
+
+    file
+
+    name
+
+    value
+
+4. lamda function
+
+    $value($a, $b){$value = $a + $b; %for($i = 0; $i < 10; %i++){$value += $i}}
+
+:code:`%let declear a varible and`
 
 :code:`[], <>, (), {}`
 
-:code:`$, @, %, #`
+:code:`$, @, %, # ~`
 
 Detials
 +++++++++++++++++++++++
