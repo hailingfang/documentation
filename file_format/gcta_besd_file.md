@@ -3,7 +3,9 @@
 ## .epi file
 
 ```
-    [?$epi_num]{
+    [%file $epi_file]<>(file="epi file")
+    [%let $epi_num = $filelen($epi_file)]<>()
+    [$epi_num]{
         [1]<int>(dsp="chromosome")
         [1]<string>(dsp="probe id")
         [1]<float>(dsp="physical position")
@@ -15,7 +17,9 @@
 ## .esi file
 
 ```
-    [?$esi_num]{
+    [%file $esi_file]<>(file="esi file")
+    [%let $esi_num = $filelen($esi_file)]<>()
+    [$esi_num]{
         [1]<int>(dsp="chromosome")
         [1]<string>(dsp="rsid")
         [1]<float>(dsp="physical position")
@@ -63,23 +67,29 @@ Defined C macros for besd file format.
 ```
     []<>(info="besd sparse and dense binary file")
     []<>(endianness="little")
-    [1]<int32;>(dsp="besd type"; value="3 for sparse, 5 for dense")
+    [%file $epi_file]<>(file="epi file")
+    [%file $esi_file]<>(file="esi file")
+    [%let $epi_flen = $filelen($epi_file)]<>()
+    [%let $esi_flen = $filelen($esi_file)]<>()
+    [1]<int32>(dsp="besd type"; value="3 for sparse, 5 for dense")
     [1]<int32>(dsp="sample number"; value="-9 if unknown")
     [1]<int32; $esi_num>(dsp="esi_num")
-    [1]<int32; $epi_num>(dsp="esi_num")
-    [12]<int32; =-9>(dsp="keeped for future")
+    [%assert $esi_num == $esi_flen]<>()
+    [1]<int32; $epi_num>(dsp="epi_num")
+    [%assert $epi_num == $epi_flen]<>()
+    [12]<int32; = -9>(dsp="keeped for future")
 
-    [%elif $format == 5] {
+    [%if $format == 5] {
         [$epi_num]{
-            [$esi_num]<float>(dsp="beta value", order="same as esi file")
-            [$esi_num]<float>(dsp="se value", order="same as esi file")
+            [$esi_num]<float>(dsp="beta value")
+            [$esi_num]<float>(dsp="se value")
         }(dsp="beta and se value of each probe"; order="same as epi file")
     }()
 
-    [%if $format == 3] {
-        [%let]<$value_num = 0>()
-        [1]<uint64; =:$value_num>(dsp="value number")
-        [1]<uint64; =0; @beta_se_offset; $se_offset>(dsp="first value of offset")
+    [%elif $format == 3] {
+        [%let $value_num = 0]<>()
+        [1]<uint64; = $:value_num>(dsp="value number")
+        [1]<uint64; = 0; @beta_se_offset; $se_offset>(dsp="first value of offset")
         [$epi_num]{
             [1]<uint64; +@beta_se_offset; +$value_num>(dsp="beta offset")
             [1]<uint64; +@beta_se_offset; +$value_num>(dsp="se offset")
