@@ -2,17 +2,40 @@
 
 ## .epi file
 
+```
+    [?$epi_num]{
+        [1]<int>(dsp="chromosome")
+        [1]<string>(dsp="probe id")
+        [1]<float>(dsp="physical position")
+        [1]<uint32>(dsp="base position")
+        [1]<string>(dsp="oritation")
+    }()
+```
+
 ## .esi file
+
+```
+    [?$esi_num]{
+        [1]<int>(dsp="chromosome")
+        [1]<string>(dsp="rsid")
+        [1]<float>(dsp="physical position")
+        [1]<uint32>(dsp="base position")
+        [1]<string>(dsp="reference allel")
+        [1]<string>(dsp="alternertive allel")
+        [1]<float>(dsp="minor allel frequency")
+
+    }()
+```
 
 ## .besd file
 
-
 There kinds of file format of besd file. First is Dense file type, and second is sparse file type.
+
 ### Macros
 
 Defined C macros for besd file format. 
 
-#### Dense
+### Dense
 `#define DENSE_FULL 0`
 
 `#define DENSE_BELT 1`
@@ -23,7 +46,7 @@ Defined C macros for besd file format.
 
 `#define SMR_DENSE_3 5  // RESERVEDUNITS*ints + floats (indicator+samplesize+snpnumber+probenumber+ 12*-9s + values) [SMR default and OSCA default]`
 
-#### Sparse
+### Sparse
 `#define SPARSE_FULL 2`
 
 `#define SPARSE_BELT 3`
@@ -35,72 +58,45 @@ Defined C macros for besd file format.
 `#define SMR_SPARSE_3 3 // RESERVEDUNITS*ints + uint64_t + uint64_ts + uint32_ts + floats (indicator+samplesize+snpnumber+probenumber+ 6*-9s +valnumber+cols+rowids+betases) [SMR default]`
 
 
-#### dense file format | SMR_DENSE_3
+### sparse and dense file formate | SMR_SPARSE_3 SPARSE_BELT & SMR_DENSE_3
 
 ```
-
-    [1]<int32>(dsp="besd file format"; value="5 for SMR_DENSE_3 dense format")
-    [1]<int32>(dsp="sample size"; value="-9 for NA")
-    [1]<int32; $esi_num>(dsp="number of esi")
-    [1]<int32; $epi_num>(dsp="number of epi")
-    [12]<int32>(value="-9";)
-    [$epi_num]{
-        [$esi_num]<float>(dsp="beta value", order="same as esi file")
-        [$esi_num]<float>(dsp="se value", order="same as esi file")
-    }(dsp="beta and se value of each probe"; order="same as epi file")
-
-```
-
-#### sparse file formate | SMR_SPARSE_3 SPARSE_BELT
-
-```
-    []<>(#besd sparse binary file)
-    []<>(%deflable dsp "description of block")
-    []<>(%deflable esi_index "index of esi snp/variant")
+    []<>(info="besd sparse and dense binary file")
     []<>(endianness="little")
-    [1]<int32>(dsp="besd type"; value="3 for SMR_SPARSE_3 SPARSE_BELT sparse format")  
-    [1]<int32>(dsp="sample size", value="-9 for NA";)  
-    [1]<int32; $esi_num>(dsp="esi number")  
-    [1]<int32; $epi_num>(dsp="epi number")  
-    [12]<int32>(value="-9")  
-    [1]<uint64; $value_num; $value_num = 0; for(i = 1; i < $epi_num; i++){$value_num += @epi_num.$beta_offset + @epi_num.$se_offset}>(dsp="number of sparse beta and se value")  
-    [1]<uint64>(value="0")
-    [$epi_num; @]{  
-        [1]<uint64; @epi_num.$beta_offset>(dsp="number of esi offset")
-        [1]<uint64; @epi_num.$se_offset>(dsp="number of esi offset") 
-    }(dsp="beta and se offsets number of each probe"; order="same as epi file")
-    [$epi_num; @]{
-        [@epi_num.$beta_offset; @]<uint32; $beta_index>(dsp="beta index of esi", order="esi file")
-        [@epi_num.$se_offset; @]<uint32; $se_index>(dsp="se index of esi", order="esi file")
-    }(dsp="beta and se esi index arrary of each probe", order="same as epi file")
-    [$epi_num; @]{
-        [@epi_num.$beta_offset]<float>(dsp="esi beta value"; esi_index=$beta_index)
-        [@epi_num.$se_offset]<float>(dsp="esi se value"; esi_index=$se_index)
-    }(dsp="beta as se value", order="epi file")
-
-
-    [1]<int32; =3>(dsp="besd type")
+    [1]<int32;>(dsp="besd type"; value="3 for sparse, 5 for dense")
     [1]<int32>(dsp="sample number"; value="-9 if unknown")
     [1]<int32; $esi_num>(dsp="esi_num")
-    [#>%assert]<$esi_num == >()
-    [<#]<>()
     [1]<int32; $epi_num>(dsp="esi_num")
     [12]<int32; =-9>(dsp="keeped for future")
-    [%let]<$value_num = 0>()
-    [1]<uint64; =:$value_num>(dsp="value number")
-    [1]<uint64; =0; @beta_se_offset; $se_offset>(dsp="first value of offset")
-    [$epi_num]{
-        [1]<uint64; +@beta_se_offset; +$value_num>(dsp="beta offset")
-        [1]<uint64; +@beta_se_offset; +$value_num>(dsp="se offset")
-    }
-    [$epi_num; ~i] {
-        [@beta_offset[2 * $i + 1] - @beta_offset[2 * $i]]<uint32>(dsp="index of beta")
-        [@beta_se_offset[2 * $i + 2] - @beta_se_offset[2 * $i + 1]]<uint32>(dsp="index of se")
-    }
-    [$epi_num; ~i] {
-        [@beta_offset[2 * $i + 1] - @beta_offset[2 * $i]]<float>(dsp="index of beta")
-        [@beta_se_offset[2 * $i + 2] - @beta_se_offset[2 * $i + 1]]<float>(dsp="index of se")   
-    }
+
+    [%elif $format == 5] {
+        [$epi_num]{
+            [$esi_num]<float>(dsp="beta value", order="same as esi file")
+            [$esi_num]<float>(dsp="se value", order="same as esi file")
+        }(dsp="beta and se value of each probe"; order="same as epi file")
+    }()
+
+    [%if $format == 3] {
+        [%let]<$value_num = 0>()
+        [1]<uint64; =:$value_num>(dsp="value number")
+        [1]<uint64; =0; @beta_se_offset; $se_offset>(dsp="first value of offset")
+        [$epi_num]{
+            [1]<uint64; +@beta_se_offset; +$value_num>(dsp="beta offset")
+            [1]<uint64; +@beta_se_offset; +$value_num>(dsp="se offset")
+        }
+        [$epi_num; ~i] {
+            [@beta_offset[2 * $i + 1] - @beta_offset[2 * $i]]<uint32>(dsp="index of beta")
+            [@beta_se_offset[2 * $i + 2] - @beta_se_offset[2 * $i + 1]]<uint32>(dsp="index of se")
+        }
+        [$epi_num; ~i] {
+            [@beta_offset[2 * $i + 1] - @beta_offset[2 * $i]]<float>(dsp="index of beta")
+            [@beta_se_offset[2 * $i + 2] - @beta_se_offset[2 * $i + 1]]<float>(dsp="index of se")   
+        }
+    }()
+
+    [%else]{
+        [%error]<>(mesg="format not recognized")
+    }()
 
 ```
 
