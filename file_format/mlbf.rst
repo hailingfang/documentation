@@ -30,75 +30,222 @@ Syntax
 
 .. code-block::
 
-    [a_number | expression; @individual_name]
-    <block_type | condition_expression; $variable_represent_value_of_this_block;>
-    (lable="";)
+    [expression; build in key words; iteration variable; a file order according to]
+    <data type; a expression which value would assiigned to this block;
+        a variable which will store the value of this block; general expression>
+    (lable="value";)
+
+
+If the "<>" is not a data type, instead it is a complex structure, using "{}" instead
+of "<>". 
+
+For example:
+
+.. code::
+
+    [5]{
+        [1]<int>()
+        [3]<char>()
+    }()
+
+
+1. data type
+----------------
+
+    **general varible**
+
+    :code:`$var`
+
+    store a single value or a reference to a file.
+
+    **array**
+
+    :code:`@var`
+
+    store a group of value.
+
+    **file reference**
+
+    :code:`^file`
+
+2. key words
+----------------------
+
+    key wrods of MLBF all begined with `%`.
+
+    :code:`%let`
+
+        declare a variable, and assign value.
+
+        example:
+        
+        :code:`[%let $var = 3]<>()`
+
+    :code:`%extern`
+
+        declare a variable, and the value of this value is offered by user.
+
+        example:
+
+        :code:`[%extern $var]<>(mesg="this value is assigned by user.")`
+
+    :code:`%file`
+
+        assign a file reference to a variable.
     
-    {...}
+        example:
+
+        :code:`[%file $file_ref]<>(file="a descreption of file which refered to")`
 
 
-reserved characters:
+    :code:`%if %elif %else`
 
-1. key words
+        key words used to flow control.
 
-    key wrods of MLBF all begined with `%`
+        example:
 
-    .. code-block::
+        .. code::
 
-        %let
-            define a varible and assign value
-            example:
-                [%let]<$a = 3>(dsp="assign value 3 to $a")
+            [%let $var = 3]<>()
+            [%if $var >= 0]{
+                [$var]<int>()
+            }()
+            [%elif $var < 0]{
+                [5]<int>()
+            }()
+            [%else]{
+                []<>(mesg="this is not possible")
+            }()
 
-        %file
-            refer a varible to a file
-            example:
-                [%file]<$f>(file="a file")
+    :code:`%for`
 
-        %extern
-            declear a varible which value is offer by user
-            example:
-            [%extern]<%ex>()
+        for loops.
 
-        %define
+        example:
 
-        %deflable
+        .. code::
 
-        %if %elif %else
+            [%let $var = 0]<>()
+            [%for $i = 1; $i < 10; $i++]<$var += $i>()
 
-        %for
+            [%for $i = 0; $i < 5; $i++]{
+                []<$var *= $i>()
+            }()
 
-        %while
+    :code:`%while`
+
+        while loops.
+
+        example:
+
+        .. code::
+
+            [%let $i = 3]<>()
+            [%while $i > 0]<$i -= 1>()
+
+    :code:`%error`
+
+        indicate a error.
+
+        example:
+
+        :code:`[%error]<>(mesg="this is a error message")`
+
+    :code:`%warning`
+
+    :code:`%assert`
+
+        assertion.
+
+        example:
+
+        :code:`[%assert $var == 3]<>()`
 
 
-2. data type
+    :code:`%break and %continue`
 
-    (1) general varible
+        pass or break within loops.
 
-    (2) array    
+        example:
+
+        .. code::
+            
+            [%let $var = 1]<>()
+            [%while 1]{
+                [%if %var > 10]{[%break]<>()}()
+                [%if $var == 2]{
+                    []<$var += 2>()
+                    [%continue]<>()
+                }()
+                []<$var += 1>()
+            }()
+
+    :code:`%func`
+        
+        used to declare a function. see following.
+    
+    :code:`%note`
+
+    :code:`%mesg`
+
+    :code:`%extend`
+
+    :code:`%include`
+
+    :code:`%block`
+
+3. expression
+-------------------
 
 
-3. standard lable
+4. function
+-------------------
+.. code::
+
+    [%func $func_name(%args1, %args2)$return_value]{
+        []<$return_value = $args1 + args2>()
+    }()
+
+
+
+5. build in function
+-----------------------
+
+    $filelen
+
+    $filesize
+
+    $append()
+
+    $ceil
+
+    $floor
+
+    $sum
+
+
+6. comment
+--------------------
+
+    [#]<>()
+
+    [#\*]<>()
+    [\*#]<>()
+
+
+7. standard lables
+--------------------------
+
+    info
+
+    file
 
     id
 
     dsp
 
-    file
+    order
 
-    name
-
-    value
-
-4. lamda function
-
-    $value($a, $b){$value = $a + $b; %for($i = 0; $i < 10; %i++){$value += $i}}
-
-:code:`%let declear a varible and`
-
-:code:`[], <>, (), {}`
-
-:code:`$, @, %, # ~`
 
 Detials
 +++++++++++++++++++++++
