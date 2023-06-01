@@ -1,3 +1,5 @@
+.. _aaaa:
+
 Benjamin Fang's documentation project
 ======================================
 
