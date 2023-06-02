@@ -12,5 +12,6 @@ Welcome to Benjamin Fang's documentation!
     
     About <README>
     file-format/index
+    computer/index
 
 
