@@ -6,12 +6,19 @@
 Welcome to Benjamin Fang's documentation!
 ================================================
 
+This is my documentation project.
+
+
 .. toctree::
     :maxdepth: 1
+    :numbered:
     :caption: Contents
-    
+
     About <README>
     file-format/index
     computer/index
 
+
+
+Built Time: |today|,   `github repository <https://github.com/benjaminfang/documentation>`_
 
