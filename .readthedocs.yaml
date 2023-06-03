@@ -5,10 +5,10 @@ formats:
   - epub
 
 sphinx:
-   configuration: conf.py
+   configuration: ./conf.py
 
 python:
    install:
-   - requirements: requirements.txt
+   - requirements: ./requirements.txt
    - method: pip
 
