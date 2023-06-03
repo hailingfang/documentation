@@ -6,18 +6,25 @@
 Welcome to Benjamin Fang's documentation!
 ================================================
 
-This is my documentation project.
+
+This is my documentation project to document kinds of thing:
+
+    * techinical docs
+    * lists of things
+
+and so on.
 
 
 .. toctree::
     :maxdepth: 1
     :caption: Contents
 
-    About <README>
     file-format/index
     computer/index
 
 
 
-Built Time: |today|,   `github repository <https://github.com/benjaminfang/documentation>`_
+Built Time: |today|
+
+`github repository <https://github.com/benjaminfang/documentation>`_
 
