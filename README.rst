@@ -1,10 +1,12 @@
-.. _aaaa:
-
 Benjamin Fang's documentation project
 ======================================
 
+This is repository of my documentation project.
 
-This is a documentation project using reST and sphinx.
-The project used to documentate kinds of things, such as
-language mem, music list, and so on.
+This project using reST and sphinx, as tools, to
+generate other strucuture rich docs.
+
+The html is host by: `Read the Doc`_
+
+.. _Read the Doc: https://docs-benjaminfang.readthedocs.io/en/latest/
 
