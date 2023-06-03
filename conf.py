@@ -18,20 +18,21 @@ extensions = ["myst_parser", "sphinx_rtd_theme"]
 
 templates_path = ['_templates']
 html_static_path = ['_static']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.*']
 
 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
+#using rtd theme and modify it's settings
 html_theme = 'sphinx_rtd_theme'
-
 html_theme_options = {
     "analytics_id" : None,
     "logo_only" : True,
     "display_version" : True
 }
 
+#change the logo
 github_url = "https://github.com/benjaminfang/documentation"
 html_logo = "img/BF-doc-logo.svg"
