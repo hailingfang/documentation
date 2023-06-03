@@ -11,7 +11,6 @@ This is my documentation project.
 
 .. toctree::
     :maxdepth: 1
-    :numbered:
     :caption: Contents
 
     About <README>
