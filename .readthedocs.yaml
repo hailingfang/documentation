@@ -1,14 +1,14 @@
 version: 2
 
 formats:
-  - pdf
-  - epub
+    - pdf
+    - epub
 
 sphinx:
-   configuration: ./conf.py
+    configuration: ./conf.py
 
 python:
-   install:
-   - requirements: ./requirements.txt
-   - method: pip
+    install:
+    - requirements: ./requirements.txt
+    - method: pip
 
