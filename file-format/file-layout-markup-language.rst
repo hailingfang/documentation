@@ -1,18 +1,25 @@
-======================================
-MLBF(Markup Language for Binary File)
-======================================
+============================================
+Reference of File Layout Markup Language 
+============================================
 
-version: 0.4.0; By Benjamin Fang
+version: 1.0.0; by Benjamin Fang
 
-**A method/language to describe binary file orgnization**.
+creat: 20230401; update: 20230603
 
 Introduction
-++++++++++++++++++
+==============
 
-I need a method to describe the layout of binary file quickly. So I presented this
-method to do this.
+I need a method to describe the layout, or format, of file.
+To describe the format of a plaintext is easy, you just need to
+specify the meaning of every field. but for binary file, it is
+difficult to descirbe the layout effectively and accurately.
+So I presented this method to do this.
 
-For example, if you want to describe a binary organized as: :code:`"int(value is 222) int char(repeat 3 times) int(value is a) float(repeat a times)"`.
+This mothod is simple, and For example,
+if you want to describe a binary organized 
+as::
+
+    "int(value is 222) int char(repeat 3 times) int(value is a) float(repeat a times)
 
 You can reprent it by:
 
@@ -26,50 +33,199 @@ You can reprent it by:
 
 
 Syntax
-++++++++++++++++++
+========
 
-.. code-block::
+FLML description is made of :code:`flml-sentence`, which is 
+:code:`[block-number]<block-unit>(description)` or :code:`[block-number]{flml-sentence}(description)`.
 
-    [expression; build in key words; iteration variable; a file order according to]
-    <data type; a expression which value would assiigned to this block;
-        a variable which will store the value of this block; general expression>
-    (lable="value";)
+Using a modified BNF grammar notation. Which can be defined as::
 
-
-If the "<>" is not a data type, instead it is a complex structure, using "{}" instead
-of "<>". 
-
-For example:
-
-.. code::
-
-    [5]{
-        [1]<int>()
-        [3]<char>()
-    }()
+    flml-syntax   ::= flml-sentence +
+    file-sentence ::= "[" block-number "]" ( "<" block-unit ">" | "{" flml-sentence "}" ) "(" description ")"
 
 
-1. data type
-----------------
 
-    **general varible**
+block-number
+---------------
 
-    :code:`$var`
+:code:`block-number` used to describe the number of :code:`block-unit`.
+:code:`block-number` can be a :code:`number`, :code:`variable`, or a :code:`expression`.
 
-    store a single value or a reference to a file.
+In modified BNF, this can be descirbed as::
 
-    **array**
+    block-number ::= expression
+    expression   ::= (number | variable) | function (("+" | "-" | "*" | "/" ) expression)?
+    number       ::= [0-9]+
+    variable     ::= "$" [a-zA-Z]+ [0-9]* | "@" [a-zA-Z]+ [0-9]*
+    function     ::= "$" [a-zA-Z]+ [0-9]* "(" arguments ")"
 
-    :code:`@var`
+:code:`number`
+    A number must great equal to zero.
 
-    store a group of value.
+:code:`variable`
+    A variable begined with "$" is scale variable, it can refer to a number, a function
+    or a file handle. A variable begined with "@" is a array, which content 0 or more numbers.
 
-    **file reference**
 
-    :code:`^file`
+block-unit
+------------
 
-2. key words
-----------------------
+The :code:`block-uint` is used to represent what the uint is. It include the size/type of
+one block, the value of the block, and which variable the value of the block will assinged
+to.
+
+In modified BNF::
+
+    block-uint ::= uint (";" "=" (expression | "{" choice "}"))? (";" variable)
+    uint       ::= "bit" | "byte" | "char" | "uint8" | "int8" | "uint16" | "int16" |
+                   "int" | "uint32" | "int32" | "uint64" | "int64" | "float" |"float32" |
+                   "double" | "float64" | "ascii"
+
+When is file is plaintext, the :code:`uint` can use "ascii" or explite this in descreption
+field.
+
+description
+-------------
+
+:code:`description` is a group of descreption of attributes of :code:`uint`.
+
+In modified BNF::
+
+    description     :: description-one (";" descreption)?
+    descreption-one ::= lable "=" (expression | string)
+    string          ::= [a-zA-z\s]+
+
+
+
+Key words
+============
+
+All key words of FLML begain with "%". That is::
+
+    key-words ::= "%let", "extern", "%file",
+                  "%deflabel", "%include", "%extend", "%block",
+                  "%if", "%elif", "%else", "%for", "%while",
+                  "%assert", "%warning", "%error", "%message"
+                  "%break", "%continue"
+                  "%deffunc"
+
+:code:`%let`
+    Used to declare and assign value to a variable.
+
+    For example::
+
+        [%let $var = 5]<>()
+        [%let @arr = [1, 2, 3, 4]<>()
+
+:code:`%extern`
+    Declare a variable which is defined out of present file.
+
+:code:`%file`
+    Declare a variable is file type.
+
+    For example::
+
+        [%file $a_file]<>(dsp="a plaintext file")
+
+:code:`%deflabel`
+    To define a new label.
+
+    For example::
+
+        [%deflabel newlabel]<>(dsp="This is a new label")
+
+:code:`%if %elif %else`
+    To structure a branch.
+
+    For example::
+
+        [%let $var = 5]<>()
+        [%if $var > 5]{
+            [3]<int>()
+        }()
+        [%elif $var == 5 ]{
+            [100]<char>()
+        }()
+        [%else]{
+            [5]<float>()
+        }()
+
+:code:`%for %while`
+    To structure a loop.
+
+    For example::
+
+        [%let $i = 0]<>()
+        [%for ($i = 0; $i < 10; $i = $i - 1)] {
+            [1]<int; +$sum>()
+        }
+        [%i = 15]<>()
+        [%while $i > 10] {
+            [1]<int; @collector>()
+            [$i = $i - 1]<>()
+        }()
+
+:code:`%assert`
+    To assert something.
+
+    Example::
+
+        [%assert $i > 3]<>()
+
+
+:code:`%message`
+    To message some information as remainder.
+
+    Example::
+
+        [%message "This is not right"]<>()
+
+
+:code:`%deffunc`
+    Define a function.
+
+    Example::
+
+        [%deffunc $myfunc ($va, $vb) $res]{
+            [$res = $va + $vb]<>()
+        }()
+
+
+
+Expression
+================
+
+
+
+
+Branch
+================
+
+
+Loop
+============
+
+
+Function
+==============
+
+
+Comment
+===============
+
+
+Built in functions
+======================
+
+
+Standard lables
+==================
+
+
+Examples
+================
+
+
 
     key wrods of MLBF all begined with `%`.
 
