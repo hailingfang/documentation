@@ -18,7 +18,7 @@ extensions = ["myst_parser", "sphinx_rtd_theme"]
 
 templates_path = ['_templates']
 html_static_path = ['_static']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.*']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.rst', 'file-format/README.rst']
 
 
 
