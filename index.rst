@@ -7,6 +7,9 @@ Welcome to Benjamin Fang's documentation!
 ================================================
 
 
+Introduction
+---------------------
+
 This is my documentation project to document kinds of thing:
 
     * techinical docs
@@ -22,9 +25,7 @@ and so on.
     file-format/index
     computer/index
 
+------------------------
 
-
-Built Time: |today|
-
-`github repository <https://github.com/benjaminfang/documentation>`_
+Built Time: |today|. Source code please see: `github repository <https://github.com/benjaminfang/documentation>`_
 
