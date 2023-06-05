@@ -6,8 +6,6 @@ version: 1.0.0; by Benjamin Fang
 
 creat: 20230401; update: 20230603
 
-Introduction
-==============
 
 I need a method to describe the layout, or format, of file.
 To describe the format of a plaintext is easy, you just need to

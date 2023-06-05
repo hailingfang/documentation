@@ -1,15 +1,19 @@
-file format
+File format
 =============
 
+Docs here is used to describe the file layout,
+Those file include plaintext file and binary file.
+I use FLML(File layout markup language) to describe
+file format.
 
 .. toctree::
     :maxdepth: 2
-    
-    introduction <README>
+    :numbered:
+
     file-layout-markup-language
+    plink-bed-file
     bld_file
     bgen_file
     bod_file
     gcta_besd_file
-    plink_bed_file
 
