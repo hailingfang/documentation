@@ -2,10 +2,15 @@
 Plink BED file
 ===============
 
+The Plink BED file is used to store genotype data for individuals 
+and must be accompanied by the .bim and .fam files. Both the .bim and .fam
+files are plaintext files, with the .bim file containing variable information
+and the .fam file containing individual information
+
 .fam file
 ============
 
-fam file is a plaintext file without header line. and one line per sample with six fields.
+Fam file is a plaintext file without header line. and one line per sample with six fields.
 
 .. code::
 
@@ -37,7 +42,7 @@ fam file is a plaintext file without header line. and one line per sample with s
 .bim file
 =================
 
-extended variant information file accompanying a .bed binary genotype table. have no
+Extended variant information file accompanying a .bed binary genotype table. have no
 header line, and each line contain six fields.
 
 .. code::
@@ -93,10 +98,14 @@ header line, and each line contain six fields.
     }(order="$bimfile")
 
 
-individuals order across byte
+Individuals order across byte
 =================================
 
 .. image:: ./imgs/plink_bed_file.svg
+
+
+Meaning of bits
+=====================
 
 ::
 
@@ -106,54 +115,16 @@ individuals order across byte
     * 11: Homozygous of second allele in .bim file.
     * 01: Missing
 
-
-`bed file <https://www.cog-genomics.org/plink/1.9/formats>`_
-
-::
-
-    The two-bit genotype codes have the following meanings:
-    00	Homozygous for first allele in .bim file
-    01	Missing genotype
-    10	Heterozygous
-    11	Homozygous for second allele in .bim file
-
 If N is not divisible by four, the extra high-order bits in the last byte of each block are always zero.
-
-
-`plink2R <https://github.com/gabraham/plink2R/blob/master/plink2R/src/data.cpp>`_
-
-::
-
-    information from data.cpp
-    /*
-    *                   plink BED           sparsnp
-    * minor homozyous:  00 => numeric 0     10 => numeric 2
-    * heterozygous:     10 => numeric 2     01 => numeric 1
-    * major homozygous: 11 => numeric 3     00 => numeric 0
-    * missing:          01 => numeric 1     11 => numeric 3
-    *
-    *
-    * http://pngu.mgh.harvard.edu/~purcell/plink/binary.shtml says,
-    * The bytes in plink are read backwards HGFEDCBA, not GHEFCDAB, but we read
-    * them forwards as a character (a proper byte)
-    *
-    * By default, plink usage dosage of the *major* allele, since allele A1 is
-    * usually the minor allele and the code "1" refers to the second allele A2,
-    * so that "11" is A2/A2 or major/major.
-    *
-    * We always use minor allele dosage, to be consistent with the output from
-    * plink --recodeA which used minor allele dosage by default.
-    *
-    * out: array of genotypes
-    * in: array of packed genotypes (bytes)
-    * n: number of bytes in input
-    *
-    */
 
 
 References
 ===============
 
 https://www.cog-genomics.org/plink/1.9/formats#fam
+
+`bed file <https://www.cog-genomics.org/plink/1.9/formats>`_
+
+`plink2R <https://github.com/gabraham/plink2R/blob/master/plink2R/src/data.cpp>`_
 
 
