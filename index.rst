@@ -24,6 +24,7 @@ and so on.
 
     file-format/index
     computer/index
+    lists/index
 
 ------------------------
 
