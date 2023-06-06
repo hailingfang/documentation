@@ -13,7 +13,6 @@ file format.
     file-layout-markup-language
     plink-bed-file
     gcta-besd-file
-    bld_file
-    bgen_file
     bod_file
+    bgen_file
 
