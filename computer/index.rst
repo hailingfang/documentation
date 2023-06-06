@@ -1,8 +1,8 @@
-computer
+Computer
 ===========
 
 
 .. toctree::
    :maxdepth: 2
 
-   networks/firewall
+   firewall
