@@ -5,10 +5,11 @@ Plink BED file
 .fam file
 ============
 
-A text file without header line. and one line per sample with six fields.
+fam file is a plaintext file without header line. and one line per sample with six fields.
 
 .. code::
 
+    [%info "fam plaintext file"]<>()
     [%file $famfile]<>(dsp="assign the fam file to the variable")
     [$linenum = $filelen($famfile)]<>(dsp="get the line number of the file")
     [%let $white_space]<>(dsp="$white is is equal \t or \n")
@@ -41,7 +42,7 @@ header line, and each line contain six fields.
 
 .. code::
 
-    [%message "bim plaintext file"]<>()
+    [%info "bim plaintext file"]<>()
     [%file $bimfile]<>(dsp="assign the bim file to a variable")
     [%linenum = $filelen($bimfile)]<>(dsp="get file line number")
     [$let $white_space]<>(dsp="white space is \n or \t")
@@ -71,23 +72,25 @@ header line, and each line contain six fields.
 
 .. code::
 
-    []<>(info="plink bed file")
+    [%info "bed binary file"]<>()
     [%file $famfile]<>(file="fam file")
     [%file $bimfile]<>(file="bim file")
-    [%let $famfile_len = $filelen($famfile)]
-    [%let $bimfile_len = $filelen($bimfile)]
-    [%let $data_len_per_vari = $ceil(famfile_len / 4)]
+    [%let $famfile_len = $filelen($famfile)]<>()
+    [%let $bimfile_len = $filelen($bimfile)]<>()
+    [%let $data_len_per_vari = $ceil(famfile_len / 4)]<>(dsp="variant data of 
+        every four individuals was stored by one byte. if the $famfile_len
+        can not be divided by four,  the remainder stored using a whole byte.")
     [3]<char; =[0x6c, 0x1b, 0x01]>(dsp="magic number, in lasted plink version, them should be 0x6c, 0x1b, 0x01")
     [$bimfile_len]{
-        [$data_len_per_vari; ~i]{
+        [$data_len_per_vari; ~$i]{
             [1]{
                 [2]<bit>(dsp="low 7-8 bits of individual 4 * $i + 3")
                 [2]<bit>(dsp="low 5-6 bits of individual 4 * $i + 2")
                 [2]<bit>(dsp="low 3-4 bits of individual 4 * $i + 1")
                 [2]<bit>(dsp="low 1-2 bits of individual 4 * $i")
             }(dsp="genotype of 4 individuals, store by 4 2-bits block"; value="00: Homozygous of first allele in .bim file. 10: Heterozygous. 11: Homozygous of second allele in .bim file. 01: Missing";)
-        }(dsp="genotype data of one snp/variant, if individual number can not divided by 4, use a whole byte for remainder， use 0 for superfluous bits")
-    }()
+        }(dsp="genotype data of one snp/variant, if individual number can not divided by 4, use a whole byte for remainder， use 0 for superfluous bits", order="$famfile")
+    }(order="$bimfile")
 
 
 individuals order across byte
