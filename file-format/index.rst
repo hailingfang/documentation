@@ -1,10 +1,9 @@
 File format
 =============
 
-Docs here is used to describe the file layout,
-Those file include plaintext file and binary file.
-I use FLML(File layout markup language) to describe
-file format.
+All doucuments in this section are used to describe the file layout.
+Those files include both binary and plaintext format.
+I use FLML(File layout markup language) to describe file layout.
 
 .. toctree::
     :maxdepth: 2
