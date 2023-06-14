@@ -417,88 +417,31 @@ Appendix
 Key words
 -------------
 
-All key words of FLML begain with "%". That is::
-
-:code:`%let`
-    Used to declare and assign value to a variable.
-
-    For example::
-
-        [%let $var = 5]<>()
-        [%let @arr = [1, 2, 3, 4]<>()
-
-:code:`%extern`
-    Declare a variable which is defined out of present file.
-
-:code:`%file`
-    Declare a variable is file type.
-
-    For example::
-
-        [%file $a_file]<>(dsp="a plaintext file")
-
-:code:`%deflabel`
-    To define a new label.
-
-    For example::
-
-        [%deflabel newlabel]<>(dsp="This is a new label")
-
-:code:`%if %elif %else`
-    To structure a branch.
-
-    For example::
-
-        [%let $var = 5]<>()
-        [%if $var > 5]{
-            [3]<int>()
-        }()
-        [%elif $var == 5 ]{
-            [100]<char>()
-        }()
-        [%else]{
-            [5]<float>()
-        }()
-
-:code:`%for %while`
-    To structure a loop.
-
-    For example::
-
-        [%let $i = 0]<>()
-        [%for ($i = 0; $i < 10; $i = $i - 1)] {
-            [1]<int; +$sum>()
-        }
-        [%i = 15]<>()
-        [%while $i > 10] {
-            [1]<int; @collector>()
-            [$i = $i - 1]<>()
-        }()
-
-:code:`%assert`
-    To assert something.
-
-    Example::
-
-        [%assert $i > 3]<>()
+All key words of FLML begain with "%".
 
 
-:code:`%message`
-    To message some information as remainder.
+* %let
 
-    Example::
+* %if %elif %else
 
-        [%message "This is not right"]<>()
+* %for
 
+* %while
 
-:code:`%deffunc`
-    Define a function.
+* %deffunc %return
 
-    Example::
+* %deflabel
 
-        [%deffunc $myfunc ($va, $vb) $res]{
-            [$res = $va + $vb]<>()
-        }()
+* %assert
+
+* %msg
+
+* %error
+
+* %infor
+
+* %file
+
 
 
 
@@ -511,12 +454,12 @@ Block type
 
 * integer
 
-    The block type of integer include::
+The block type of integer include::
 
-        <int8> <uint8> <char>
-        <int16> <uint16> <short>
-        <int32> <uint32> <int>
-        <int64> <uint64> <long>
+    <int8> <uint8> <char>
+    <int16> <uint16> <short>
+    <int32> <uint32> <int>
+    <int64> <uint64> <long>
 
 * float
 
@@ -535,11 +478,58 @@ Block type
 .. code::
     
     <bit>
-    
+
+
 
 Built in functions
 -------------------------
 
+* $getorder
+
+* $sum
+
+* $abs
+
+* $floor
+
+* $ceil
+
+
+
 
 Standard lables
 --------------------
+
+* dsp
+
+* eledsp
+
+* value
+
+* NA
+
+* name
+
+* filetype
+
+* order
+
+* alignwith
+
+
+
+
+Specicial variable
+------------------------
+
+* $? or $DEPEND
+
+* $NA
+
+* $NONE
+
+* $UNKNOW
+
+* $WHITESPACE
+
+* $TAB
