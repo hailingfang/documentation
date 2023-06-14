@@ -1,4 +1,4 @@
-File format
+File Format
 =============
 
 All doucuments in this section are used to describe the file layout.
@@ -9,7 +9,6 @@ I use FLML(File layout markup language) to describe file layout.
     :maxdepth: 2
     :numbered:
 
-    file-layout-markup-language
     plink-bed-file
     gcta-besd-file
     bod_file
