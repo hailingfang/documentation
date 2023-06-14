@@ -35,7 +35,7 @@ label to give information about :code:`[]<>` part.
 Syntax
 ==================
 
-An FLML description is composed of FLML sentences. Each sentence is formatted as either
+An FLML description is composed of FLML statments. Each statment is formatted as either
 :code:`[square-bracket-part] <angled-bracket-part> (round-parenthese-part)` or
 :code:`[square-bracket-part] {curly-bracket-part} (round-parenthese-part)`.
 
@@ -43,12 +43,12 @@ The primarily role of the
 :code:`square-bracket-part` part is to describe the number of unit. The :code:`angled-bracket-part` is used to
 recorde the unit type(or say data type). And the last part, within :code:`round-parenthese-part`
 is make up of several labels, in form :code:`label="value"`. These labels and their values are
-used to descirbe the :code:`[] ()` part. :code:`curly-bracket-part` is made up of FLML sentences.
+used to descirbe the :code:`[] ()` part. :code:`curly-bracket-part` is made up of FLML statments.
 
 Using a modified BNF grammar notation. Which can be defined as::
 
-    flml-description   ::= flml-sentence +
-    flml-sentence      ::= "[" square-bracket-part "]" ( "<" angled-bracket-part ">" | "{" flml-sentence "}" ) "(" round-parenthese-part ")"
+    flml-description   ::= flml-statment +
+    flml-statment      ::= "[" square-bracket-part "]" ( "<" angled-bracket-part ">" | "{" flml-statment "}" ) "(" round-parenthese-part ")"
 
 
 Terminology
@@ -160,7 +160,7 @@ curly-bracket-part
 
 When the :code:`block` is not a sample block type, such as int, float and so on, instead
 it is some other :code:`segment`. the curly bracket is used to contain those segment. The
-other applicaiton of curly-bracket-part is used for complex sentences like :code:`[%if 1]{}()`.
+other applicaiton of curly-bracket-part is used for complex statments like :code:`[%if 1]{}()`.
 
 1. used when block is a segment.
 
@@ -172,7 +172,7 @@ For example::
     } (dsp="the block is sagment, the sagment is 2 bits and 3 int")
 
 
-2. used when a complex sentence introduced.
+2. used when a complex statment introduced.
 
 For example::
 
@@ -209,40 +209,215 @@ In modified BNF::
 
 
 Variables and expression
-==========================
+============================
+
+FLML have two kinds of variables: :code:`scaler` and :code:`array`. The scaler refer to a
+number, a function or a file. while the array is refer a bunch of scalers. Scaler varialbe start with a "$",
+and array start with a "@".
+
+* Here is some examples of scaler::
+
+    [%let $a = 3] <> ()
+    [%let $b = 2] <> ()
+    [$a] <int> (name="seg1")
+    [$a + 2 * $b] <float> <name="seg2">
+
+    [1]<int; :$c> (name="seg3")
+    [10] {
+        [1] <int; :+$d> ()
+    } (name="seg4")
+    
+    [1] <int; =$a> (name="seg5")
+    [1] <int; =:$a> ("name="seg6")
+    [$a = $a + 5] <> ()
+
+    [10; ~$e] {
+        [$e] <char> ()
+    } (name="seg7")
+
+    [$myfun($a, $b)] <int> (name="seg8")
+    [%file $file_handle "file description"] <> (name="seg9")
+
+Example "seg1" and "seg2" is the basic usage of scaler. It refer to a number.
+In example "seg3", scaler follows a marker ":", this mean the value of block is assigned
+to this variable.
+
+Example "sag4", the variable follows ":+", this a accumulating assing, and this mean
+the values of will added to the variable.
+The "seg5" assign the value of $a to the block.
+The "seg6" example, "$a" follows "=:", this is a later assign sign, the value would be used late "$a", it is 8 here, instead
+the old(3).
+
+In example "seg7", "$e" follows "~", this is a iteration sign and make "$e" a iteration variable.
+In "seg8", the "$myfun" refer to a function. In "seg9", the variable refer to a file.
+
+
+* Here is some examples of array::
+
+    [%let @ar1 = [1, 2, 3]] <> (name="seg10")
+    [@ar1 * 3] <float> (name="seg11")
+
+    [10] <int; :@ar2> (name="seg12")
+    [3] <int; =@ar1> (name="seg13")
+
+    [@ar1; ~$i] {
+        [$i] <float> ()
+    } (name="seg14")
+
+
+In example "seg10", a array named "ar1" was assigned with [1,2,3].
+The next example name "seg11", this segment contain tree blocks, the first block is
+is segment have 3 floats, the second is a segment contain 6 floats, the third segment
+have 9 float. This example have same meaning of "seg14".
+
+In example "seg12", the value of int was appended to "@ar2". In the "seg13", values
+within "@ar1" was assigned to blocks.
+
+
+In above examples, The example was shown too. The expression of FLML is same as C programming
+language. The operation include :code:`+ - * /`. The assignment to a array using :code:`[]`.
+
+
+In modified BNF::
+
+    variable  ::= "$" [a-zA-Z]+ [0-9]* | "@" [a-zA-Z]+ [0-9]*
+
+
 
 
 Branch
-================
+============
+
+The Branch in FLML used key words :code:`%if %ifel %else`.
+
+The usage is::
+
+    [%if expression] {
+        statments
+    } ()
+    
+    [%elif expression] {
+        statments
+    } ()
+
+    [%else] {
+        statments
+    } ()
 
 
 Loop
 ============
 
+1. the "for" loop
+
+The usage of for statment is::
+
+    [%for expression_a; expression_b; expression_c] {
+        statments
+    } ()
+
+
+The for loop is just like C's.
+
+For example::
+
+    [%let $sum = 0] <> ()
+    [%for $i = 0; $i < 10; $i ++] {
+        [$sum += $i] <> ()
+    } ()
+
+
+2. the "while" loop
+
+The usage of while loop::
+
+    [%while expression] {
+        statments
+    } ()
+
+
 
 Function
-==============
+===========
+
+The way to define a function::
+
+    [%deffunc $funname (arguments) returns] {
+        statments    
+    } ()
+
+Here is an example::
+
+    [%deffunc $myadd ($a, $b) $c] {
+
+        [$c = $a + $b] <> ()
+        [%return $c] <> () 
+
+    } ()
+
+The [%return] can be omitted.
 
 
 Comment
-===============
+===========
+
+1. comment like C language.
+
+The comment in C style is acceptable.
+
+Here is example::
+
+    [1] <int> () //here is a comment
+    
+    //[3] <int> ()
+
+    /*
+        [3] {
+            [5] {
+                [5] <float> ()
+            } ()
+        } ()
+    /*
+
+
+
+2. segment comment.
+
+"#" can be used for segment comment, to comment a segment.
+
+For example::
+
+    [# 10] {
+        [1] <int> ()
+        [1] <float> ()
+    } ()
+
+
+
+
+Omission of "<>" and "()"
+===========================
+
+If "<>" and "()" both don't have contents, then, them can be omitted.
+
+If "()" don't have content, then it can be omitted.
+
+Examples::
+
+    [%let $sum = 0]
+    [%for $i = 0; $i < 10; $i++] {
+        [$sum += $i]
+    }
 
 
 Appendix
-====================
+===========
 
 
 Key words
------------------
+-------------
 
 All key words of FLML begain with "%". That is::
-
-    key-words ::= "%let", "extern", "%file",
-                  "%deflabel", "%include", "%extend", "%block",
-                  "%if", "%elif", "%else", "%for", "%while",
-                  "%assert", "%warning", "%error", "%message"
-                  "%break", "%continue"
-                  "%deffunc"
 
 :code:`%let`
     Used to declare and assign value to a variable.
@@ -326,3 +501,45 @@ All key words of FLML begain with "%". That is::
         }()
 
 
+
+Block type
+---------------------
+
+* Plaintext.
+
+    the :code:`<ascii>` was used to reprent asscii code, the block/unit consums 1 byte.
+
+* integer
+
+    The block type of integer include::
+
+        <int8> <uint8> <char>
+        <int16> <uint16> <short>
+        <int32> <uint32> <int>
+        <int64> <uint64> <long>
+
+* float
+
+.. code::
+
+    <float> <float32> <float64> <double>
+
+* bytes
+
+.. code::
+
+    <byte>
+
+* bit
+
+.. code::
+    
+    <bit>
+    
+
+Built in functions
+-------------------------
+
+
+Standard lables
+--------------------
