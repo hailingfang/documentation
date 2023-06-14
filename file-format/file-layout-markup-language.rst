@@ -2,162 +2,204 @@
 Reference of File Layout Markup Language 
 ============================================
 
-version: 1.0.0; by Benjamin Fang
+version: 1.0.1; by Benjamin Fang
 
-creat: 20230401; update: 20230606
+creat: 20230401; update: 20230614
 
-I need a method to describe the layout or format of a file.
-Describing the format of a plaintext file is easy, you just need to
-specify the meaning of every field. However, describing the layout of a binary
-file can be difficult to do effectively and accurately. That's why I
-developed this method.
+Introdution
+======================
 
-This mothod is simple, and For example,
-if you want to describe a binary organized 
-as::
+In my work in software development, I often need to parse files,
+which can be either binary or plaintext. To understand the structure and
+content of these files, I typically refer to documentation in the form
+of descriptive text or tables that outline the meaning of each field and
+its associated data type. My goal is to create an easy-to-use and accurate
+markup language that can be used to describe the layout of both binary and
+plaintext files. Once I have designed this language, I plan to use it to
+document commonly used file formats in the biological field and other areas. 
 
-    3 integers, 1 char, which value is 255, 1 integer which have a value "X", "X" floats.
+This method is simple. For example, if you want to describe a binary file organized as follows::
+
+    3 integers; 1 char, which value is 255; 1 integer which have a value "X"; "X" floats.
 
 You can describe the layout using FLML like following::
 
-    [3] <int> ()
-    [1] <char; =255> ()
-    [1] <int; :$x> (dsp="here assigned the vaule of this integer block to variable $x")
-    [$x] <float> ()
+    [3] <int> (dsp="3 integers")
+    [1] <char; =255> (dsp="one char, whose value is 255")
+    [1] <int; :$x> (dsp="one int, the value stored by this int is assigned to variable $x")
+    [$x] <float> (dsp="the amout of float is $x")
 
+This example described the data type and the number of each type. :code:`dsp` is a
+label to give information about :code:`[]<>` part.
 
 Syntax
-========================
+==================
 
-FLML description is made of :code:`flml-sentence`, which is looks like
-:code:`[block-number]<block-unit>(description)` or :code:`[block-number]{flml-sentence}(description)`.
-spaces between :code:`file-sentence` will be ignored.
+An FLML description is composed of FLML sentences. Each sentence is formatted as either
+:code:`[square-bracket-part] <angled-bracket-part> (round-parenthese-part)` or
+:code:`[square-bracket-part] {curly-bracket-part} (round-parenthese-part)`.
+
+The primarily role of the
+:code:`square-bracket-part` part is to describe the number of unit. The :code:`angled-bracket-part` is used to
+recorde the unit type(or say data type). And the last part, within :code:`round-parenthese-part`
+is make up of several labels, in form :code:`label="value"`. These labels and their values are
+used to descirbe the :code:`[] ()` part. :code:`curly-bracket-part` is made up of FLML sentences.
 
 Using a modified BNF grammar notation. Which can be defined as::
 
-    flml-syntax   ::= flml-sentence +
-    file-sentence ::= "[" number-block "]" ( "<" uint-block ">" | "{" flml-sentence "}" ) "(" descriptions ")"
+    flml-description   ::= flml-sentence +
+    flml-sentence      ::= "[" square-bracket-part "]" ( "<" angled-bracket-part ">" | "{" flml-sentence "}" ) "(" round-parenthese-part ")"
 
 
-number-block
+Terminology
+---------------
+
+There I define some terms in order to clarify my expression.
+
+The uint represented by :code:`angled-bracket-part` is called :code:`block`;
+The number recorded within :code:`square-bracket-part` is call :code:`segment-length`;
+While the block repeat :code:`segment-length` times, or say: :code:`segment-length` multiply block, those multiplied blocks composed
+a :code:`segment`.
+
+
+square-bracket-part
 -----------------------
 
-:code:`block-number` is mainlly used to describe the number of :code:`uint-block`.
-:code:`block-number` can be a :code:`number`, :code:`variable`, or a :code:`expression`.
+:code:`square-bracket-part` is mainlly used to describe the number of :code:`angled-bracket-part`.
+It can also be a container of statment, like "%let", "%if" and so on.
+
+
+1. :code:`square-bracket-part` can be a expression, the value of expression is number of :code:`block`.
 
 For example::
 
-    [%let $n = 5]<>(dsp="assign 5 to $n")
-    [3 * $n] <float> (dsp="this have 10 float")
+    [3]<byte>(dsp="this FLML give information that this is a 3 bytes segment")
+    [%let $num = 5]<>()
+    [$num * 2]<float>(dsp="this segument contain 10 blocks, each block is a float")
 
-:code:`block-number` can also have a interation variable.
+2. :code:`seqare-bracket-part` can be a container of some statments.
 
 For example::
 
-    [5; ~$i]{
-        [$i + 1] <int> ()
-    }()
-
-The :code:`$i` will change along the :code:`5` from 0 to 4. So above code is used to
-describe such layout:
-    
-    int; int, int; int, int, int; int, int, int, int; int, int, int, int, int
-
-In modified BNF, this can be descirbed as::
-
-    block-number ::= expression (";" "~"variable)
-    expression   ::= (number | variable) | function (("+" | "-" | "*" | "/" ) expression)?
-    number       ::= [0-9]+
-    variable     ::= "$" [a-zA-Z]+ [0-9]* | "@" [a-zA-Z]+ [0-9]*
-    function     ::= "$" [a-zA-Z]+ [0-9]* "(" arguments ")"
-
-:code:`number`
-    A number must great equal to zero.
-
-:code:`variable`
-    A variable begined with "$" is scale variable, it can refer to a number, a function
-    or a file handle. A variable begined with "@" is a array, which content 0 or more numbers.
-    see variable for more information.
+    [%let $i = 3] <> (dsp="assign value to $i")
+    [%if $i == 3] {
+        [16]<uint32>()
+    } (dsp="if the value of $i is equal to 3, the segments within {} will exist in the file")
+    [%else] {
+        [%error "this is a error"] <> ()
+    } (dsp="if $i is not equal to 3, this would be a error")
 
 
-unit-block
+3. :code:`square-bracket-part` could have a additional specicial variable called  iteration variable.
+
+For example::
+
+    [5; ~$it] {
+        [$it + 1] <int> (name="segmentB")
+    } (dsp="$it will change from 0 to 4"; name="segmentA")
+
+
+The value of $it is change form 0 to 4, so the sagment-length within {} should be
+1, 2, 3, 4, 5 respectively. So, :code:`sagmentA` has 5 :code:`block`, and each
+block is a segment, named :code:`segmentB`, the block of segmentB is int, and the
+:code:`segment-lenth` is $it, and $it is a iteration variable, it changed over each
+segmentB. 
+
+
+In modified BNF, The  can be descirbed as::
+
+    square-bracket-part ::= (expression (";" "~"variable)?) | ( keyword expression) 
+    expression          ::= (number | variable) | function (("+" | "-" | "*" | "/" ) expression)?
+    number              ::= [0-9]+
+    variable            ::= "$" [a-zA-Z]+ [0-9]* | "@" [a-zA-Z]+ [0-9]*
+    function            ::= "$" [a-zA-Z]+ [0-9]* "(" arguments ")"
+    keyword             ::= "%" [a-zA-Z]+ [0-9]*
+
+
+
+angled-bracket-part
 -----------------------
 
-The :code:`unit-block` is used to represent what the uint is. It indicate the size/type of
-one block, the value of the block, and which variable the value of the block will assinged
-to.
+:code:`angled-bracket-part` is mainlly used to offered block information. It also have
+some additional variables that have other functions.
 
-The :code:`uint-block` multiplied by :code:`number-block` will be a :code:`segment`.
+
+1. :code:`angle-bracket-part` represent block tpye.
+
+For example::
+    [1] <float> (dsp="the block type is float, one float comsume 4 bytes")
+    [1] <uint32> (dsp="a 32 bits block")
+
+2. The value of block can be assigned to a variable.
+
+For example::
+
+    [1] <int; :$len> (dsp="the value of the block is assigned to $len")
+    [$len] <float> ()
+
+3. A value can assigned to the block.
+
+For example::
+
+    [8] <char; =0> (dsp="this segment has 8 blocks, and the value of block is 0")
+    [4] <int; ={0, 1}> (dsp="this segment have 4 int, the value of block should be either 0 or 1")
+
 
 In modified BNF::
 
-    block-uint ::= uint (";" "=" (expression | "{" choice "}" | "[" array "]") | "(" range ")")?  (";" "=:" (expression)? (";" ":"variable)? (";" ":+"variable)
-    uint       ::= "bit" | "byte" | "char" | "uint8" | "int8" | "uint16" | "int16" |
-                   "int" | "uint32" | "int32" | "uint64" | "int64" | "float" |"float32" |
-                   "double" | "float64" | "ascii"
-    choice     ::= expression ("," expression) +
-    array      ::= expression ("," expression) +
-    range      ::= expression "," expression
+    angle-bracket-part ::= block-type (";" (":" | ":+") (variable))? (";" ("=" | "=:") (variable | choices | range | value_list))?
+    choices            ::= "{" elements "}"
+    range              ::= "(" ("(" | "[") range-start ","  range-end ("]" | ")" ) ")"
+    value_list         ::= "[" elements "]"
+    elements           ::= variable ("," variable)*
 
 
 
-For plaintext, :code:`uint` can be a :code:`ascii`.
+curly-bracket-part
+----------------------
 
-If :code:`uint-block` have a :code:`"=" expression part`, this is mean the value of :code:`expression`
-is the value of this block.
+When the :code:`block` is not a sample block type, such as int, float and so on, instead
+it is some other :code:`segment`. the curly bracket is used to contain those segment. The
+other applicaiton of curly-bracket-part is used for complex sentences like :code:`[%if 1]{}()`.
 
-For example:
-
-    [%let $n = 3]<>()
-    [8]<int; =$n * 2>(dsp="the int block has a value 6")
-
-The "=" can follwed by a :code:`choice`.
-
-For example:
-
-    [5] <float; ={1.0, 2.0, -9}> (dsp="float value can be anyone of it's choices")
-
-The :code:`array` is values which would assigned to blocks, if the lenth of this array is
-greater than block number, only front value be used, if it shorter than block-number, the arrary
-will be repeated.
-
-The :code:`range` is used to limit value's range of the block.
-
-And the blocks can assigned a array varible too, same like a array.
+1. used when block is a segment.
 
 For example::
 
-    [3] <int; =[1, 2, 3]> (dsp="this segment have 3 blocks, them have value 1, 2, 3")
-    [3] <int; =([5, 10))> (dsp="the value block set between 5, 10, and 5 is included")
-    [%let @ar = [1, 2, 3]] <> ()
-    [5] <int; =@ar> (dsp="the segment will be 1, 2, 3, 1, 2")
+    [6] {
+        [2] <bit> ()
+        [3] <int> ()
+    } (dsp="the block is sagment, the sagment is 2 bits and 3 int")
 
-Some time the vaule assign to a block only can be decided after the assignment. And
-for this case, using "=:" as a delay assignment.
 
-For example::
-
-    [%let $n = 0] <> (dsp="$n is initiated with 0")
-    [1] <uint64; =:$n> (dsp="$n would decided after this assignment")
-    [4] <int; :+$n> (dsp="this sagment have 4 block, the value as added to $n")
-    
-The value can be assigned to a value, or stored by a array.
+2. used when a complex sentence introduced.
 
 For example::
 
-    [1] <int; :$i> (dsp="the value of block is assigned to $i")
-    [$i] <char> (dsp="the number of char is decided by int behind this segment")
-    [$i] <float; :@collector; :+$float_sum> (dsp="all floats of this segment was stored by @collector
-        the float value is added up to $float_sum")
+    [%for $i = 0; $i < 10; $i++] {
+        [$i + 1] <int> ()
+    } (dsp="$i changed from 0 to 9")
 
-In above example, the value of floats is collected by :code:`@collector` and the sum of all floats is
-add up to :code:`$float_sum`, here we use ":+" to reprent this operation.
+By the way, this example can be replace by other way::
+
+    [10; ~$i] {
+        [$i + 1] <int> ()
+    } ()
 
 
-description
+
+round-parenthesis-part
 -------------------------
 
-:code:`description` is a group of descreption :code:`segment`.
+:code:`round-parenthesis-part` contain labels that used to descirbe the :code:`segment` or :code:`block`.
+
+For example::
+
+    [1] <char; =2> (dsp="this is a example"; value="1 for fou, 2 for bar"; name="example-segment")
+
+
+The lable is pre-defined by FLML, the user can define label themself by :code:`[%deflabel mylabe "this is my label"]<>()` too.
+
 
 In modified BNF::
 
@@ -166,26 +208,32 @@ In modified BNF::
     value           ::= [a-zA-z\s] +
 
 
-description is consist of :code:`label-name` and :code:`value`. The :code:`lable-name` is predefined
-by FLML or user can define it as need.
-
-Here is a same example::
-
-    [%fileinfo]<>(dsp="this is a file", type="text")
-
-
-
-
 Variables and expression
 ==========================
 
 
-Descreption labels
-===========================
+Branch
+================
+
+
+Loop
+============
+
+
+Function
+==============
+
+
+Comment
+===============
+
+
+Appendix
+====================
 
 
 Key words
-============
+-----------------
 
 All key words of FLML begain with "%". That is::
 
@@ -278,317 +326,3 @@ All key words of FLML begain with "%". That is::
         }()
 
 
-
-
-
-
-Branch
-================
-
-
-Loop
-============
-
-
-Function
-==============
-
-
-Comment
-===============
-
-
-Built in functions
-======================
-
-
-Standard lables
-==================
-
-
-Examples
-================
-
-
-
-    key wrods of MLBF all begined with `%`.
-
-    :code:`%let`
-
-        declare a variable, and assign value.
-
-        example:
-        
-        :code:`[%let $var = 3]<>()`
-
-    :code:`%extern`
-
-        declare a variable, and the value of this value is offered by user.
-
-        example:
-
-        :code:`[%extern $var]<>(mesg="this value is assigned by user.")`
-
-    :code:`%file`
-
-        assign a file reference to a variable.
-    
-        example:
-
-        :code:`[%file $file_ref]<>(file="a descreption of file which refered to")`
-
-
-    :code:`%if %elif %else`
-
-        key words used to flow control.
-
-        example:
-
-        .. code::
-
-            [%let $var = 3]<>()
-            [%if $var >= 0]{
-                [$var]<int>()
-            }()
-            [%elif $var < 0]{
-                [5]<int>()
-            }()
-            [%else]{
-                []<>(mesg="this is not possible")
-            }()
-
-    :code:`%for`
-
-        for loops.
-
-        example:
-
-        .. code::
-
-            [%let $var = 0]<>()
-            [%for $i = 1; $i < 10; $i++]<$var += $i>()
-
-            [%for $i = 0; $i < 5; $i++]{
-                []<$var *= $i>()
-            }()
-
-    :code:`%while`
-
-        while loops.
-
-        example:
-
-        .. code::
-
-            [%let $i = 3]<>()
-            [%while $i > 0]<$i -= 1>()
-
-    :code:`%error`
-
-        indicate a error.
-
-        example:
-
-        :code:`[%error]<>(mesg="this is a error message")`
-
-    :code:`%warning`
-
-    :code:`%assert`
-
-        assertion.
-
-        example:
-
-        :code:`[%assert $var == 3]<>()`
-
-
-    :code:`%break and %continue`
-
-        pass or break within loops.
-
-        example:
-
-        .. code::
-            
-            [%let $var = 1]<>()
-            [%while 1]{
-                [%if %var > 10]{[%break]<>()}()
-                [%if $var == 2]{
-                    []<$var += 2>()
-                    [%continue]<>()
-                }()
-                []<$var += 1>()
-            }()
-
-    :code:`%func`
-        
-        used to declare a function. see following.
-    
-    :code:`%note`
-
-    :code:`%mesg`
-
-    :code:`%extend`
-
-    :code:`%include`
-
-    :code:`%block`
-
-3. expression
--------------------
-
-
-4. function
--------------------
-.. code::
-
-    [%func $func_name(%args1, %args2)$return_value]{
-        []<$return_value = $args1 + args2>()
-    }()
-
-
-
-5. build in function
------------------------
-
-    $filelen
-
-    $filesize
-
-    $append()
-
-    $ceil
-
-    $floor
-
-    $sum
-
-
-6. comment
---------------------
-
-    [#]<>()
-
-    [#\*]<>()
-    [\*#]<>()
-
-
-7. standard lables
---------------------------
-
-    info
-
-    file
-
-    id
-
-    dsp
-
-    order
-
-
-Detials
-+++++++++++++++++++++++
-
-1. [...] 
-
-    The number of block. (NB)
-
-    "..." can be:
-
-    1. a number, which represent the number of block. For example :code:`[3]<int>(name="foo")`.
-
-    2. expressions, consists constants and variables, the value of expression reprent the number of block. For example :code:`[$var_a * 2 + 3]<int>(name="foo")`
-
-    3. a iterator, which start with "@", This is used to reprent the iteration of number of block. Example :code:`[76; @iterater_var_a]<int>(name="foo")`. Most of time, string after of :code:`@` can be omited, :code:`[$var_a; @]<int>()`, can use :code:`@var_a` to reference this iterator.  
-
-    Each part is sperated by ";". Example :code:`[$var_a * 2; @ind_a]<int>(name="foo")`
-
-
-2. <...>
-
-    block type. (BT)
-
-    "..." can be:
-
-    1. a block type. Anyone of :code:`bit, byte, char, uint8, int, long, int32, uint32, uint64, float, double` and so on. Example :code:`[7]<int32>(name="foo")`.
-
-    2. a variable begain with :code:`$`. For example :code:`[3]<long; $var_a>(name="foo")`. if NB is one, than :code:`$var` is a single value, else, :code:`$var` is a array of block values. 
-
-    3. expressions, the value of expression will be assiigned to block. Example :code:`[3]<int; $var_a; $var_a = [31, 30, 29]>`, mean that value of this 3 blocks is 31, 30 and 29.
-
-    Each part is sperated by ";".
-
-3. (...)
-
-    Attributes lables. (AL) 
-
-    "..." are several :code:`lable="value"` attributes, sperated by ";".
-
-4. {...}
-
-    Block group. (BG)
-
-    "{}" is used to group block which have more complex structure. Example :code:`[3]{[2]<int>() [1]<float>()}()`
-
-
-5. Define lable
-
-    Example:
-
-    :code:`<>[](%deflable dsp "description")`
-
-    This would define dsp lable. you can use a not defined lable, Define the lable when you want.
-
-6. Globle lable
-
-    Example:
-
-    :code:`<>[](endianness="little")`
-
-    This lable mean all multiple bytes integer is store by little endianness.
-
-7. Comments
-
-    :code:`[]<>(#this is a comment)`
-
-    .. code::
-
-        []<>(#--)
-            all content within this is commented
-        []<>(--#)
-
-
-All characters between "[]", "<>", "()" and "{}" is ogmited.
-
-
-Example
-++++++++++++++++++
-
-.. code-block::
-
-    []<>(#besd sparse binary file)
-    []<>(%deflable dsp "description of block")
-    []<>(%deflable esi_index "index of esi snp/variant")
-    []<>(endianness="little")
-    [1]<int32>(dsp="besd type"; value="3 for SMR_SPARSE_3 SPARSE_BELT sparse format")  
-    [1]<int32>(dsp="sample size", value="-9 for NA";)  
-    [1]<int32; $esi_num>(dsp="esi number")  
-    [1]<int32; $epi_num>(dsp="epi number")  
-    [12]<int32>(value="-9")  
-    [1]<uint64; $value_num; $value_num = 0; for(i = 1; i < $epi_num; i++){$value_num += @epi_num.$beta_offset + @epi_num.$se_offset}>(dsp="number of sparse beta and se value")  
-    [1]<uint64>(value="0")
-    [$epi_num; @]{  
-        [1]<uint64; @epi_num.$beta_offset>(dsp="number of esi offset")
-        [1]<uint64; @epi_num.$se_offset>(dsp="number of esi offset") 
-    }(dsp="beta and se offsets number of each probe"; order="same as epi file")
-    [$epi_num; @]{
-        [@epi_num.$beta_offset; @]<uint32; $beta_index>(dsp="beta index of esi", order="esi file")
-        [@epi_num.$se_offset; @]<uint32; $se_index>(dsp="se index of esi", order="esi file")
-    }(dsp="beta and se esi index arrary of each probe", order="same as epi file")
-    [$epi_num; @]{
-        [@epi_num.$beta_offset]<float>(dsp="esi beta value"; esi_index=$beta_index)
-        [@epi_num.$se_offset]<float>(dsp="esi se value"; esi_index=$se_index)
-    }(dsp="beta as se value", order="epi file")
-
-Here are more example within this directory.
