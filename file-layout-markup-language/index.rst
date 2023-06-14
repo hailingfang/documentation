@@ -5,7 +5,7 @@ Documents of File Layout Markup Language.
 
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :numbered:
 
     file-layout-markup-language
