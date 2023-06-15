@@ -173,6 +173,8 @@ This is a new version may adepted in future
     [%info]<> (dsp="besd file version 2"; endianness="little")
 
     [4] <char; =["b", "e", "s", "d"]> (dsp="besd magic number")
+    [1] <uint32> (dsp="BESD file format version")
+
     [32] <byte> (dsp="store sha256 sum of following data")
     [1] <char; ={13, 14}; :$file_type> (dsp="besd file type"; value="13 for new sparse version, 14 for new dense version")
     [1] <uint64; :$probe_num> (dsp="probe number")
