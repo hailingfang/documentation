@@ -170,6 +170,8 @@ This is a new version may adepted in future
 
 .. code::
 
+    [%info]<> (dsp="besd file version 2"; endianness="little")
+
     [4] <char; =["b", "e", "s", "d"]> (dsp="besd magic number")
     [32] <byte> (dsp="store sha256 sum of following data")
     [1] <char; ={13, 14}; :$file_type> (dsp="besd file type"; value="13 for new sparse version, 14 for new dense version")
@@ -265,7 +267,7 @@ This is a new version may adepted in future
             
             } (dsp="probe beta and se data", alignwith="@probe_order")
         }
-        
+
         [%else] {
             [$probe_num] {
                 [1] <uint32; :$each_probe_data_len> (dsp="beta, se data storage length of one probe") 
