@@ -161,3 +161,151 @@ SMR_SPARSE_3F 0x40400000
     }
 
 
+
+
+BESD version 2
+======================
+
+This is a new version may adepted in future
+
+.. code::
+
+    [4] <char; =["b", "e", "s", "d"]> (dsp="besd magic number")
+    [32] <byte> (dsp="store sha256 sum of following data")
+    [1] <char; ={13, 14}; :$file_type> (dsp="besd file type"; value="13 for new sparse version, 14 for new dense version")
+    [1] <uint64; :$probe_num> (dsp="probe number")
+    [1] <uint64; :$vari_num> (dsp="variants number")
+    [1] <uint64> (dsp="individual number"; NA="0")
+
+
+    [1] {
+        [1] <bit; :$probeinfo_flg> (dsp="flag for probe information"; value="0 for probe information not stored by this file, 1 stored")
+        [1] <bit; :$variantinfo_flg> (dsp="flag for vairant information"; value="0 for variants information is not stored, 1 stored")
+        [2] <bit; :$compress_flg> (dsp="flag for compression"; value="0 for not compressed, 1 for zlib compressed, other value is rested for future")
+        [4] <bit; =[0, 0, 0, 0]> (dsp="conserved")
+    } (dsp="flags")
+
+
+    [%if probeinfo_flg == 1] {
+        [$probe_num; ^@probe_order] {
+            [5]<uint16; :@probe_str_len> (dsp="the length of probe information in char")
+            [@probe_str_len] <char> (dsp="information string of probe")
+        }
+    }
+    [%else] {
+        [%file $probe_file "probe text file"]
+        [%let $probe_file_len = $getlinelen($probe_file)]
+        [%assert $probe_file_len == $probe_num]
+        [%let @probe_order = $getorder($probe_file)]
+    }
+
+
+    [%if variantinfo_flg == 1] {
+        [$vari_num; ^@vair_order] {
+            [7] <uint16; :@vari_str_len> (dsp="the length of eahc field")
+            [@vari_str_len] <char> (dsp="vairant information")
+        }
+    }
+    [%else] {
+        [%file $variant_file "variant information file"]
+        [%let $variant_file_len = $getlinelen($variant_file)]
+        [%assert $variant_file_len == $vari_num]
+        [%let @vair_order = $getorder($variant_file)]
+    }
+
+
+    [%if file_type == 13] {
+
+        [%if $compress_flg == 0] {
+            [$probe_num] {
+                [1] <uint32; :$vari_num_each> (dsp="vairant number of this probe")
+                [$vari_num_each] <uint32> (dsp="index of vairatn", alignwith="vair_order")
+                [$vari_num_each] <float> (dsp="beta data")
+                [$vari_num_each] <float> (dsp="se data")
+            }
+        }
+        
+        [%else] {
+            [$probe_num] {
+                
+                [1] <uint32; :$vari_num_probe> (dsp="variant number of this probe")
+                [1] <uint32; :$data_size_probe> (dsp="data size of this probe")
+                [%let $actual_vari_num_probe = 0]
+                [%let $actual_size_probe = 0]
+                [$?] {
+                    [1] {
+                        [1] <uint16; :$vari_num_block; :+$actual_vari_num_probe> (dsp="vairant number of this block")
+                        [1] <uint16; :$compressed_len> (dsp="data size in byte compressed")
+                        [1] <uint16> (dsp="data size in byte decompressed")
+                        [$compressed_len] <byte; :@compressed_data> (dsp="compressed data")
+                        [$actual_size_probe += 6 + $compressed_len]
+                        [%let @decompressed_data = $decompress_fuction($compressed_data)]
+                        [%parse @decompressed_data] {
+                            [$vari_num_block] <int> (dsp="variant index of this block", alignwith="@vair_order")
+                            [$vari_num_block] <float> (dsp="beta data of this block")
+                            [$vari_num_block] <float> (dsp="se data of this block")
+                        }
+
+                        [%assert $actual_vari_num_probe == $vari_num_probe]
+                        [%assert $actual_size_probe == $data_size_probe]
+                    }
+                }
+            
+            } (dsp="beta se data"; alignwith="@probe_order")
+        }
+    }
+
+
+    [%if file_format == 14] {
+
+        [%if $compress_flg == 0] {
+            [$probe_num] {
+                [$vari_num] <float> (dsp="beta data", alignwith="@vair_order")
+                [$vari_num] <float> (dsp="se data", alignwith="@vair_order")
+            
+            } (dsp="probe beta and se data", alignwith="@probe_order")
+        }
+        
+        [%else] {
+            [$probe_num] {
+                [1] <uint32; :$each_probe_data_len> (dsp="beta, se data storage length of one probe") 
+                [%let $acture_len = 0]
+                [%let $acture_vari_num = 0]
+                [$?] {
+                    [1] <uint16; :+acture_vari_num; :$vari_num_block> (dsp="contained variant number of this compressed block")
+                    [1] <uint16; :$compressed_len> (dsp="size in byte after compressed")
+                    [1] <uint16> (dsp="size in byte decompressed")
+                    [$acture_len += 6 + $compressed_len]
+                    [$compressed_len] <byte; :@compressed_data> (dsp="compressed data")
+
+                    [%let @decompressed_data = $decompress_fuction(@compressed_data)] <> (dsp="decompress the data")
+                    [%parse @decompressed_data] {
+                        [$vari_num_block] <float> (dsp="beta data")
+                        [$vari_num_block] <float> (dsp="se data")
+                    } (dsp="the layout of decompressed data")
+
+                } (alignwith="@vair_order")
+
+                [%assert $acture_len == $each_probe_data_len]
+                [%assert $acture_vari_num == $value_num]
+                
+            } (dsp="beta and se data"; alignwith="@probe_order")
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
