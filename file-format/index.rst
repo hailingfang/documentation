@@ -12,5 +12,5 @@ I use FLML(File layout markup language) to describe file layout.
     plink-bed-file
     gcta-besd-file
     bod_file
-    bgen_file
+    bgen-file
 
