@@ -14,4 +14,5 @@ I use FLML(File layout markup language) to describe file layout.
     bod_file
     bgen-file
     sam-bam-file
+    fasta-file
 
