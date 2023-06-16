@@ -14,29 +14,19 @@ Fam file is a plaintext file without header line. and one line per sample with s
 
 .. code::
 
-    [%info "fam plaintext file"]<>()
-    [%file $famfile]<>(dsp="assign the fam file to the variable")
-    [$linenum = $filelen($famfile)]<>(dsp="get the line number of the file")
-    [%let $white_space]<>(dsp="$white is is equal \t or \n")
-    [$linenum]{
-        [$?]<ascii; ={re[a-zA-Z0-9]})>(dsp="Family ID"; NA="0", type="string")
-        [1]<ascii; =$white_space>(dsp="white spaces")
+    [%info](dsp="fam file"; filetype="plaintext"; encode="ascii")
 
-        [$?]<ascii; =re[a-zA-Z0-9]>(dsp="within family ID"; NA="0"; type="string")
-        [1]<ascii; =$white_space>(dsp="white space")
-        
-        [$?]<ascii; =re[a-zA-Z0-9]>(dsp="Within family ID of father"; NA="0"; type="string")
-        [1]<ascii; =$white_space(dsp="white space")
-        
-        [$?]<ascii; =re[a-zA-Z0-9]>(dsp="Within family ID of mother"; NA="0"; type="string")
-        [1]<ascii; =$white_space>(dsp="white space")
-        
-        [$?]<ascii>(dsp="sex code"; value="1 for male, 2 for female, 0 for unknown"; NA=0, type=int)
-        [1]<ascii; =$white_space>(dsp="white space")
-        
-        [$?]<ascii>(dsp="phenotype value"; value="1 for control, 2 for case, -9 or 0 for missing"; NA="-9 or 0"; type=int)
-        [1]<ascii; ="\n">(dsp="new line")
-    }(dsp="fam file field fixed plaintext file, it have no head line, every line have six field sperated by white character")
+    [$+]{
+        [1] <string; ="[a-zA-Z0-9]+")>(dsp="Family ID"; NA="0", re="true")
+        [1] <string; ="[a-zA-Z0-9]+">(dsp="within family ID"; NA="0"; re="true")
+        [1] <string; ="[a-zA-Z0-9]+">(dsp="Within family ID of father"; NA="0"; re="true")
+        [1] <string; =re[a-zA-Z0-9]>(dsp="Within family ID of mother"; NA="0"; re="true")
+        [1] <string; ={"1", "2", "0"}>(dsp="sex code"; value="'1' for male, '2' for female, '0' for unknown"; NA="'0'", datatype=int)
+        [1] <string; ={"1", "2", "0", "-9"}>
+            (dsp="phenotype value"; value="1 for control, 2 for case, -9 or 0 for missing"; NA="'-9' or '0'"; datatype=int)
+
+        [1]<char; ='\n'>
+    }(dsp="fam file field fixed plaintext file, it have no head line, every line have six field sperated by white character"; sep="$TAB")
 
 
 .bim file
@@ -47,29 +37,18 @@ header line, and each line contain six fields.
 
 .. code::
 
-    [%info "bim plaintext file"]<>()
-    [%file $bimfile]<>(dsp="assign the bim file to a variable")
-    [%linenum = $filelen($bimfile)]<>(dsp="get file line number")
-    [$let $white_space]<>(dsp="white space is \n or \t")
-    [$linenum]{
-        [$?]<ascii>(dsp="chromosome code", value="is a integer or X, Y, MT or 0, 0 for unknown", NA="0")
-        [1]<ascii; =$white_space>(dsp="white space")
+    [%info](dsp="bim file"; filetype="plaintext"; encode="ascii")
 
-        [$?]<ascii>(dsp="a tring used as a variant identifier")
-        [1]<ascii; =$white_space>(dsp="white space")
+    [$linenum]{
+        [$?]<string>(dsp="chromosome code", value="is a integer or X, Y, MT or 0, 0 for unknown", NA="0")
+        [$?]<string>(dsp="a tring used as a variant identifier")
+        [$?]<string>(dsp="position in morgans or centimorgans", datatype="a float, 0 for unknown", NA="0")
+        [$?]<string>(dsp="base pair position", datatype="integer, 0 for unknown", NA="0")
+        [$?]<string>(dsp="allele 1")
+        [$?]<string>(dsp="allele 2")
         
-        [$?]<ascii>(dsp="position in morgans or centimorgans", type="a float, 0 for unknown", NA="0")
-        [1]<ascii; =$white_space>(dsp="white space")
-        
-        [$?]<ascii>(dsp="base pair position", type="integer, 0 for unknown", NA="0")
-        [1]<ascii; =$white_space>(dsp="white space")
-        
-        [$?]<ascii>(dsp="allele 1", type="string")
-        [1]<ascii; =$white_space>(dsp="white space")
-        
-        [$?]<ascii>(dsp="allele 2", type="string")
-        [1]<ascii; ="\n">(dsp="new line")
-    }(dsp="bim file has no head line, and every line has six field sperated by white space")
+        [1]<char; ='\n'>(dsp="new line")
+    }(dsp="bim file has no head line, and every line has six field sperated by white space"; spe="$TAB")
 
 
 .bed file
