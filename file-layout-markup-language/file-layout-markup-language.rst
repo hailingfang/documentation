@@ -434,7 +434,7 @@ All key words of FLML begain with "%".
 
 * %assert
 
-* %msg
+* %mesg
 
 * %error
 
@@ -444,15 +444,15 @@ All key words of FLML begain with "%".
 
 * %parse
 
+* %include
 
+* %extern
+
+* %define
 
 
 Block type
 ---------------------
-
-* Plaintext.
-
-    the :code:`<ascii>` was used to reprent asscii code, the block/unit consums 1 byte.
 
 * integer
 
@@ -481,6 +481,13 @@ The block type of integer include::
     
     <bit>
 
+* Plaintext.
+
+.. code::
+
+    <char> <string> <ascii>
+
+the :code:`<ascii>` was used to reprent asscii code, the block/unit consums 1 byte.
 
 
 Built in functions
@@ -496,6 +503,11 @@ Built in functions
 
 * $ceil
 
+* $filelinenum
+
+* $filesize
+
+* $abs
 
 
 
@@ -514,17 +526,28 @@ Standard lables
 
 * filetype
 
+* datatype
+
 * order
 
 * alignwith
 
+* sep
+
+* end
+
+* code
 
 
 
 Specicial variable
 ------------------------
 
-* $? or $DEPEND
+* $?
+
+* $*
+
+* $+
 
 * $NA
 
@@ -534,4 +557,10 @@ Specicial variable
 
 * $WHITESPACE
 
+* $EOF
+
+* $NEWLINE
+
 * $TAB
+
+* $CMDARGS
