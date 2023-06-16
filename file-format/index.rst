@@ -13,4 +13,5 @@ I use FLML(File layout markup language) to describe file layout.
     gcta-besd-file
     bod_file
     bgen-file
+    sam-bam-file
 
