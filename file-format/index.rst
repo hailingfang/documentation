@@ -15,4 +15,5 @@ I use FLML(File layout markup language) to describe file layout.
     bgen-file
     sam-bam-file
     fasta-file
+    gff-file
 
