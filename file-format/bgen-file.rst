@@ -67,19 +67,60 @@ version 1.2
             [%parse @genotype_dt] {
             
                 [$sample_num] {
-                    [2] <byte; :@pb1> (dsp="probability of homozygous of allel 1")
-                    [2] <byte; :@pb2> (dsp="probability of Heterozygous")
-                    [2] <byte; :@pb3> (dsp="probability of homozygous of allel 2")
+                    [1] <uint16; :$pb1> (dsp="probability of homozygous of allel 1")
+                    [1] <uint16; :$pb2> (dsp="probability of Heterozygous")
+                    [1] <uint16; :$pb3> (dsp="probability of homozygous of allel 2")
                 }
 
-                [%let $pb1_converted = $convert_to_prob(@pb1)]
-                [%let $pb2_converted = $convert_to_prob(@pb2)]
-                [%let $pb2_converted = $convert_to_prob(@pb3)]
+                [%let $pb1_converted = $convert_to_prob($pb1)]
+                [%let $pb2_converted = $convert_to_prob($pb2)]
+                [%let $pb2_converted = $convert_to_prob($pb3)]
             
             }
         }
 
-        [%if $layout == 2]
-    
+        [%if $layout == 2] {
+            [1] <uint32; $data_size> (dsp="the offset to the next variant block or end of file")
+        
+            [%if $compress_flg == 1] {
+                [1] <uint32; :$decompressed_size> (dsp="size after decompress")
+                [$data_size - 4] <byte; :@vair_data_compressed> (dsp="compressed data")
+                [%let @vari_data_ori = $decompress_fuction(@vair_data_compressed)]
+            }
+
+            [%else] {
+                [$data_size] <byte; :@vair_data_ori> (dsp="data which not compressed")
+            }
+        
+            
+            [%parse @vari_data_ori] {
+            
+                [1] <uint32> (dsp="number of individual")
+                [1] <uint16> (dsp="number of allels")
+                [1] <char> (dsp="minimum ploidy")
+                [1] <char> (dsp="maximum ploidy")
+                [$sample_num] <char> (dsp="ploidy of samples"; NA="most significant bit is 1")
+                [1] <char> (dsp="denoted Phased indicating what is stored in the row")
+                [1] <uint8> (dsp="number of bits used to store each probability in this row")
+                [$?] <byte> ()
+                //not finished yet
+            
+            }
+        
+        
+        
+        }
     
     }
+
+    [%deffunc $convert_to_prob ($datain) $dataout] {
+        [$dataout = $datain / 32768]
+        [%return $dataout]
+
+    } (dsp="fuction to convert 16 bits integer into a float to get probability")
+
+    [%deffunc $convert_prob_to_int ($datain) $dataout] {
+
+        [$dataout = $floor($datain * 32768)]
+    
+    } (dsp="convert probability into a 16 bits integer")  
