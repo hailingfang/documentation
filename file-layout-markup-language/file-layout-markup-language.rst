@@ -516,7 +516,9 @@ Standard lables
 
 * dsp
 
-* eledsp
+* ele-dsp
+
+* value-dsp
 
 * value
 
@@ -525,6 +527,8 @@ Standard lables
 * name
 
 * filetype
+
+* endianness
 
 * datatype
 
@@ -536,9 +540,9 @@ Standard lables
 
 * end
 
-* code
+* encode
 
-
+* re
 
 Specicial variable
 ------------------------
@@ -563,4 +567,10 @@ Specicial variable
 
 * $TAB
 
-* $CMDARGS
+* $EXTARGS
+
+* $INFINITY
+
+* $TRUE
+
+* $FAUSE
