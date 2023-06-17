@@ -56,9 +56,12 @@ Terminology
 
 * sentence
     A FLML sentence looks like :code:`[statment]<statment>(statment)` or :code:`[statment]{sentences}(statament)`.
-    A sentence is have tree parts, the first one is called "square bracket part",
+    A sentence is have tree **sentence parts**, the first one is called "square bracket part",
     which include the "[]" marker and statments it containing.
     The second is called "angled bracket part" or "curly bracket part". The last is called "round parenthese part".
+
+* statment
+    A statament in FLML is a expression end by ";". If the statament is last one of a sentence part. the ";" can be omiited.
 
 * block
     A block is the uint which construct the further data structure. For instance, :code:`[8] <int> ()` (example A),
@@ -89,63 +92,85 @@ Terminology
     repeated time of the block.
 
 * segment
-    The block multiplied by multiplier makes a segment. For example A, :code:`[8]<int>()` make a segment, which have 8 int,
+    The block multiplied by multiplier of same sentence makes a segment. For example A, :code:`[8]<int>()` make a segment, which have 8 int,
     the the size is 32 bytes. The block makes a sagments also called the **element** of segment. The multiplier also termed
     the length of segment or **segment length**.
 
 
-square-bracket-part
+
+Square bracket part
 -----------------------
 
-:code:`square-bracket-part` is mainlly used to describe the number of :code:`angled-bracket-part`.
-It can also be a container of statment, like "%let", "%if" and so on.
+:code:`square-bracket-part` is the first part of FLML sentence, which mainlly used to describe the number of block.
+This part is made of statment enclosed by "[]". The part have four types of stetments.
 
+1. A statament indicate the number of block
 
-1. :code:`square-bracket-part` can be a expression, the value of expression is number of :code:`block`.
-
-For example::
-
-    [3]<byte>(dsp="this FLML give information that this is a 3 bytes segment")
-    [%let $num = 5]<>()
-    [$num * 2]<float>(dsp="this segument contain 10 blocks, each block is a float")
-
-2. :code:`seqare-bracket-part` can be a container of some statments.
+This statament is a expression, the value of the expression is number of block, In Terminology, this value
+is the multiplier of block or length of the segment.
 
 For example::
 
-    [%let $i = 3] <> (dsp="assign value to $i")
-    [%if $i == 3] {
-        [16]<uint32>()
-    } (dsp="if the value of $i is equal to 3, the segments within {} will exist in the file")
-    [%else] {
-        [%error "this is a error"] <> ()
-    } (dsp="if $i is not equal to 3, this would be a error")
+    [3] <byte> ()
+    [%let $num = 5] <> ()
+    [$num * 2] <float> ()
+
+For the first sentence in the example above, the block is "byte", and multiplier is 3.
+which make a segment of 3 bytes. The second sentence defined a variable, whose value is 5.
+And in the third sentence, the statament in square bracket part is a expression having a value 10,
+The the multiplier is 10, the segment is 10 floats sagment. 
 
 
-3. :code:`square-bracket-part` could have a additional specicial variable called  iteration variable.
+2. A variable iteration statament.
+
+Along with multiplier, there can be a **iteration statament**. which made of "~" followed by variable.
+(a variable is words start with "$" or "@").
 
 For example::
 
-    [5; ~$it] {
-        [$it + 1] <int> (name="segmentB")
-    } (dsp="$it will change from 0 to 4"; name="segmentA")
+    [3; ~$i] {
+        [$i] <float> ()
+        [2] <int> ()
 
+    } ()
 
-The value of $it is change form 0 to 4, so the sagment-length within {} should be
-1, 2, 3, 4, 5 respectively. So, :code:`sagmentA` has 5 :code:`block`, and each
-block is a segment, named :code:`segmentB`, the block of segmentB is int, and the
-:code:`segment-lenth` is $it, and $it is a iteration variable, it changed over each
-segmentB. 
+In the example, The "~$i" is a iteration statament, The $i will iterated from 0 to 3 in
+its element. The block of sentence is complex block, the complex is descirbed by two sentence,
+The segment have 3 block, the first block is made of 0 float 2 integers, and second is made of 1 float
+2 integers. The third is made of 2 floats 2 integers.
 
+3. A order collecting statament. 
 
-In modified BNF, The  can be descirbed as::
+Some time the order of a sequece is importand and the order may be aligned by following segment.
+The statament is used to collect the order, or refer the order of a sagment.
 
-    square-bracket-part ::= (expression (";" "~"variable)?) | ( keyword expression) 
-    expression          ::= (number | variable) | function (("+" | "-" | "*" | "/" ) expression)?
-    number              ::= [0-9]+
-    variable            ::= "$" [a-zA-Z]+ [0-9]* | "@" [a-zA-Z]+ [0-9]*
-    function            ::= "$" [a-zA-Z]+ [0-9]* "(" arguments ")"
-    keyword             ::= "%" [a-zA-Z]+ [0-9]*
+For example::
+
+    [10; ^@myorder] <string> ()
+    [10] <int> (alignwith=@myorder)
+    [10; ~$i] {
+        [1] <float> (order=@myorder[$i])
+    } 
+
+4. statament of FLML operation
+
+This kind of statament is operation of FLML, such as declear a variable, branch and loop and so on.
+
+For example::
+
+    [%let $var = 3]
+    [%if $var == 2] {
+        [1] <int>
+    }
+
+.. In modified BNF, The  can be descirbed as::
+
+        square-bracket-part ::= (expression (";" "~"variable)?) | ( keyword expression) 
+        expression          ::= (number | variable) | function (("+" | "-" | "*" | "/" ) expression)?
+        number              ::= [0-9]+
+        variable            ::= "$" [a-zA-Z]+ [0-9]* | "@" [a-zA-Z]+ [0-9]*
+        function            ::= "$" [a-zA-Z]+ [0-9]* "(" arguments ")"
+        keyword             ::= "%" [a-zA-Z]+ [0-9]*
 
 
 
@@ -313,8 +338,6 @@ language. The operation include :code:`+ - * /`. The assignment to a array using
 In modified BNF::
 
     variable  ::= "$" [a-zA-Z]+ [0-9]* | "@" [a-zA-Z]+ [0-9]*
-
-
 
 
 Branch
