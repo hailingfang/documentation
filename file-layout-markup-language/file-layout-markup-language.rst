@@ -2,9 +2,9 @@
 Reference of File Layout Markup Language 
 ============================================
 
-version: 1.0.1; by Benjamin Fang
+version: 1.0.2; by Benjamin Fang
 
-creat: 20230401; update: 20230614
+creat: 20230401; update: 20230617
 
 Introdution
 ======================
@@ -26,7 +26,7 @@ You can describe the layout using FLML like following::
 
     [3] <int> (dsp="3 integers")
     [1] <char; =255> (dsp="one char, whose value is 255")
-    [1] <int; :$x> (dsp="one int, the value stored by this int is assigned to variable $x")
+    [1] <int; $x> (dsp="one int, the value stored by this int is assigned to variable $x")
     [$x] <float> (dsp="the amout of float is $x")
 
 This example described the data type and the number of each type. :code:`dsp` is a
@@ -35,14 +35,14 @@ label to give information about :code:`[]<>` part.
 Syntax
 ==================
 
-An FLML description is composed of FLML statments. Each statment is formatted as either
+An FLML description is composed of FLML sentences. Each sentence is formatted as either
 :code:`[square-bracket-part] <angled-bracket-part> (round-parenthese-part)` or
 :code:`[square-bracket-part] {curly-bracket-part} (round-parenthese-part)`.
 
 The primarily role of the
-:code:`square-bracket-part` part is to describe the number of unit. The :code:`angled-bracket-part` is used to
-recorde the unit type(or say data type). And the last part, within :code:`round-parenthese-part`
-is make up of several labels, in form :code:`label="value"`. These labels and their values are
+:code:`square-bracket-part` part is to describe the number of :code:`block`. The :code:`angled-bracket-part` is used to
+recorde the :code:`block` type(or say data type). And the last part, within :code:`round-parenthese-part`
+is made up of several labels, in form :code:`label=value`. These labels and their values are
 used to descirbe the :code:`[] ()` part. :code:`curly-bracket-part` is made up of FLML statments.
 
 Using a modified BNF grammar notation. Which can be defined as::
@@ -54,12 +54,44 @@ Using a modified BNF grammar notation. Which can be defined as::
 Terminology
 ---------------
 
-There I define some terms in order to clarify my expression.
+* sentence
+    A FLML sentence looks like :code:`[statment]<statment>(statment)` or :code:`[statment]{sentences}(statament)`.
+    A sentence is have tree parts, the first one is called "square bracket part",
+    which include the "[]" marker and statments it containing.
+    The second is called "angled bracket part" or "curly bracket part". The last is called "round parenthese part".
 
-The uint represented by :code:`angled-bracket-part` is called :code:`block`;
-The number recorded within :code:`square-bracket-part` is call :code:`segment-length`;
-While the block repeat :code:`segment-length` times, or say: :code:`segment-length` multiply block, those multiplied blocks composed
-a :code:`segment`.
+* block
+    A block is the uint which construct the further data structure. For instance, :code:`[8] <int> ()` (example A),
+    where the "int" is the block, which is inclose by a "<>" parenthese. The main function of "angled bracket part" and
+    "curly bracket part" is to contain block.
+
+* sample block and complex block
+    The block can de divided into two tipies: sample block and complex block. A sample block is
+    a basic data type which have beed define in this language, which can not consist of other
+    blocks. For example, the "int", "float", "char" all are sample blocks. The sample block was enclosed
+    by "<>". The complex block, on the other hand, is made up of sample blocks. For example, :code:`[3]{[1]<int>() [1]<float>()}()` (example B).
+    The complex block in the example is consist of one int and one float. The complex block is enclosed by
+    "{}"
+
+* block type
+    There many kinds of sample block type, each type reprent the its data type as well as data size. For example,
+    A "uint64" sample block meant that the data is a integer and it consums 64 bits.
+
+* block size
+    For a given block, no matter it is a sample block or complex block, the size of it is decided.
+    that is the size of block, or in term, block size. For the example I given above, the block size
+    of "{[1]<int> [1]<float>}" is 8 bytes (here we suppose the size of int is 4 bytes).
+
+
+* block multiplier
+    There is a number or variable in "[]" to indicate the amount of block. For example A which given above,
+    "[8]" mean there are 8 "<int>". The number "8" here is a block multiplier, which use to represent the
+    repeated time of the block.
+
+* segment
+    The block multiplied by multiplier makes a segment. For example A, :code:`[8]<int>()` make a segment, which have 8 int,
+    the the size is 32 bytes. The block makes a sagments also called the **element** of segment. The multiplier also termed
+    the length of segment or **segment length**.
 
 
 square-bracket-part
