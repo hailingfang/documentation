@@ -2,9 +2,9 @@
 Reference of File Layout Markup Language 
 ============================================
 
-version: 1.0.2; by Benjamin Fang
+version: 1.1.0; by Benjamin Fang
 
-creat: 20230401; update: 20230617
+creat: 20230401; update: 20230627
 
 Introdution
 ======================
@@ -20,39 +20,99 @@ document commonly used file formats in the biological field and other areas.
 
 This method is simple. For example, if you want to describe a binary file organized as follows::
 
-    3 integers; 1 char, which value is 255; 1 integer which have a value "X"; "X" floats.
+    3 integers; 1 char, whose value is 255; 1 integer which have a value "X"; "X" floats.
 
 You can describe the layout using FLML like following::
 
     [3] <int> (dsp="3 integers")
     [1] <char; =255> (dsp="one char, whose value is 255")
     [1] <int; $x> (dsp="one int, the value stored by this int is assigned to variable $x")
-    [$x] <float> (dsp="the amout of float is $x")
+    [$x] <float> (dsp="the amount of float is $x")
 
-This example described the data type and the number of each type. :code:`dsp` is a
-label to give information about :code:`[]<>` part.
 
-Syntax
-==================
-
-An FLML description is composed of FLML sentences. Each sentence is formatted as either
+An FLML description is composed of FLML sentences. Each sentence consist of three parts:
 :code:`[square-bracket-part] <angled-bracket-part> (round-parenthese-part)` or
 :code:`[square-bracket-part] {curly-bracket-part} (round-parenthese-part)`.
 
-The primarily role of the
-:code:`square-bracket-part` part is to describe the number of :code:`block`. The :code:`angled-bracket-part` is used to
+The primarily role of the :code:`square-bracket-part` part is to describe
+the number of :code:`block`. The :code:`angled-bracket-part` is used to
 recorde the :code:`block` type(or say data type). And the last part, within :code:`round-parenthese-part`
 is made up of several labels, in form :code:`label=value`. These labels and their values are
-used to descirbe the :code:`[] ()` part. :code:`curly-bracket-part` is made up of FLML statments.
+used to descirbe the :code:`[] ()` part. :code:`curly-bracket-part` is made up of FLML sentences.
+
+In above example, the first sentence is :code:`[3] <int> (dsp="3 integers")`. The "3" in "[]" is reveal the
+number of block which is a "int" written in "<>". "dsp" in "()" is a label, which is used to offer
+information about square-bracket-part and angled-bracket-part/curly-bracket-part.
 
 Using a modified BNF grammar notation. Which can be defined as::
 
-    flml-description   ::= flml-statment +
-    flml-statment      ::= "[" square-bracket-part "]" ( "<" angled-bracket-part ">" | "{" flml-statment "}" ) "(" round-parenthese-part ")"
+    flml-description   ::= flml-sentences +
+    flml-sentences     ::= "[" square-bracket-part "]" ( "<" angled-bracket-part ">" | "{" flml-sentences "}" ) "(" round-parenthese-part ")"
 
+
+
+
+Data types
+========================
+There are two data types in FLML, one is scaler and the other is array. scaler can refer to number, file, and iterater, and
+a order element. On the other hand, array is a collection of scaler.
+
+A scaler variable, which is used to reprent a scaler, is start with "$", and a array variable is start with
+"@".
+
+Here are some examples.
+
+.. code::
+
+    $sca = 3;
+    @arr = [1, 2, 3, 4, 5];
+    $sca = @arr[0]; // $sca equal 1
+    @arr[:2] = [7, 8];
+
+Array can be indexed and sliced, "@arr[0]" refers to the first element of the array, while "@arr[:3]" refers to
+a range form the first to the third. 
+
+In BNF::
+
+    variable ::= "$" [a-zA-Z*+?] + [0-9]* | "@" [a-zA-Z]+ [0-9]*
+
+
+
+
+operator, expression and statment
+===================================
+The operator of FLML include :code:`+ - * / : ~ ^ =` The "+ - * /" is same as normally
+itself in algebra. For example::
+
+    $foo = 1 + 3; // $foo equal 4
+    $foo = 4 - 3; // $foo equal 1
+    $foo = 4 * 3; // $foo equal 12
+    $foo = 5 / 2; // $foo equal 2.5
+
+There are five operator in FLML, they are "+ : ~ ^ =". They have sepecial meaning in certain context.
+
+A expression of FLML is consist of variables and operators. and a expression end with a ";" make
+a statament.
+
+In BNF::
+
+    statament  ::= expression ";"
+    expression ::= (operator)? (variable | number) (operator expression)?
+    variable   ::= "$" [a-zA-Z*+?] + [0-9]* | "@" [a-zA-Z]+ [0-9]*
+    number     ::= [1-9]+ "." [1-9]
+    operator   ::= [+-*/:~^]
+
+
+
+
+FLML sentences
+========================
 
 Terminology
 ---------------
+
+* statment
+    A statament in FLML is a expression end by ";". If the statament is last one of a sentence part. the ";" can be omiited.
 
 * sentence
     A FLML sentence looks like :code:`[statment]<statment>(statment)` or :code:`[statment]{sentences}(statament)`.
@@ -60,8 +120,6 @@ Terminology
     which include the "[]" marker and statments it containing.
     The second is called "angled bracket part" or "curly bracket part". The last is called "round parenthese part".
 
-* statment
-    A statament in FLML is a expression end by ";". If the statament is last one of a sentence part. the ";" can be omiited.
 
 * block
     A block is the uint which construct the further data structure. For instance, :code:`[8] <int> ()` (example A),
@@ -91,11 +149,10 @@ Terminology
     "[8]" mean there are 8 "<int>". The number "8" here is a block multiplier, which use to represent the
     repeated time of the block.
 
-* segment
+* segment, segment length, elements of segment
     The block multiplied by multiplier of same sentence makes a segment. For example A, :code:`[8]<int>()` make a segment, which have 8 int,
     the the size is 32 bytes. The block makes a sagments also called the **element** of segment. The multiplier also termed
     the length of segment or **segment length**.
-
 
 
 Square bracket part
@@ -121,10 +178,9 @@ And in the third sentence, the statament in square bracket part is a expression 
 The the multiplier is 10, the segment is 10 floats sagment. 
 
 
-2. A variable iteration statament.
+2. Iteration operator and iteration statament.
 
 Along with multiplier, there can be a **iteration statament**. which made of "~" followed by variable.
-(a variable is words start with "$" or "@").
 
 For example::
 
@@ -139,10 +195,10 @@ its element. The block of sentence is complex block, the complex is descirbed by
 The segment have 3 block, the first block is made of 0 float 2 integers, and second is made of 1 float
 2 integers. The third is made of 2 floats 2 integers.
 
-3. A order collecting statament. 
+3. Order collecting operation and order collecting statament. 
 
-Some time the order of a sequece is importand and the order may be aligned by following segment.
-The statament is used to collect the order, or refer the order of a sagment.
+Some time the order of a sequece is importand and the order may be aligned by following segments.
+
 
 For example::
 
@@ -163,38 +219,67 @@ For example::
         [1] <int>
     }
 
-.. In modified BNF, The  can be descirbed as::
+.. note::
+    
+    multi FLML statement can be writren within one square bracket.
 
-        square-bracket-part ::= (expression (";" "~"variable)?) | ( keyword expression) 
-        expression          ::= (number | variable) | function (("+" | "-" | "*" | "/" ) expression)?
-        number              ::= [0-9]+
-        variable            ::= "$" [a-zA-Z]+ [0-9]* | "@" [a-zA-Z]+ [0-9]*
-        function            ::= "$" [a-zA-Z]+ [0-9]* "(" arguments ")"
-        keyword             ::= "%" [a-zA-Z]+ [0-9]*
+In modified BNF, it can be descirbed as::
 
+        square-bracket-part ::= (expression (";" "~"variable)? (";") "^"variable ) | other statament 
 
 
-angled-bracket-part
+Angled bracket part
 -----------------------
 
 :code:`angled-bracket-part` is mainlly used to offered block information. It also have
-some additional variables that have other functions.
+some additional stataments.
 
 
-1. :code:`angle-bracket-part` represent block tpye.
-
-For example::
-    [1] <float> (dsp="the block type is float, one float comsume 4 bytes")
-    [1] <uint32> (dsp="a 32 bits block")
-
-2. The value of block can be assigned to a variable.
+1. a string represent block tpye.
 
 For example::
+    [1] <float> // block type is float
+    [1] <uint32> // block type is int, whose size is 4 bytes
 
-    [1] <int; :$len> (dsp="the value of the block is assigned to $len")
-    [$len] <float> ()
 
-3. A value can assigned to the block.
+2. A statament only have a variable.
+
+For example::
+
+    [1] <int; $int_value>  // value of this block is stored in $int_value
+    [3] <float; @float_values> //this segment have 3 float, the values of those floats were stored in @float_values
+
+If the length of segment is one, the data type of variable should be scaler, otherwise, it should be a array.
+
+There are a typea operator can be applied to this variable: accumulating operator "+".
+
+"+" will keep the value already stored by the variable, and add the new value up to the original.
+
+For example::
+
+    [10] {
+        [1] <int; +$sum>
+    
+    }
+    
+This will add 10 value to $sum.
+
+
+3. Assign a value to the block
+
+We can assign one or more value to a segment.
+
+For example::
+
+    [1] <int; =2>
+    [4] <int; =[1,2,3,4]>
+    [%let $a = 5]
+    [%let @b = [1, 2, 3]]
+    [1] <int; =$a>
+    [3] <int; =@b>
+
+
+4. A choices of block.
 
 For example::
 
@@ -204,7 +289,7 @@ For example::
 
 In modified BNF::
 
-    angle-bracket-part ::= block-type (";" (":" | ":+") (variable))? (";" ("=" | "=:") (variable | choices | range | value_list))?
+    angle-bracket-part ::= block-type (";" variable)? | (";" "+"variable) (";" ("=" | "=:") variable)? (";" "=" choices | range | value_list)?
     choices            ::= "{" elements "}"
     range              ::= "(" ("(" | "[") range-start ","  range-end ("]" | ")" ) ")"
     value_list         ::= "[" elements "]"
@@ -265,110 +350,52 @@ In modified BNF::
     value           ::= [a-zA-z\s] +
 
 
-Variables and expression
-============================
 
-FLML have two kinds of variables: :code:`scaler` and :code:`array`. The scaler refer to a
-number, a function or a file. while the array is refer a bunch of scalers. Scaler varialbe start with a "$",
-and array start with a "@".
+Declearation of new variable
+==============================
+"%let" can be used to declear a new variable. For example::
 
-* Here is some examples of scaler::
+    [%let $a = 3]
 
-    [%let $a = 3] <> ()
-    [%let $b = 2] <> ()
-    [$a] <int> (name="seg1")
-    [$a + 2 * $b] <float> <name="seg2">
+The new declear variable can initiated like what we do in example.
 
-    [1]<int; :$c> (name="seg3")
-    [10] {
-        [1] <int; :+$d> ()
-    } (name="seg4")
-    
-    [1] <int; =$a> (name="seg5")
-    [1] <int; =:$a> ("name="seg6")
-    [$a = $a + 5] <> ()
+A variable can auto declear when it show up first time. For example::
+    [1] <int; $bar>
 
-    [10; ~$e] {
-        [$e] <char> ()
-    } (name="seg7")
-
-    [$myfun($a, $b)] <int> (name="seg8")
-    [%file $file_handle "file description"] <> (name="seg9")
-
-Example "seg1" and "seg2" is the basic usage of scaler. It refer to a number.
-In example "seg3", scaler follows a marker ":", this mean the value of block is assigned
-to this variable.
-
-Example "sag4", the variable follows ":+", this a accumulating assing, and this mean
-the values of will added to the variable.
-The "seg5" assign the value of $a to the block.
-The "seg6" example, "$a" follows "=:", this is a later assign sign, the value would be used late "$a", it is 8 here, instead
-the old(3).
-
-In example "seg7", "$e" follows "~", this is a iteration sign and make "$e" a iteration variable.
-In "seg8", the "$myfun" refer to a function. In "seg9", the variable refer to a file.
-
-
-* Here is some examples of array::
-
-    [%let @ar1 = [1, 2, 3]] <> (name="seg10")
-    [@ar1 * 3] <float> (name="seg11")
-
-    [10] <int; :@ar2> (name="seg12")
-    [3] <int; =@ar1> (name="seg13")
-
-    [@ar1; ~$i] {
-        [$i] <float> ()
-    } (name="seg14")
-
-
-In example "seg10", a array named "ar1" was assigned with [1,2,3].
-The next example name "seg11", this segment contain tree blocks, the first block is
-is segment have 3 floats, the second is a segment contain 6 floats, the third segment
-have 9 float. This example have same meaning of "seg14".
-
-In example "seg12", the value of int was appended to "@ar2". In the "seg13", values
-within "@ar1" was assigned to blocks.
-
-
-In above examples, The example was shown too. The expression of FLML is same as C programming
-language. The operation include :code:`+ - * /`. The assignment to a array using :code:`[]`.
-
-
-In modified BNF::
-
-    variable  ::= "$" [a-zA-Z]+ [0-9]* | "@" [a-zA-Z]+ [0-9]*
+The variable "$bar" is decleared and the value of the block is assigned to it.
 
 
 Branch
-============
+========================
 
 The Branch in FLML used key words :code:`%if %ifel %else`.
 
 The usage is::
 
     [%if expression] {
-        statments
+        sentences
     } ()
     
     [%elif expression] {
-        statments
+        sentences
     } ()
 
     [%else] {
-        statments
+        sentences
     } ()
 
 
-Loop
-============
 
-1. the "for" loop
+Loop
+========================
+
+
+1. The "for" loop
 
 The usage of for statment is::
 
     [%for expression_a; expression_b; expression_c] {
-        statments
+        sentences
     } ()
 
 
@@ -382,7 +409,7 @@ For example::
     } ()
 
 
-2. the "while" loop
+2. The "while" loop
 
 The usage of while loop::
 
@@ -393,12 +420,12 @@ The usage of while loop::
 
 
 Function
-===========
+============================
 
 The way to define a function::
 
     [%deffunc $funname (arguments) returns] {
-        statments    
+        sentences
     } ()
 
 Here is an example::
@@ -414,7 +441,7 @@ The [%return] can be omitted.
 
 
 Comment
-===========
+===========================
 
 1. comment like C language.
 
@@ -450,12 +477,11 @@ For example::
 
 
 
-Omission of "<>" and "()"
-===========================
+Omission
+========================
 
-If "<>" and "()" both don't have contents, then, them can be omitted.
-
-If "()" don't have content, then it can be omitted.
+A FLML must have a square bracket part. The angle bracket part and round
+parenthesis part can be omiited if they have no contents.  
 
 Examples::
 
@@ -465,9 +491,22 @@ Examples::
     }
 
 
+" " and ' ' in FLML
+==============================
+
+"" and '' can be used to parenthesis a string. The difference between them is that
+the variable within "" would be extended, the other is not. The specifier like "\n", "\t"
+would refer to a new line and tab respectively too.
+
+For example::
+
+    [%let $var = 3; %let @arr = [1, 2, 3]]
+    [%mesg "\$var is $var"] //the mesg is: $var is 3
+    [%mesg 'this is @aarr'] // the message is: this is @arr
+
+
 Appendix
 ===========
-
 
 Key words
 -------------
@@ -477,155 +516,402 @@ All key words of FLML begain with "%".
 
 * %let
 
+    Declear a variable and initiate it.
+
+    .. code::
+
+        [%let $var = 12]
+        [%let @arr = [1, 2, 3]]
+
 * %if %elif %else
+
+    Those three key words is used in loop.
+
+    ..code ::
+
+        [1] <int; $var>
+        [%if $var > 10] {
+            [10] <int>
+        }
+        [%elif $var == 10] {
+            [5] <int>
+        }
+
+        [%else] {
+            [1] <int>
+        }
+
 
 * %for
 
+    To construct for loop sentence.
+
+    .. code::
+
+        [%let $var = 10]
+        [%for ($i = 0;$i < 10; $i += 1)] {
+            [$var]
+        }
+
+    If no other stataments, the parenthesis of "%for" can be omiited.
+
+
 * %while
 
-* %deffunc %return
+    To make whild loop sentence.
 
-* %deflabel
+    .. code::
+
+        [$let $var = 10; %let $summ = 0]
+        [%while $var > 0] {
+            [1] <int; +$summ>
+            [$var -= 1]
+        }
+
+
+* %break %continue
+
+    Those key words used in loop.
 
 * %assert
 
-* %mesg
+    Assert a statament.
+
+    .. code::
+
+        [%assert $var == 0]
 
 * %error
 
-* %infor
+    Give error information.
+
+    .. code::
+
+        [%error "this is a error"]
+
+* %mesg
+
+    Give a message.
+
+    [%mesg "this a message"]
+
+
+* %deffunc %return
+
+    When use "%deffunc" to define a function, all "[]" can be omitted.
+    The arguments of function put into a parenthesis and saperated by commer.
+    Then the variable will be return followed the arguments. The "%return" statament
+    can be omiited.
+    function should be defined before refered to. You can declear the function first and
+    then define it later like C language.
+
+    .. code::
+
+        [%deffunc %myfunc ($var_a, $var_b) $data_out]
+
+        [%let $a = 13; %let $b = 14; %let $c = $myfunc($a, $b)]
+        [$mesg "the value of \$c is $c"]
+        [$c]<float>
+
+        [%deffunc %myfunc ($var_a, $var_b) $data_out] {
+        
+            %let $c = $var_a + $var_b;
+            $data_out = $c;
+            %return %data_out; // can be omitted
+        }
+
+
+* %info
+
+    Give information, Generally, use it to offer information about whole file.
+
+    .. code::
+
+        [%info](dsp="a binary file"; filetype="binary"; endianness="little")
+
 
 * %file
 
+    declear a variable which refer to a file.
+
+    .. code::
+
+        [%file $file_var "file description" "file_name"]
+    
+    The "file name" can be omiited.
+
 * %parse
 
-* %include
+    To parse an array. 
 
-* %extern
+    .. code::
 
-* %define
+        [100]<byte; @data_a>
+        [%let @data_b = %transform(@data_b)]
+
+        [%parse @data_b] {
+
+            sentences
+        
+        }
+
+
+    The original data in the file maybe need some transform and the transformed data
+    have acctual meaning. When is the time "%parse" works.
+
+
+* %deflabel
+
+    Used to define a new label user itself.
+
+    .. code::
+
+        [%deflabel newlabel "this is a new label used to express new attribute"]
+
+.. * %define
+
+.. * %include
+
+.. * %extern
 
 
 Block type
----------------------
+-------------------------
 
 * integer
 
-The block type of integer include::
+    The block type of integer include::
 
-    <int8> <uint8> <char>
-    <int16> <uint16> <short>
-    <int32> <uint32> <int>
-    <int64> <uint64> <long>
+        <int8> <uint8> <char>
+        <int16> <uint16> <short>
+        <int32> <uint32> <int>
+        <int64> <uint64> <long>
 
 * float
 
-.. code::
+    .. code::
 
-    <float> <float32> <float64> <double>
+        <float> <float32> <float64> <double>
 
 * bytes
 
-.. code::
+    .. code::
 
-    <byte>
+        <byte>
 
 * bit
 
-.. code::
+    .. code::
     
-    <bit>
+        <bit>
 
 * Plaintext.
 
-.. code::
+    .. code::
 
-    <char> <string> <ascii>
+        <char> <string> <ascii>
 
-the :code:`<ascii>` was used to reprent asscii code, the block/unit consums 1 byte.
+    the :code:`<ascii>` was used to reprent asscii code, the block/unit consums 1 byte.
 
 
 Built in functions
 -------------------------
 
-* $getorder
-
-* $sum
-
 * $abs
+
+    .. code::
+
+            %let $a = -2;
+            %let $b = $abs($a); // $b equal 2
 
 * $floor
 
+    .. code::
+
+        %let $a = $floor(10 / 3); // $a equal 3
+
 * $ceil
+
+    .. code::
+
+        %let $a = $ceil(10 / 3); // $a equal 4
+
+* $sum
+
+    .. code::
+
+        %let @arr = [1, 2, 3];
+        %let $ss = $sum(@arr); // $ss equal 6
+
+* $append
+
+    .. code::
+
+        %let @arr = [1, 2, 3];
+        %let $a = 4;
+        $append(@arr, $a); // @arr is [1, 2, 3, 4]
+
+* $pop
+
+    .. code::
+
+        %let @arr = [1, 2, 3];
+        %let $a = $pop(@arr); // @arr is [1, 2], $a equal 3
+
+* $length
+
+    .. code::
+
+        %let @arr = [1, 2, 3];
+        %let $a = $length(@arr); // $a is 3
+
+
+* $getorder
+
+    Get the order of a file or array.
+
+    .. code::
+
+        %file $test_file "a test file"
+        %let @order = $getorder($test_file); // @order represent the order of file.
+
 
 * $filelinenum
 
+    Return the line number of a plaintext file.
+
 * $filesize
 
-* $abs
+    Return size of file.
+
 
 
 
 Standard lables
---------------------
+--------------------------
 
 * dsp
 
+    Description of segment. This label is used for general popurse and have no limitation.
+    The value is a string.
+
+    .. code::
+
+        dsp="string"
+
 * ele-dsp
 
-* value-dsp
+    Description the element of segment. The value is string.
 
-* value
+    .. code::
+
+        dsp="string"
+
+* value-dsp  value
+
+    Description the mean of each value.
+
+    .. code::
+
+        [1] <char; ={0, 1, 2}> (value-dsp="descripiton of value"; value={0: "dsp one", 1: "dsp two", 2: "des three"})
+
 
 * NA
 
-* name
+    Value to indicate NA.
+
+* name id
+
+    name of segment.
 
 * filetype
 
+    File type, vlaue is "binary" or "plaintext".
+
 * endianness
+
+    endianness of file, value is "little" or "big".
+
+* order alignwith
+
+    The order which the block refer to.
+
+    .. code::
+
+        [%file $myfile "my file"]
+        [%let $filelen = $filelinenum($myfile)]
+        [@let @order = $getorder($myfile)]
+        [1] <int> (order=@order[0])
+        [$filelen] <float> (alignwith=@order)
 
 * datatype
 
-* order
-
-* alignwith
+    Used in plaintext descripiton, reprent the data type of block.
 
 * sep
 
+    Used in plaintext descripiton, the seperator between elements of segment.
+
 * end
+
+    Used in plaintext descripiton, reprent the end of segment.
 
 * encode
 
+    Used in plaintext descripiton, reprent the encoding type of plaintext.
+
 * re
+
+    Used in plaintext descripiton, indicate whether the regular express is used or not.
+
 
 Specicial variable
 ------------------------
 
-* $?
-
 * $*
+
+    This variable refer to a range [0, infinity).
 
 * $+
 
-* $NA
+    This variable refer to a range [1, infinity).
 
-* $NONE
+* $?
 
-* $UNKNOW
+    This variable refer to a value, which is 0 or 1.
+
+* $NA $NONE $UNKNOW
+
+    The variable means that the value is not known.
 
 * $WHITESPACE
 
+    Refer to "\s" or "\t".
+
 * $EOF
+
+    Refer to End Of File.
 
 * $NEWLINE
 
+    Refer to "\n".
+
 * $TAB
 
-* $EXTARGS
+    Refer to "\t".
 
-* $INFINITY
+* @EXTARGS
+
+    Refer to a array, which store arguments of command line. This is defined for future usage.
+
+* $INF $INF_POS $INF_NEG
+
+    Refer to a infinity value.
 
 * $TRUE
 
+    Refer to true.
+
 * $FAUSE
+
+    Refer to false.
