@@ -1,10 +1,13 @@
-============================================
+======================================================
 Reference of File Layout Markup Language 
-============================================
+======================================================
 
 version: 1.1.0; by Benjamin Fang
 
-creat: 20230401; update: 20230627
+create: 20230401; update: 20230627
+
+
+
 
 Introdution
 ======================
@@ -79,8 +82,9 @@ In BNF::
 
 
 
-operator, expression and statment
-===================================
+Operator, expression and statement
+==========================================
+
 The operator of FLML include :code:`+ - * / : ~ ^ =` The "+ - * /" is same as normally
 itself in algebra. For example::
 
@@ -151,7 +155,7 @@ Terminology
 
 * segment, segment length, elements of segment
     The block multiplied by multiplier of same sentence makes a segment. For example A, :code:`[8]<int>()` make a segment, which have 8 int,
-    the the size is 32 bytes. The block makes a sagments also called the **element** of segment. The multiplier also termed
+    the the size is 32 bytes. The block makes a sagments also called the **elements** of segment. The multiplier also termed
     the length of segment or **segment length**.
 
 
@@ -296,7 +300,6 @@ In modified BNF::
     elements           ::= variable ("," variable)*
 
 
-
 curly-bracket-part
 ----------------------
 
@@ -329,7 +332,6 @@ By the way, this example can be replace by other way::
     } ()
 
 
-
 round-parenthesis-part
 -------------------------
 
@@ -351,6 +353,7 @@ In modified BNF::
 
 
 
+
 Declearation of new variable
 ==============================
 "%let" can be used to declear a new variable. For example::
@@ -363,6 +366,8 @@ A variable can auto declear when it show up first time. For example::
     [1] <int; $bar>
 
 The variable "$bar" is decleared and the value of the block is assigned to it.
+
+
 
 
 Branch
@@ -383,6 +388,7 @@ The usage is::
     [%else] {
         sentences
     } ()
+
 
 
 
@@ -419,6 +425,7 @@ The usage of while loop::
 
 
 
+
 Function
 ============================
 
@@ -438,6 +445,8 @@ Here is an example::
     } ()
 
 The [%return] can be omitted.
+
+
 
 
 Comment
@@ -491,6 +500,8 @@ Examples::
     }
 
 
+
+
 " " and ' ' in FLML
 ==============================
 
@@ -505,8 +516,11 @@ For example::
     [%mesg 'this is @aarr'] // the message is: this is @arr
 
 
+
+
 Appendix
 ===========
+
 
 Key words
 -------------
@@ -783,8 +797,6 @@ Built in functions
 * $filesize
 
     Return size of file.
-
-
 
 
 Standard lables
