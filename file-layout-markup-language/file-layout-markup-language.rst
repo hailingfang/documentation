@@ -750,6 +750,12 @@ Built in functions
 
         %let $a = $ceil(10 / 3); // $a equal 4
 
+* $mod
+    
+    .. code::
+        
+        %let $a = $mod(10, 3); // $a equal 1
+
 * $sum
 
     .. code::
@@ -844,7 +850,7 @@ Standard lables
 
     endianness of file, value is "little" or "big".
 
-* order alignwith
+* alignwith order
 
     The order which the block refer to.
 
@@ -855,6 +861,12 @@ Standard lables
         [@let @order = $getorder($myfile)]
         [1] <int> (order=@order[0])
         [$filelen] <float> (alignwith=@order)
+
+
+* value-alignwith
+
+* relatedto
+
 
 * datatype
 
@@ -877,6 +889,10 @@ Standard lables
     Used in plaintext descripiton, indicate whether the regular express is used or not.
 
 * role
+
+* bitorder
+
+* BitBlockOri
 
 Specicial variable
 ------------------------
@@ -913,7 +929,7 @@ Specicial variable
 
     Refer to "\t".
 
-* @EXTARGS
+* @CMDARGS
 
     Refer to a array, which store arguments of command line. This is defined for future usage.
 
