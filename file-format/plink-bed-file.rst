@@ -66,8 +66,8 @@ FLML description
 .. code::
 
     [%file](dsp="bed file"; filetype="binary"; role="main"; enddianess="little"; bitorder="76543210")
-    [%let $famfile_name = $CMDARGS[1]]
-    [%let $bimfile_name = $CMDARGS[2]]
+    [%let $famfile_name = @CMDARGS[1]]
+    [%let $bimfile_name = @CMDARGS[2]]
     [%file $famfile $famfile_name]<>(dsp="fam file"; filetype="plaintext"; encode="ascii"; role="company")
     [%file $bimfile $bimfile_name]<>(dsp="bim file"; filetype="plaintext"; encode="ascii"; role="company")
     [%let $famfile_len = $filelinenum($famfile_name)]
