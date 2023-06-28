@@ -7,7 +7,7 @@ I use FLML(File layout markup language) to describe file layout.
 
 .. toctree::
     :maxdepth: 2
-    :numbered:
+    :numbered: 2
 
     plink-bed-file
     gcta-besd-file
