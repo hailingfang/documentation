@@ -1,191 +1,227 @@
-===================
 GCTA BESD file
 ===================
 
 The BESD file is a binary file format used in GCTA, OSCA, and SMR to store 
 GWAS analysis results. It must be accompanied by the .epi and .esi files when used.
 
+
+
+
 .epi file
-================
+-------------------
 
 The .epi file is a plaintext file where every line represents an entry of
 information for a phenotype. Therefore, the number of lines in the .epi file is
 equal to the number of phenotypes.
 
+FLML description
+++++++++++++++++++++++++
+
 .. code::
 
-    [%info ".epi plaintext file"]<>()
-    [%file $epi_file]<>(file="epi file")
-    [%let $epi_num = $filelen($epi_file)]<>(dsp="phenotypes number")
-    [$epi_num]{
-        [$?]<ascii>(dsp="chromosome number", type="string", value="number or X, Y, MT and so on")
-        <1><ascii; =$white_space>(dsp="a $white_space used to seprat fields")
-        [$?]<ascii>(dsp="variant ID", type="string")
-        [1]<ascii; =$white_space>()
-        [$?]<ascii>(dsp="physical position", type="float")
-        [1]<ascii; =$white_space>()
-        [$?]<ascii>(dsp="base position", type="int")
-        [$?]<ascii>(dsp="orientation", value="+ or -")
-        [1]<ascii; ="\n">()
-    }()
+    [%file]"](dsp="epi file"; filetype="plaintext"; encode="ascii"; role="main")
+
+    [$+]{
+        [1]<string; ="[0-9XYMT]+">(dsp="chromosome number", type="string", value-dsp="number or X, Y, MT and so on"; re=$TRUE)
+        [1]<string; ="[0-9a-zA-Z_]+">(dsp="variant ID", datatype="string"; re=$TRUE)
+        [1]<string>(dsp="physical position", datatype="float")
+        [1]<string>(dsp="base position", datatype="int")
+        [1]<string>(dsp="orientation", value-dsp="+ or -")
+        
+        [1]<char; ='\n'>
+    }(sep=$WHITESPACE)
+
+
+
 
 .esi file
 ==============
 
 .esi file is used to record information of variants.
 
+FLML description
++++++++++++++++++++++
+
 .. code::
 
-    [%file $esi_file]<>(file="esi file")
-    [%let $esi_num = $filelen($esi_file)]<>()
-    [$esi_num]{
-        [1]<int>(dsp="chromosome")
+    [%file]<>(dsp="esi file"; filetype="plaintext"; encode="ascii"; role="main")
+
+    [$+]{
+        [1]<string>(dsp="chromosome"; value-dsp="a number, X, Y or MT and so on")
         [1]<string>(dsp="rsid")
-        [1]<float>(dsp="physical position")
-        [1]<uint32>(dsp="base position")
+        [1]<string>(dsp="physical position"; datatype="float")
+        [1]<string>(dsp="base position"; datatype="unsigned integer")
         [1]<string>(dsp="reference allel")
         [1]<string>(dsp="alternertive allel")
-        [1]<float>(dsp="minor allel frequency")
+        [1]<string>(dsp="minor allel frequency"; datatype="float")
 
-    }()
+        [1] <char; ='\n')
+    }(sep=$WHITESPACE)
+
 
 
 .besd file
-=================
+-----------------------
 
 There kinds of file format of besd file. First is Dense file type, and second is sparse file type.
 
 Macros
-------------------
+++++++++++++++
 
 Defined C macros for besd file format. 
 
 * Dense
-    ::
 
-        #define DENSE_FULL 0
-        #define DENSE_BELT 1
-        #define OSCA_DENSE_1 4 // 0x00000004: RESERVEDUNITS*ints  + floats  :  <beta, se> for each SNP across all the probes are adjacent.
-        #define SMR_DENSE_1 0 // 0x00000000 + floats  : beta values (followed by se values) for each probe across all the snps are adjacent.
-        #define SMR_DENSE_3 5  // RESERVEDUNITS*ints + floats (indicator+samplesize+snpnumber+probenumber+ 12*-9s + values) [SMR default and OSCA default]
+::
+
+    #define DENSE_FULL 0
+    #define DENSE_BELT 1
+    #define OSCA_DENSE_1 4 // 0x00000004: RESERVEDUNITS*ints  + floats  :  <beta, se> for each SNP across all the probes are adjacent.
+    #define SMR_DENSE_1 0 // 0x00000000 + floats  : beta values (followed by se values) for each probe across all the snps are adjacent.
+    #define SMR_DENSE_3 5  // RESERVEDUNITS*ints + floats (indicator+samplesize+snpnumber+probenumber+ 12*-9s + values) [SMR default and OSCA default]
 
 * Sparse
-    ::
 
-        #define SPARSE_FULL 2
-        #define SPARSE_BELT 3
-        #define OSCA_SPARSE_1 1 // 0x00000001: RESERVEDUNITS*ints + uint64_t  + uint64_ts + uint32_ts + floats: value number + (half uint64_ts and half uint32_ts of SMR_SPARSE_3) [OSCA default]
-        #define SMR_SPARSE_3F 0x40400000 // 0x40400000: uint32_t + uint64_t + uint64_ts + uint32_ts + floats
-        #define SMR_SPARSE_3 3 // RESERVEDUNITS*ints + uint64_t + uint64_ts + uint32_ts + floats (indicator+samplesize+snpnumber+probenumber+ 6*-9s +valnumber+cols+rowids+betases) [SMR default]
+::
+
+    #define SPARSE_FULL 2
+    #define SPARSE_BELT 3
+    #define OSCA_SPARSE_1 1 // 0x00000001: RESERVEDUNITS*ints + uint64_t  + uint64_ts + uint32_ts + floats: value number + (half uint64_ts and half uint32_ts of SMR_SPARSE_3) [OSCA default]
+    #define SMR_SPARSE_3F 0x40400000 // 0x40400000: uint32_t + uint64_t + uint64_ts + uint32_ts + floats
+    #define SMR_SPARSE_3 3 // RESERVEDUNITS*ints + uint64_t + uint64_ts + uint32_ts + floats (indicator+samplesize+snpnumber+probenumber+ 6*-9s +valnumber+cols+rowids+betases) [SMR default]
+
 
 sparse and dense file formate | SMR_SPARSE_3 SPARSE_BELT & SMR_DENSE_3
-=========================================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code::
 
-    [%fileinfo] <> (dsp="besd file", endianness="little", filetype="binary")
-    [%linkfile $epi_file] <> (dsp="a epi file, record phenotype information", filetype="text")
-    [%let $epi_len = $filelen($epi_file)] <>()
-    [%let @epi_order = $getorder($epi_file)] <> ()
-    [%linkfile $esi_file] <> (dsp="a esi file, record variants information", filetype="text")
-    [%let $esi_len = $filelen($esi_file)] <> ()
-    [%let @esi_order = $getorder($esi_file)] <> ()
-    [1] <int32; :=$file_format> (dsp="besd type",value="{3: sparse},{5: dense}")
-    [1] <int32> (dsp="sample number", NA="-9")
-    [1] <int32; :$esi_num> (dsp="variant number")
-    [%assert $esi_num == $esi_len] <> ()
-    [1] <int32; :$epi_num> (dsp="phenotype number")
-    [%assert $epi_num == $epi_len] <> ()
-    [12] <int32; =-9> (dsp="keeped for future use";)
-    
+    [%file] (dsp="besd file", endianness="little", filetype="binary"; role="main")
+    [%let $epi_fname = @CMDARGS[1]]
+    [%let $esi_fname = @CMDARGS[2]]
+    [%file $epi_file $epi_fname] (dsp="epi file"; filetype="plaintext"; role="company")
+    [%file $esi_file $esi_fname] (dsp="esi file"; filetype="plaintext"; role="company")
+
+    [%let $epi_len = $filelinenum($epi_file)]
+    [%let $esi_len = $filelinenum($esi_file)]
+    [%let @epiorder = $getorder($epi_file)]
+    [%let @esiorder = $getorder($esi_file)]
+
+    [1] <int32; $file_format; ={3, 5}> (dsp="besd file format"; value={3: "sparse", 5: "dense"})
+    [1] <int32> (dsp="sample number"; NA=-9)
+    [1] <int32; $esi_num> (dsp="number of variants")
+    [%assert $esi_num == $esi_len]
+    [1] <int32; $epi_num> (dsp="number of probe")
+    [%assert $epi_num == $epi_len]
+    [12] <int32; =-9> (dsp="conserved for future use")
+
     [%if $file_format == 5] {
-        [$epi_num; ~$epi_inter_num] {
-            [$esi_num] <float> (dsp="bata of one phenotype", relatedto="@epi_order[$epi_inter_num]", alignwith="$esi_order")
-            [$esi_num] <float> (dsp="se of one phenotype", relatedto="@epi_inter_num[$epi_inter_num]", alignwith="$esi_order")
-        }(dsp="data for all phenotype", dspelement="beta and se data of one phenotype", alignwith="@epi_order")
-    }(dsp="file format is dense")
+
+        [$epi_num] {
+            [$esi_num] <float> (dsp="beta values of a probe"; alignwith=@esiorder)
+            [$esi_num] <float> (dsp="se values of a probe"; alignwith=@esiorder)        
+        } (alignwith@epiorder)
     
-    [%elif $file_format == 3] {
-        [%let $value_sum = 0] <> (dsp="sum of couter of value")
-        [1] <uint64; =:$value_sum> ()
-        [1] <uint64; =0; :@index_array_offset> (dsp="the first value of variants index offset")
-        [$epi_num; ~$epi_it] {
-            [%let $offset_block] <> (dsp="a value represents the block size of beta or se of this phenotype")
-            [1] <uint64; =@index_array_offset[-1] + $offset_block; :@index_array_offset; :+$value_sum> (relatedto="@epi_order[$epi_it]")
-            [1] <uint64; =@index_array_offset[-1] + $offset_block; :@index_array_offset; :+$value_sum> (relatedto="@epi_order[$epi_it]")
-        }(dsp="index offset length array", alignwith"@epi_order")
-        [%assert @index_array_offset[-1] == value_sum] <> ()
-        [%let @index_array_collector = []] <> ()
-        [$epi_num; ~$epi_it] {
-            [%let @beta_offsets = []] <> ()
-            [%let @se_offsets = []] <> ()
-            [@index_array_offset[2 * $epi_it + 1] - @index_array_offset[2 * $epi_it]]<uint32; :@beta_offsets>()
-            [@index_array_offset[2 * $epi_it + 2] - @index_array_offset[2 * $epi_it + 2]]<uint32; :@se_offsets>()
-            [$append(@index_array_collector, @beta_offsets)] <> ()
-            [$append(@index_array_collector, @se_offsets)] <> ()
-        }()
-        [$epi_num; $epi_it]{
-            [@index_array_offset[2 * $epi_it + 1] - @index_array_offset[2 * $epi_it]] <float> (alignwith="@index_array_collector[$epi_it * 2]")
-            [@index_array_offset[2 * $epi_it + 2] - @index_array_offset[2 * $epi_it + 2]] <float> (alignwith="@index_array_collector[$epi_it * 2 + 1]")
-        }
-    }(dsp="file format is sparse")
     
+    } (dsp="data stored using dense format")
+
+
+    [%if $file_format == 3] {
+    
+        [%let $value_num_count = 0]
+        [1] <uint64; =:$value_num_count> (dsp="the number of values, include beta and se")
+        [%let @offsets = []]
+        [1] <uint64; =0; :@offsets> (dsp="frist value of offset")
+
+        [$epi_num] {
+            [1] <uint64; $offset_beta> (dsp="totall offset of beta data")
+            [%let $beta_dt_len = $offset_beta - @offsets[-1]](dsp="this is the beta data number of this probe")
+            [$append(@offsets, $offset_beta)]
+            [$value_num_count += $beta_dt_len]
+            [1] <uint64; $offset_se> (dsp="total offset of se data")
+            [%let $se_dt_len = $offset_se - @offsets[-1]] (dsp="se data number")
+            [$append(@offsets, $offset_se)]
+            [$value_num_count += $se_dt_len]
+            [%assert $beta_dt_len == $se_dt_len]
+        } (dsp="data offset of each probe"; alignwith=@epiorder)
+        [%assert $value_num_count == @offsets[-1]]
+
+        [%let @all_index_order]
+        [$epi_num; ~$i] {
+            [@offsets[$i * 2 + 1] - @offsets[$i * 2]; ^@beta_order]     <uint32; @beta_index> (dsp="index of beta"; value-alignwith=@esiorder)
+            [@offsets[$i * 2 + 2] - @offsets[$i + 2 + 1]; ^@se_order]   <uint32; @se_index> (dsp="index of se"; value-alignwith=@esiorder)
+            [$append(@all_index_order, @beta_order); $append(@all_index_order, @se_order)]
+        } (dsp="beta and se data indexs"; alignwith=@epiorder)
+
+        [$epi_num; ~$j] {
+            [@offsets[$i * 2 + 1] - @offsets[$i * 2]]     <float> (dsp="beta values of this probe"; alignwith=@all_index_order[$j * 2])
+            [@offsets[$i * 2 + 2] - @offsets[$i + 2 + 1]] <float> (dsp="se values of this probe"; alignwith=@all_index_order[$j * 2 + 1])
+        
+        } (dsp="beta and se data blocks")
+
+
+    } (dsp="data stored using sparse format")
+
     [%else] {
-        [%error]<>(mesg="the format is not recognized")
-    }()
-
-
-SMR_SPARSE_3F 0x40400000
-==============================
-
-.. code::
-
-    [# "need correct"]<>()
-    []<>(%defvalue $epi_num "length of epi file")
-    [1]<int32>(dsp="file type"; value="0x40400000")
-    [1]<uint64; $value_num; $value_num = 0;  for(i = 1; i <= $epi_numr; i++>)($value_num += $beta_offset + $se_offset)>(dsp="number beta or se value")
-    [1]<uint64>(dsp="start beta se offset"; value="0")
-    [$epi_num; @]{
-        [1]<uint64; @epi_num.$beta_offset>(offset of beta value)
-        [1]<uint64; @epi_num.$se_offset>(offset of se value)
-    }(dsp="offset length or number of beta and se of each probe"; order="epi file")
-    [$epi num; @]{
-        {[$1]<uint32>(beta esi file index of probe 1), [$1]<uint32>(se esi file index of probe 1)}
-        {[$2]<uint32>(bete esi file index of probe 2), [$2]<uint32>(se esi file index of probe 2)}
-        ...
+    
+        [%error "file format not recognized"]
     }
-    [$epi num; @]{
-        {[$1]<float>(beta value of probe 1), [$1]<float>(se value of probe 1)}
-        {[$2]<float>(beta value of probe 2), [$2]<float>(se value of probe 2)}
-        ...
-    }
+
+
+
+
+.. 
+    SMR_SPARSE_3F 0x40400000
+    +++++++++++++++++++++++++++++++
+
+    .. code::
+
+        [# "need correct"]<>()
+        []<>(%defvalue $epi_num "length of epi file")
+        [1]<int32>(dsp="file type"; value="0x40400000")
+        [1]<uint64; $value_num; $value_num = 0;  for(i = 1; i <= $epi_numr; i++>)($value_num += $beta_offset + $se_offset)>(dsp="number beta or se value")
+        [1]<uint64>(dsp="start beta se offset"; value="0")
+        [$epi_num; @]{
+            [1]<uint64; @epi_num.$beta_offset>(offset of beta value)
+            [1]<uint64; @epi_num.$se_offset>(offset of se value)
+        }(dsp="offset length or number of beta and se of each probe"; order="epi file")
+        [$epi num; @]{
+            {[$1]<uint32>(beta esi file index of probe 1), [$1]<uint32>(se esi file index of probe 1)}
+            {[$2]<uint32>(bete esi file index of probe 2), [$2]<uint32>(se esi file index of probe 2)}
+            ...
+        }
+        [$epi num; @]{
+            {[$1]<float>(beta value of probe 1), [$1]<float>(se value of probe 1)}
+            {[$2]<float>(beta value of probe 2), [$2]<float>(se value of probe 2)}
+            ...
+        }
 
 
 
 
 BESD version 2
-======================
+----------------------
 
 This is a new version may adepted in future
 
 .. code::
 
-    [%info]<> (dsp="besd file version 2"; endianness="little")
+    [%file](dsp="besd file version 2"; endianness="little"; filetype="binary"; role="main")
 
     [4] <char; =["b", "e", "s", "d"]> (dsp="besd magic number")
     [1] <uint32> (dsp="BESD file format version")
 
     [32] <byte> (dsp="store sha256 sum of following data")
-    [1] <char; ={13, 14}; :$file_type> (dsp="besd file type"; value="13 for new sparse version, 14 for new dense version")
-    [1] <uint64; :$probe_num> (dsp="probe number")
-    [1] <uint64; :$vari_num> (dsp="variants number")
-    [1] <uint64> (dsp="individual number"; NA="0")
+    [1] <char; ={13, 14}; $file_type> (dsp="besd file type"; value="13 for new sparse version, 14 for new dense version")
+    [1] <uint64; $probe_num> (dsp="probe number")
+    [1] <uint64; $vari_num> (dsp="variants number")
+    [1] <uint64> (dsp="individual number"; NA=0)
 
 
     [1] {
-        [1] <bit; :$probeinfo_flg> (dsp="flag for probe information"; value="0 for probe information not stored by this file, 1 stored")
-        [1] <bit; :$variantinfo_flg> (dsp="flag for vairant information"; value="0 for variants information is not stored, 1 stored")
-        [2] <bit; :$compress_flg> (dsp="flag for compression"; value="0 for not compressed, 1 for zlib compressed, other value is rested for future")
+        [1] <bit; $probeinfo_flg> (dsp="flag for probe information"; value="0 for probe information not stored by this file, 1 stored")
+        [1] <bit; $variantinfo_flg> (dsp="flag for vairant information"; value="0 for variants information is not stored, 1 stored")
+        [2] <bit; $compress_flg> (dsp="flag for compression"; value="0 for not compressed, 1 for zlib compressed, other value is rested for future")
         [4] <bit; =[0, 0, 0, 0]> (dsp="conserved")
     } (dsp="flags")
 
@@ -296,17 +332,6 @@ This is a new version may adepted in future
             } (dsp="beta and se data"; alignwith="@probe_order")
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
