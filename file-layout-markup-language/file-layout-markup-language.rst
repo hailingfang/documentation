@@ -876,6 +876,7 @@ Standard lables
 
     Used in plaintext descripiton, indicate whether the regular express is used or not.
 
+* role
 
 Specicial variable
 ------------------------

@@ -16,4 +16,5 @@ I use FLML(File layout markup language) to describe file layout.
     sam-bam-file
     fasta-file
     gff-file
+    zlib-and-gzip-file
 
