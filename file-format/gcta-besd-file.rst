@@ -35,7 +35,7 @@ FLML description
 
 
 .esi file
-==============
+-----------------
 
 .esi file is used to record information of variants.
 
