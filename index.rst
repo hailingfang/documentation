@@ -22,6 +22,7 @@ and so on.
     :maxdepth: 1
     :caption: Contents
     
+    biology/index
     file-layout-markup-language/index
     file-format/index
     computer/index
