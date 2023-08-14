@@ -1,0 +1,91 @@
+==========================
+RNA Sequencing
+==========================
+
+Total RNA Sequencing
+========================
+
+RNA Extraction and Purification
+---------------------------------
+
+Extract Total RNA
++++++++++++++++++++++
+
+
+Because RNA within cells is dynamic and fragile, so the cells
+that parpared for RNA extraction should stored properlly.
+
+The sample, which is cells, tissue or other material, should be
+lysed in a buffer that disrupts cell membranes and releases the RNA.
+To remove proteins and protect RNA from degradation,
+a denaturing agent such as guanidine thiocyanate or guanidine hydrochloride
+is added to the lysed sample.
+
+There are many RNA-seq tikits in the market, the tikits many use differenct
+method to extract RNA. For example,
+
+* Phenol-chloroform extraction
+
+    Phenol-chloroform extraction is a classic method widely used for RNA extraction from various biological samples. It relies on the differential solubility of RNA in phenol and chloroform to separate RNA from other cellular components. Here's an overview of the phenol-chloroform extraction method:
+
+        Sample preparation: The method begins with the preparation of the sample. The sample can be cells, tissues, or other biological material containing RNA. The sample is typically lysed in a buffer that disrupts cell membranes and releases the RNA.
+
+        Protein denaturation: To remove proteins and protect RNA from degradation, a denaturing agent such as guanidine thiocyanate or guanidine hydrochloride is added to the lysed sample. The denaturants disrupt protein structures, facilitating subsequent separation steps.
+
+        Organic extraction: Phenol, a water-immiscible organic solvent, is added to the sample. Phenol denatures proteins and disrupts protein-RNA interactions, allowing the separation of RNA from proteins. The mixture is thoroughly mixed or vortexed to ensure proper extraction.
+
+        Phase separation: The addition of chloroform (or a chloroform-isoamyl alcohol mixture) to the sample results in the formation of a biphasic system. The mixture is centrifuged, causing the separation of the sample into distinct phases: an upper aqueous phase containing RNA, a lower organic phase containing proteins and lipids, and an interphase containing DNA and other cellular debris.
+
+        RNA recovery: The upper aqueous phase, which contains RNA, is carefully transferred to a new tube while avoiding the interphase and the organic phase. This step ensures the separation of RNA from contaminants.
+
+        RNA precipitation: Isopropanol or ethanol is added to the aqueous phase to precipitate the RNA. The addition of these alcohol solutions causes the RNA to become insoluble and form a visible pellet. The mixture is incubated at low temperatures or centrifuged to enhance precipitation.
+
+        Wash and purification: The RNA pellet is washed with ethanol to remove residual salts, phenol, and other impurities. The RNA is then air-dried or dissolved in an appropriate buffer, such as RNase-free water, for downstream applications.
+
+    Phenol-chloroform extraction is a labor-intensive method and requires careful handling of organic solvents, as they can be hazardous. It is important to work in a well-ventilated area, wear appropriate safety equipment, and follow proper disposal protocols.
+
+    While phenol-chloroform extraction is a robust method for RNA extraction, it has some limitations. It is time-consuming, requires skilled laboratory techniques, and may result in RNA degradation if not performed carefully. Therefore, many researchers have shifted to using commercial RNA extraction kits based on column-based or magnetic bead-based purification methods, which offer convenience, reproducibility, and higher throughput.   
+
+* Column-based purification kits
+
+    Commercial kits based on spin columns are widely used for RNA extraction. These kits typically use silica-based membranes that specifically bind RNA, while contaminants are removed through washing steps. Column-based methods offer convenience, reproducibility, and high-quality RNA isolation. Examples include the RNeasy Mini Kit from Qiagen and the PureLink RNA Mini Kit from Thermo Fisher Scientific.
+
+
+* Magnetic bead-based methods
+
+    These methods use magnetic beads coated with specific molecules that selectively bind RNA. The beads are mixed with the sample, and the RNA-bound beads are separated using a magnetic field. Magnetic bead-based methods are popular due to their ease of use, scalability, and compatibility with automation. The MagMAX RNA Isolation Kit from Thermo Fisher Scientific and the Ambion MagMAX RNA Isolation Kit from Invitrogen are examples of magnetic bead-based RNA extraction kits.
+
+RNA deleption or enrichment
++++++++++++++++++++++++++++++++
+
+About method would isolate all RNA from sample. Different RNA types have differenct abandence, A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose.
+
+
+Quantitation and Quality
+++++++++++++++++++++++++++++
+
+
+
+Store RNA
++++++++++++++++++++++
+
+
+
+
+Library Construction
+----------------------
+
+
+Sequencing
+-----------------
+
+
+QC of Data
+-------------------
+
+
+Reads Map and Counting
+-------------------------
+
+Data normalization
+----------------------
