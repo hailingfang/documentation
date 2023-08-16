@@ -2,11 +2,11 @@
 RNA Sequencing
 ==========================
 
-Total RNA Sequencing
-========================
+Bulk RNA Sequencing
+==========================
 
-RNA Extraction and Purification
----------------------------------
+RNA Isolation
+---------------------
 
 Extract Total RNA
 +++++++++++++++++++++
@@ -55,15 +55,29 @@ method to extract RNA. For example,
 
     These methods use magnetic beads coated with specific molecules that selectively bind RNA. The beads are mixed with the sample, and the RNA-bound beads are separated using a magnetic field. Magnetic bead-based methods are popular due to their ease of use, scalability, and compatibility with automation. The MagMAX RNA Isolation Kit from Thermo Fisher Scientific and the Ambion MagMAX RNA Isolation Kit from Invitrogen are examples of magnetic bead-based RNA extraction kits.
 
-RNA deleption or enrichment
+RNA depletion or enrichment
 +++++++++++++++++++++++++++++++
 
-About method would isolate all RNA from sample. Different RNA types have differenct abandence, A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose.
+About method would isolate all RNA from sample. Different RNA types have differenct abandence, A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose [1]_.
+
+For example, the rRNA account for about 80% of all RNA in mammal cells. This fact will enflunt the detection of mRNA and other small proportion RNAs.Certain enzymes, such as RNase H, can specifically degrade RNA-DNA hybrids. In this method, rRNA molecules can be targeted using DNA probes complementary to rRNA sequences. The RNA-DNA hybrid is then digested by RNase H, resulting in the degradation of rRNA. The mRNA can be enriched by oligo(dT) beads.
 
 
 Quantitation and Quality
 ++++++++++++++++++++++++++++
 
+- quantitation
+    
+    Absorbance or dye methods can be used to test the concentration of RNA.
+
+
+- quality
+
+    Spectrophotometric Analysis: Measure the concentration and assess the purity of the RNA sample using a spectrophotometer. The absorbance ratios at specific wavelengths (e.g., A260/A280 and A260/A230) can provide insights into the purity of the RNA, indicating the presence of contaminants like proteins or chemicals. A high A260/A280 ratio (around 2.0) indicates pure RNA.
+
+    Electrophoresis: Perform gel electrophoresis to visualize the integrity and size distribution of the RNA molecules. Run the extracted RNA on an agarose gel, and observe distinct bands representing intact RNA species. The presence of discrete bands without smearing or degradation indicates good RNA quality.
+
+    RNA Integrity Number (RIN): Use a specialized instrument, such as a Bioanalyzer or TapeStation, to obtain an RNA Integrity Number (RIN). These systems analyze the electrophoretic mobility of RNA and generate a RIN score, ranging from 1 to 10, where higher scores indicate better RNA quality. RIN scores above 7 are generally considered as good quality.
 
 
 Store RNA
@@ -89,3 +103,17 @@ Reads Map and Counting
 
 Data normalization
 ----------------------
+
+Single Cell RNA Sequencing
+===========================
+
+Spatial RNA Sequencing
+===========================
+
+
+Reference
+===========================
+
+
+.. [1] Non-coding RNA: what is functional and what is junk? 
+.. [2] https://hbctraining.github.io/rnaseq-cb321/lectures/Lib_prep.pdf
