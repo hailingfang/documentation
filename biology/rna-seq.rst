@@ -8,9 +8,9 @@ Bulk RNA Sequencing
 RNA Isolation
 ---------------------
 
+
 Extract Total RNA
 +++++++++++++++++++++
-
 
 Because RNA within cells is dynamic and fragile, so the cells
 that parpared for RNA extraction should stored properlly.
@@ -55,8 +55,9 @@ method to extract RNA. For example,
 
     These methods use magnetic beads coated with specific molecules that selectively bind RNA. The beads are mixed with the sample, and the RNA-bound beads are separated using a magnetic field. Magnetic bead-based methods are popular due to their ease of use, scalability, and compatibility with automation. The MagMAX RNA Isolation Kit from Thermo Fisher Scientific and the Ambion MagMAX RNA Isolation Kit from Invitrogen are examples of magnetic bead-based RNA extraction kits.
 
+
 RNA depletion or enrichment
-+++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++
 
 About method would isolate all RNA from sample. Different RNA types have differenct abandence, A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose [1]_.
 
@@ -64,7 +65,7 @@ For example, the rRNA account for about 80% of all RNA in mammal cells. This fac
 
 
 Quantitation and Quality
-++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++
 
 - quantitation
     
@@ -81,12 +82,12 @@ Quantitation and Quality
 
 
 Store RNA
-+++++++++++++++++++++
+++++++++++++++++++++
 
 
 
 
-Library Construction
+Library Preparation
 ----------------------
 
 
@@ -103,6 +104,9 @@ Reads Map and Counting
 
 Data normalization
 ----------------------
+
+Comparison between Samples
+----------------------------
 
 Single Cell RNA Sequencing
 ===========================
