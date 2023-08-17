@@ -1,3 +1,8 @@
+
+.. .. contents:: Content
+   :depth: 1
+   
+
 ==========================
 RNA Sequencing
 ==========================
@@ -9,13 +14,16 @@ RNA Isolation
 ---------------------
 
 
+.. image:: img-rna-seq/RNA-isolation.svg
+
+Figure 1. RNA Isolation process
+
 Extract Total RNA
 +++++++++++++++++++++
 
 Because RNA within cells is dynamic and fragile, so the cells
-that parpared for RNA extraction should stored properlly.
-
-The sample, which is cells, tissue or other material, should be
+that parpared for RNA extraction should stored properlly. The sample,
+which is cells, tissue or other material, should be
 lysed in a buffer that disrupts cell membranes and releases the RNA.
 To remove proteins and protect RNA from degradation,
 a denaturing agent such as guanidine thiocyanate or guanidine hydrochloride
@@ -59,9 +67,10 @@ method to extract RNA. For example,
 RNA depletion or enrichment
 ++++++++++++++++++++++++++++++++++
 
-About method would isolate all RNA from sample. Different RNA types have differenct abandence, A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose [1]_.
+Above method would isolate all RNA from sample. Different RNA types have differenct abandence, A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose [1]_.
 
-For example, the rRNA account for about 80% of all RNA in mammal cells. This fact will enflunt the detection of mRNA and other small proportion RNAs.Certain enzymes, such as RNase H, can specifically degrade RNA-DNA hybrids. In this method, rRNA molecules can be targeted using DNA probes complementary to rRNA sequences. The RNA-DNA hybrid is then digested by RNase H, resulting in the degradation of rRNA. The mRNA can be enriched by oligo(dT) beads.
+Typecally, there are tow method to achieve this, one is polyA enrichment, the other is rRNA depletion.
+The rRNA account for about 80% of all RNA in mammal cells. This fact will enflunt the detection of mRNA and other small proportion RNAs.Certain enzymes, such as RNase H, can specifically degrade RNA-DNA hybrids. In this method, rRNA molecules can be targeted using DNA probes complementary to rRNA sequences. The RNA-DNA hybrid is then digested by RNase H, resulting in the degradation of rRNA. The mRNA can be enriched by oligo(dT) beads.
 
 
 Quantitation and Quality
@@ -84,7 +93,7 @@ Quantitation and Quality
 Store RNA
 ++++++++++++++++++++
 
-
+The isolated RNA sample should stored in cold and RNAase free solution.
 
 
 Library Preparation
@@ -121,3 +130,4 @@ Reference
 
 .. [1] Non-coding RNA: what is functional and what is junk? 
 .. [2] https://hbctraining.github.io/rnaseq-cb321/lectures/Lib_prep.pdf
+.. [3] RNA-Seq methods for transcriptome analysis

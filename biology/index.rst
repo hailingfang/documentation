@@ -2,7 +2,8 @@ Docs related to biology
 ==========================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 3
+    :numbered: 3
 
     genomic-features
     subsystem-of-cell
