@@ -18,6 +18,10 @@ RNA Isolation
 
 Figure 1. RNA Isolation process
 
+.. note::
+
+   The method intruduced here is only a some portion of all.
+
 Extract Total RNA
 +++++++++++++++++++++
 
@@ -124,16 +128,29 @@ The isolated RNA sample should stored in cold and RNAase free solution.
 Library Preparation
 ------------------------
 
-Fregmente RNA
+The RNA is uausally fragmented before reverse transcription, that is because reverse transcription may cause 3' bias and make read more enriched at 3'. The fragmented RNA is primed by randem primer(6 oligo DNA) and the first strand is sythesised. In order to keep the strand information which strand is RNA and ligend adeptor, when synthesising seconde strand, instead using dTTP, the dUTP is added. This cuase the second strand reprent U where is T originally. The stand contain U can be degraded, and even more, the DNA polymerase would blocked when meet U [2]_.
+
+.. image:: img-rna-seq/library-praperation.svg
+
+.. note::
+
+   The method intruduced here is only a some portion of all.
+
+Fragmente RNA
 +++++++++++++++++++
+
+RNAs can be fragmented with alkaline solutions, solutions with divalent cations, such Mg+ +, Zn++, or enzymes, such RNase III. Fragmentation with alkaline solutions or divalent cations is typically carried out at an elevated temperature, such as 70°C, to mitigate the effect of RNA structure on fragmentation [3]_.
+
 
 Random Primer RT for the first strand
 ++++++++++++++++++++++++++++++++++++++
 
+A randem primer of 6 nt length would be used to transcirpt RNA reverselly. The the RNA be degraded.
 
 Sythethese second strand dUTP added
 ++++++++++++++++++++++++++++++++++++++
 
+When syntheseing second strand, instead using dTTP, dUTP was used, this will label the second strand.
 
 ligate adapter
 +++++++++++++++++++++++++++++++++++++
@@ -142,8 +159,10 @@ ligate adapter
 dUTP strand degradation or specific amplification
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
 Library Amplification
 ++++++++++++++++++++++++++
+
 
 Sequencing
 -----------------
@@ -151,7 +170,6 @@ Sequencing
 
 Quality Control of Data
 --------------------------------
-
 
 Reads Mapping and Counting
 --------------------------------
