@@ -36,19 +36,33 @@ method to extract RNA. For example,
 
     Phenol-chloroform extraction is a classic method widely used for RNA extraction from various biological samples. It relies on the differential solubility of RNA in phenol and chloroform to separate RNA from other cellular components. Here's an overview of the phenol-chloroform extraction method:
 
-        Sample preparation: The method begins with the preparation of the sample. The sample can be cells, tissues, or other biological material containing RNA. The sample is typically lysed in a buffer that disrupts cell membranes and releases the RNA.
+    1. Sample preparation:
+        
+        The method begins with the preparation of the sample. The sample can be cells, tissues, or other biological material containing RNA. The sample is typically lysed in a buffer that disrupts cell membranes and releases the RNA.
 
-        Protein denaturation: To remove proteins and protect RNA from degradation, a denaturing agent such as guanidine thiocyanate or guanidine hydrochloride is added to the lysed sample. The denaturants disrupt protein structures, facilitating subsequent separation steps.
+    2. Protein denaturation: 
 
-        Organic extraction: Phenol, a water-immiscible organic solvent, is added to the sample. Phenol denatures proteins and disrupts protein-RNA interactions, allowing the separation of RNA from proteins. The mixture is thoroughly mixed or vortexed to ensure proper extraction.
+        To remove proteins and protect RNA from degradation, a denaturing agent such as guanidine thiocyanate or guanidine hydrochloride is added to the lysed sample. The denaturants disrupt protein structures, facilitating subsequent separation steps.
 
-        Phase separation: The addition of chloroform (or a chloroform-isoamyl alcohol mixture) to the sample results in the formation of a biphasic system. The mixture is centrifuged, causing the separation of the sample into distinct phases: an upper aqueous phase containing RNA, a lower organic phase containing proteins and lipids, and an interphase containing DNA and other cellular debris.
+    3. Organic extraction:
+        
+        Phenol, a water-immiscible organic solvent, is added to the sample. Phenol denatures proteins and disrupts protein-RNA interactions, allowing the separation of RNA from proteins. The mixture is thoroughly mixed or vortexed to ensure proper extraction.
 
-        RNA recovery: The upper aqueous phase, which contains RNA, is carefully transferred to a new tube while avoiding the interphase and the organic phase. This step ensures the separation of RNA from contaminants.
+    4. Phase separation: 
+        
+        The addition of chloroform (or a chloroform-isoamyl alcohol mixture) to the sample results in the formation of a biphasic system. The mixture is centrifuged, causing the separation of the sample into distinct phases: an upper aqueous phase containing RNA, a lower organic phase containing proteins and lipids, and an interphase containing DNA and other cellular debris.
 
-        RNA precipitation: Isopropanol or ethanol is added to the aqueous phase to precipitate the RNA. The addition of these alcohol solutions causes the RNA to become insoluble and form a visible pellet. The mixture is incubated at low temperatures or centrifuged to enhance precipitation.
+    5. RNA recovery:
 
-        Wash and purification: The RNA pellet is washed with ethanol to remove residual salts, phenol, and other impurities. The RNA is then air-dried or dissolved in an appropriate buffer, such as RNase-free water, for downstream applications.
+        The upper aqueous phase, which contains RNA, is carefully transferred to a new tube while avoiding the interphase and the organic phase. This step ensures the separation of RNA from contaminants.
+
+    6. RNA precipitation:
+        
+        Isopropanol or ethanol is added to the aqueous phase to precipitate the RNA. The addition of these alcohol solutions causes the RNA to become insoluble and form a visible pellet. The mixture is incubated at low temperatures or centrifuged to enhance precipitation.
+
+    7. Wash and purification:
+
+        The RNA pellet is washed with ethanol to remove residual salts, phenol, and other impurities. The RNA is then air-dried or dissolved in an appropriate buffer, such as RNase-free water, for downstream applications.
 
     Phenol-chloroform extraction is a labor-intensive method and requires careful handling of organic solvents, as they can be hazardous. It is important to work in a well-ventilated area, wear appropriate safety equipment, and follow proper disposal protocols.
 
@@ -64,13 +78,26 @@ method to extract RNA. For example,
     These methods use magnetic beads coated with specific molecules that selectively bind RNA. The beads are mixed with the sample, and the RNA-bound beads are separated using a magnetic field. Magnetic bead-based methods are popular due to their ease of use, scalability, and compatibility with automation. The MagMAX RNA Isolation Kit from Thermo Fisher Scientific and the Ambion MagMAX RNA Isolation Kit from Invitrogen are examples of magnetic bead-based RNA extraction kits.
 
 
-RNA depletion or enrichment
-++++++++++++++++++++++++++++++++++
+rRNA depletion or enrichment of interested RNA
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Above method would isolate all RNA from sample. Different RNA types have differenct abandence, A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose [1]_.
+Above method would isolate all RNA from sample. Different RNA types have differenct abandence, for example, rRNA account for about 80% of all RNA in mammal cells. A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose [1]_.
 
-Typecally, there are tow method to achieve this, one is polyA enrichment, the other is rRNA depletion.
-The rRNA account for about 80% of all RNA in mammal cells. This fact will enflunt the detection of mRNA and other small proportion RNAs.Certain enzymes, such as RNase H, can specifically degrade RNA-DNA hybrids. In this method, rRNA molecules can be targeted using DNA probes complementary to rRNA sequences. The RNA-DNA hybrid is then digested by RNase H, resulting in the degradation of rRNA. The mRNA can be enriched by oligo(dT) beads.
+* rRNA depletion
+    
+    - RNase H method
+
+        A DNA probe which complement to rRNA is added into sample, and then, RNase H was added, which degrade RNA. And lately, DNAse I was
+        introduced into solution, which degrade DNA.
+
+    - Biotin label method
+
+        Biotinlated rRNA complementative DNA probes is intruduced, and megnetic streptavidin beads would selectively pull
+        down the rRNA which hybrided with DNA probes.
+
+* polyA enrichment
+    
+    The mRNA can be enriched by oligo(dT) beads.
 
 
 Quantitation and Quality
@@ -80,7 +107,6 @@ Quantitation and Quality
     
     Absorbance or dye methods can be used to test the concentration of RNA.
 
-
 - quality
 
     Spectrophotometric Analysis: Measure the concentration and assess the purity of the RNA sample using a spectrophotometer. The absorbance ratios at specific wavelengths (e.g., A260/A280 and A260/A230) can provide insights into the purity of the RNA, indicating the presence of contaminants like proteins or chemicals. A high A260/A280 ratio (around 2.0) indicates pure RNA.
@@ -89,7 +115,6 @@ Quantitation and Quality
 
     RNA Integrity Number (RIN): Use a specialized instrument, such as a Bioanalyzer or TapeStation, to obtain an RNA Integrity Number (RIN). These systems analyze the electrophoretic mobility of RNA and generate a RIN score, ranging from 1 to 10, where higher scores indicate better RNA quality. RIN scores above 7 are generally considered as good quality.
 
-
 Store RNA
 ++++++++++++++++++++
 
@@ -97,21 +122,41 @@ The isolated RNA sample should stored in cold and RNAase free solution.
 
 
 Library Preparation
-----------------------
+------------------------
 
+Fregmente RNA
++++++++++++++++++++
+
+Random Primer RT for the first strand
+++++++++++++++++++++++++++++++++++++++
+
+
+Sythethese second strand dUTP added
+++++++++++++++++++++++++++++++++++++++
+
+
+ligate adapter
++++++++++++++++++++++++++++++++++++++
+
+
+dUTP strand degradation or specific amplification
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Library Amplification
+++++++++++++++++++++++++++
 
 Sequencing
 -----------------
 
 
-QC of Data
--------------------
+Quality Control of Data
+--------------------------------
 
 
-Reads Map and Counting
--------------------------
+Reads Mapping and Counting
+--------------------------------
 
-Data normalization
+Data Normalization
 ----------------------
 
 Comparison between Samples

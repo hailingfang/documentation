@@ -26,8 +26,8 @@
      inkscape:document-units="px"
      showgrid="true"
      inkscape:zoom="1"
-     inkscape:cx="423"
-     inkscape:cy="1789.5"
+     inkscape:cx="423.5"
+     inkscape:cy="1069.5"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
      inkscape:window-x="0"
@@ -3584,5 +3584,27 @@
            y="165.99402"
            id="tspan215">to column</tspan></text>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.343958px;fill:#1a1a1a;stroke-width:0.900112;paint-order:stroke fill markers"
+       x="6.3479333"
+       y="284.22452"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="fill:#1a1a1a;stroke-width:0.900112"
+         x="6.3479333"
+         y="284.22452">PolyA Enrichment</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.343958px;fill:#1a1a1a;stroke-width:0.900112;paint-order:stroke fill markers"
+       x="108.93495"
+       y="283.90204"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="stroke-width:0.900112"
+         x="108.93495"
+         y="283.90204">rRNA depletion</tspan></text>
   </g>
 </svg>
