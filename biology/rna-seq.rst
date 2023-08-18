@@ -155,42 +155,91 @@ When syntheseing second strand, instead using dTTP, dUTP was used, this will lab
 ligate adapter
 +++++++++++++++++++++++++++++++++++++
 
+Here is some examples of adapters [4]_.
 
 dUTP strand degradation or specific amplification
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
 Library Amplification
 ++++++++++++++++++++++++++
-
 
 Sequencing
 -----------------
 
-
 Quality Control of Data
 --------------------------------
 
-Reads Mapping and Counting
---------------------------------
+Test adapter and index sequence and remove it if exist
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Data Normalization
-----------------------
+Remove PCR introduce duplications
+++++++++++++++++++++++++++++++++++++++
+
+Trim low quality bases
++++++++++++++++++++++++++++
+
+Software
+++++++++++++++++++++++
+
+
+Reads Mapping and Counting
+-----------------------------------
+
+Map reads to reference sequence
++++++++++++++++++++++++++++++++++++
+
+Count Reads
+++++++++++++++++++++++++++++++++++
+
+expressing matrix and its normalization
+-------------------------------------------
+
+RPKM
+++++++++++++++++++++++++
+
+.. math::
+
+   M_{rpkm} =  \frac{1}{R} 
+        \begin{bmatrix}
+        d_{1,1} & d_{1,2} & \cdots & d_{1,m} \\
+        d_{2,1} & d_{2,2} & \cdots & d_{2,m} \\
+        \vdots  & \vdots  & \ddots & \vdots  \\
+        d_{n,1} & d_{n,2} & \cdots & d_{n,m}
+       \end{bmatrix}
+       \begin{bmatrix}
+       \frac{1}{l_{1,1}} & 0 & \cdots & 0 \\
+       0 & \frac{1}{l_{2,2}} & \cdots & 0 \\
+       \vdots & \vdots & \ddots & \vdots \\
+       0 & 0 & \cdots & \frac{1}{l_{m,m}}
+       \end{bmatrix}
+
+
 
 Comparison between Samples
 ----------------------------
 
+
+de nove assembly for RNA
+------------------------------
+
 Single Cell RNA Sequencing
 ===========================
+
+
+
 
 Spatial RNA Sequencing
 ===========================
 
 
+
+
 Reference
 ===========================
-
 
 .. [1] Non-coding RNA: what is functional and what is junk? 
 .. [2] https://hbctraining.github.io/rnaseq-cb321/lectures/Lib_prep.pdf
 .. [3] RNA-Seq methods for transcriptome analysis
+.. [4] https://bioinformatics.cvr.ac.uk/illumina-adapter-and-primer-sequences/
+.. [5] http://nextgen.mgh.harvard.edu/IlluminaChemistry.html
+.. [6] https://teichlab.github.io/scg_lib_structs/methods_html/Illumina.html
