@@ -166,6 +166,9 @@ Library Amplification
 Sequencing
 -----------------
 
+.. image:: img-rna-seq/sequencing.svg
+
+
 Quality Control of Data
 --------------------------------
 
