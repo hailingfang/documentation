@@ -3,8 +3,8 @@
 
 <svg
    width="800"
-   height="1900"
-   viewBox="0 0 211.66666 502.70833"
+   height="1700"
+   viewBox="0 0 211.66666 449.79166"
    version="1.1"
    id="svg1"
    inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
@@ -25,7 +25,7 @@
      inkscape:document-units="px"
      inkscape:zoom="1.4142136"
      inkscape:cx="391.03004"
-     inkscape:cy="1772.3631"
+     inkscape:cy="1715.7946"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
      inkscape:window-x="0"
@@ -103,7 +103,8 @@
          x="109.33408"
          y="43.102325">Fragement RNA</tspan></text>
     <g
-       id="g37">
+       id="g37"
+       transform="matrix(0.94840141,0,0,0.94840141,9.3785669,2.7167237)">
       <rect
          style="fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:0.831475;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect16"
@@ -165,7 +166,7 @@
          y="75.755722">NNNNNN-5' primer</tspan></text>
     <g
        id="g39"
-       transform="translate(-1.0583333,-11.641668)">
+       transform="matrix(0.90752,0,0,0.90752,10.354023,-2.4530523)">
       <text
          xml:space="preserve"
          style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.343958px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
@@ -293,7 +294,7 @@
     </g>
     <g
        id="g40"
-       transform="translate(0,-23.283342)">
+       transform="matrix(0.94683467,0,0,0.94683467,8.1872718,-15.43566)">
       <rect
          style="fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:0.83245;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect22"
@@ -346,13 +347,13 @@
        xml:space="preserve"
        style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.264583px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
        x="73.416229"
-       y="147.4545"
+       y="146.39618"
        id="text25"><tspan
          sodipodi:role="line"
          id="tspan25"
          style="fill:#1a1a1a;stroke-width:0.900112"
          x="73.416229"
-         y="147.4545">antisense strand</tspan></text>
+         y="146.39618">antisense strand</tspan></text>
     <g
        id="g25"
        transform="translate(-2.0313543,118.21709)">
@@ -400,7 +401,7 @@
          id="tspan27">dUTP instead of dTTP</tspan></text>
     <g
        id="g43"
-       transform="translate(0,-8.4666669)">
+       transform="matrix(0.9078498,0,0,0.9078498,10.131883,10.424142)">
       <rect
          style="fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.798131;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect27"
@@ -518,7 +519,7 @@
     </g>
     <g
        id="g44"
-       transform="translate(-6.3500003)">
+       transform="matrix(0.9076591,0,0,0.9076591,3.7046884,21.30091)">
       <rect
          style="fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.799411;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect34"
@@ -668,46 +669,50 @@
     <g
        id="g64"
        transform="translate(-6.006621,291.75704)">
-      <rect
-         style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-         id="rect63"
-         width="1.9391183"
-         height="14.081847"
-         x="104.03044"
-         y="33.385117"
-         ry="0" />
-      <path
-         sodipodi:type="star"
-         style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-         id="path63"
-         inkscape:flatsided="true"
-         sodipodi:sides="3"
-         sodipodi:cx="130.08955"
-         sodipodi:cy="51.723511"
-         sodipodi:r1="3.0005183"
-         sodipodi:r2="1.5002592"
-         sodipodi:arg1="1.5707963"
-         sodipodi:arg2="2.6179939"
-         inkscape:rounded="0"
-         inkscape:randomized="0"
-         d="m 130.08955,54.724029 -2.59852,-4.500777 5.19705,0 z"
-         inkscape:transform-center-y="0.75012966"
-         transform="translate(-25.089553,-3.1677308)" />
+      <g
+         id="g2"
+         transform="translate(-0.70231329,-9.1139949)">
+        <rect
+           style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+           id="rect63"
+           width="1.9391183"
+           height="14.081847"
+           x="104.03044"
+           y="33.385117"
+           ry="0" />
+        <path
+           sodipodi:type="star"
+           style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+           id="path63"
+           inkscape:flatsided="true"
+           sodipodi:sides="3"
+           sodipodi:cx="130.08955"
+           sodipodi:cy="51.723511"
+           sodipodi:r1="3.0005183"
+           sodipodi:r2="1.5002592"
+           sodipodi:arg1="1.5707963"
+           sodipodi:arg2="2.6179939"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="m 130.08955,54.724029 -2.59852,-4.500777 5.19705,0 z"
+           inkscape:transform-center-y="0.75012966"
+           transform="translate(-25.089553,-3.1677308)" />
+      </g>
     </g>
     <text
        xml:space="preserve"
        style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:-0.132292px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-       x="102.25494"
-       y="337.36841"
+       x="103.38185"
+       y="325.61398"
        id="text64"><tspan
          sodipodi:role="line"
          id="tspan64"
          style="stroke-width:0.900112"
-         x="102.25494"
-         y="337.36841">dUTP strand degration</tspan></text>
+         x="103.38185"
+         y="325.61398">dUTP strand degration</tspan></text>
     <g
        id="g79"
-       transform="matrix(0.75021987,0,0,0.75021987,35.170456,42.917084)">
+       transform="matrix(0.61887047,0,0,0.61887047,44.771126,82.719794)">
       <rect
          style="fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.788785;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect64"
@@ -798,229 +803,8 @@
            y="264.73715">-5'</tspan></text>
     </g>
     <g
-       id="g80"
-       transform="translate(-3.365782,337.00678)">
-      <rect
-         style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-         id="rect79"
-         width="1.9391183"
-         height="14.081847"
-         x="104.03044"
-         y="33.385117"
-         ry="0" />
-      <path
-         sodipodi:type="star"
-         style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-         id="path79"
-         inkscape:flatsided="true"
-         sodipodi:sides="3"
-         sodipodi:cx="130.08955"
-         sodipodi:cy="51.723511"
-         sodipodi:r1="3.0005183"
-         sodipodi:r2="1.5002592"
-         sodipodi:arg1="1.5707963"
-         sodipodi:arg2="2.6179939"
-         inkscape:rounded="0"
-         inkscape:randomized="0"
-         d="m 130.08955,54.724029 -2.59852,-4.500777 5.19705,0 z"
-         inkscape:transform-center-y="0.75012966"
-         transform="translate(-25.089553,-3.1677308)" />
-    </g>
-    <g
-       id="g60"
-       transform="matrix(0.50237084,0,0,0.50237084,53.926263,153.50101)">
-      <g
-         id="g95">
-        <rect
-           style="fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.788785;stroke-opacity:1;paint-order:stroke fill markers"
-           id="rect80"
-           width="141.91739"
-           height="8.9375267"
-           x="15.612426"
-           y="505.16254" />
-        <text
-           xml:space="preserve"
-           style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.264583px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-           x="16.071398"
-           y="512.46112"
-           id="text81"><tspan
-             sodipodi:role="line"
-             id="tspan81"
-             style="letter-spacing:0.264583px;stroke-width:0.900112"
-             x="16.071398"
-             y="512.46112"><tspan
-   style="fill:#ffff00"
-   id="tspan80">A</tspan>CGGATGATCGATGCAGTAGATGACCATC</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.264583px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-           x="113.604"
-           y="521.86029"
-           id="text82"
-           inkscape:transform-center-x="4.1585476"
-           inkscape:transform-center-y="-5.8836495"><tspan
-             sodipodi:role="line"
-             id="tspan82"
-             style="fill:#1a1a1a;stroke-width:0.900112"
-             x="113.604"
-             y="521.86029">antisense</tspan></text>
-        <g
-           id="g86">
-          <rect
-             style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:2.16646;stroke-opacity:1;paint-order:stroke fill markers"
-             id="rect82"
-             width="35.647781"
-             height="8.9164581"
-             x="-21.415361"
-             y="504.5304" />
-          <rect
-             style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1.86745;stroke-opacity:1;paint-order:stroke fill markers"
-             id="rect83"
-             width="26.48687"
-             height="8.9164581"
-             x="-297.86841"
-             y="-435.28732"
-             transform="matrix(0.8660254,-0.5,-0.5,-0.8660254,0,0)" />
-        </g>
-        <text
-           xml:space="preserve"
-           style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:-0.132292px;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-           x="-161.65831"
-           y="512.30853"
-           id="text85"
-           transform="scale(-1,1)"><tspan
-             sodipodi:role="line"
-             id="tspan85"
-             style="stroke-width:0.900112"
-             x="-161.65831"
-             y="512.30853">T</tspan></text>
-        <g
-           id="g91">
-          <rect
-             style="fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:2.17454;stroke-opacity:1;paint-order:stroke fill markers"
-             id="rect84"
-             width="35.914402"
-             height="8.9164581"
-             x="-198.91014"
-             y="-514.44727"
-             transform="scale(-1)" />
-          <rect
-             style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1.86745;stroke-opacity:1;paint-order:stroke fill markers"
-             id="rect85"
-             width="26.48687"
-             height="8.9164581"
-             x="-451.17941"
-             y="-347.43942"
-             transform="rotate(-150)" />
-          <text
-             xml:space="preserve"
-             style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:-0.132292px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-             x="452.96634"
-             y="346.65875"
-             id="text86"
-             transform="rotate(30)"><tspan
-               sodipodi:role="line"
-               id="tspan86"
-               style="fill:#1a1a1a;stroke-width:0.900112"
-               x="452.96634"
-               y="346.65875">-5'</tspan></text>
-        </g>
-        <rect
-           style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:2.16646;stroke-opacity:1;paint-order:stroke fill markers"
-           id="rect86"
-           width="35.647781"
-           height="8.9164581"
-           x="-21.944529"
-           y="493.41791" />
-        <g
-           id="g89"
-           transform="rotate(-30,-87.265203,492.55169)">
-          <g
-             id="g90"
-             transform="translate(16.883319,37.443878)">
-            <rect
-               style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1.99318;stroke-opacity:1;paint-order:stroke fill markers"
-               id="rect87"
-               width="30.173428"
-               height="8.9164581"
-               x="-78.322105"
-               y="-497.00992"
-               transform="scale(1,-1)" />
-            <rect
-               style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:2.5019;stroke-opacity:1;paint-order:stroke fill markers"
-               id="rect88"
-               width="47.541183"
-               height="8.9164581"
-               x="-126.38173"
-               y="-497.00992"
-               transform="scale(1,-1)" />
-          </g>
-        </g>
-        <rect
-           style="fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:2.17454;stroke-opacity:1;paint-order:stroke fill markers"
-           id="rect91"
-           width="35.914402"
-           height="8.9164581"
-           x="-197.94022"
-           y="-526.29425"
-           transform="scale(-1)" />
-        <text
-           xml:space="preserve"
-           style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:-0.132292px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-           x="525.97968"
-           y="357.8468"
-           id="text92"
-           transform="rotate(30)"><tspan
-             sodipodi:role="line"
-             id="tspan92"
-             style="fill:#1a1a1a;stroke-width:0.900112"
-             x="525.97968"
-             y="357.8468">-5'</tspan></text>
-        <g
-           id="g94"
-           transform="rotate(30,260.27136,638.89033)">
-          <rect
-             style="fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1.23665;stroke-opacity:1;paint-order:stroke fill markers"
-             id="rect92"
-             width="11.615252"
-             height="8.9164581"
-             x="-186.01793"
-             y="-574.52576"
-             transform="scale(-1)" />
-          <rect
-             style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:2.60853;stroke-opacity:1;paint-order:stroke fill markers"
-             id="rect93"
-             width="51.680275"
-             height="8.9164581"
-             x="-238.28738"
-             y="-574.52576"
-             transform="scale(-1)" />
-          <rect
-             style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1.9277;stroke-opacity:1;paint-order:stroke fill markers"
-             id="rect94"
-             width="28.223501"
-             height="8.9164581"
-             x="-173.84355"
-             y="-574.52576"
-             transform="scale(-1)" />
-        </g>
-        <text
-           xml:space="preserve"
-           style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:-0.132292px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
-           x="-353.86346"
-           y="423.57175"
-           id="text94"
-           transform="rotate(-30)"><tspan
-             sodipodi:role="line"
-             id="tspan94"
-             style="fill:#1a1a1a;stroke-width:0.900112"
-             x="-353.86346"
-             y="423.57175">5'-</tspan></text>
-      </g>
-    </g>
-    <g
        id="g96"
-       transform="translate(-4.7787523,397.03156)">
+       transform="matrix(0.69820145,0,0,0.69820145,23.711253,360.00099)">
       <rect
          style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect95"
@@ -1049,7 +833,7 @@
     </g>
     <g
        id="g27"
-       transform="matrix(0.51883142,0,0,0.51883142,59.919433,134.95755)">
+       transform="matrix(0.41471152,0,0,0.41471152,60.394354,148.34029)">
       <text
          xml:space="preserve"
          style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.264583px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
@@ -1314,7 +1098,7 @@
     </g>
     <g
        id="g63"
-       transform="matrix(0.68651905,0,0,0.68651905,28.609891,65.490115)">
+       transform="matrix(0.60905423,0,0,0.60905423,40.470682,84.899856)">
       <rect
          style="fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.788785;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect47"
@@ -1501,28 +1285,224 @@
              y="251.88475">-5'</tspan></text>
       </g>
     </g>
-    <text
-       xml:space="preserve"
-       style="font-size:5.81253px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.239767px;fill:#1a1a1a;fill-opacity:1;stroke-width:0.617944;paint-order:stroke fill markers"
-       x="189.48256"
-       y="431.97775"
-       id="text31"><tspan
-         sodipodi:role="line"
-         id="tspan31"
-         style="fill:#1a1a1a;stroke-width:0.617944"
+    <g
+       id="g8"
+       transform="translate(-2.0682067,-41.804815)">
+      <g
+         id="g60"
+         transform="matrix(0.44530757,0,0,0.44530757,63.70539,186.37343)">
+        <g
+           id="g95">
+          <rect
+             style="fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.788785;stroke-opacity:1;paint-order:stroke fill markers"
+             id="rect80"
+             width="141.91739"
+             height="8.9375267"
+             x="15.612426"
+             y="505.16254" />
+          <text
+             xml:space="preserve"
+             style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.264583px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+             x="16.071398"
+             y="512.46112"
+             id="text81"><tspan
+               sodipodi:role="line"
+               id="tspan81"
+               style="letter-spacing:0.264583px;stroke-width:0.900112"
+               x="16.071398"
+               y="512.46112"><tspan
+   style="fill:#ffff00"
+   id="tspan80">A</tspan>CGGATGATCGATGCAGTAGATGACCATC</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.264583px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+             x="113.604"
+             y="521.86029"
+             id="text82"
+             inkscape:transform-center-x="4.1585476"
+             inkscape:transform-center-y="-5.8836495"><tspan
+               sodipodi:role="line"
+               id="tspan82"
+               style="fill:#1a1a1a;stroke-width:0.900112"
+               x="113.604"
+               y="521.86029">antisense</tspan></text>
+          <g
+             id="g86">
+            <rect
+               style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:2.16646;stroke-opacity:1;paint-order:stroke fill markers"
+               id="rect82"
+               width="35.647781"
+               height="8.9164581"
+               x="-21.415361"
+               y="504.5304" />
+            <rect
+               style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1.86745;stroke-opacity:1;paint-order:stroke fill markers"
+               id="rect83"
+               width="26.48687"
+               height="8.9164581"
+               x="-297.86841"
+               y="-435.28732"
+               transform="matrix(0.8660254,-0.5,-0.5,-0.8660254,0,0)" />
+          </g>
+          <text
+             xml:space="preserve"
+             style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:-0.132292px;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+             x="-161.65831"
+             y="512.30853"
+             id="text85"
+             transform="scale(-1,1)"><tspan
+               sodipodi:role="line"
+               id="tspan85"
+               style="stroke-width:0.900112"
+               x="-161.65831"
+               y="512.30853">T</tspan></text>
+          <g
+             id="g91">
+            <rect
+               style="fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:2.17454;stroke-opacity:1;paint-order:stroke fill markers"
+               id="rect84"
+               width="35.914402"
+               height="8.9164581"
+               x="-198.91014"
+               y="-514.44727"
+               transform="scale(-1)" />
+            <rect
+               style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1.86745;stroke-opacity:1;paint-order:stroke fill markers"
+               id="rect85"
+               width="26.48687"
+               height="8.9164581"
+               x="-451.17941"
+               y="-347.43942"
+               transform="rotate(-150)" />
+            <text
+               xml:space="preserve"
+               style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:-0.132292px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+               x="452.96634"
+               y="346.65875"
+               id="text86"
+               transform="rotate(30)"><tspan
+                 sodipodi:role="line"
+                 id="tspan86"
+                 style="fill:#1a1a1a;stroke-width:0.900112"
+                 x="452.96634"
+                 y="346.65875">-5'</tspan></text>
+          </g>
+          <rect
+             style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:2.16646;stroke-opacity:1;paint-order:stroke fill markers"
+             id="rect86"
+             width="35.647781"
+             height="8.9164581"
+             x="-21.944529"
+             y="493.41791" />
+          <g
+             id="g89"
+             transform="rotate(-30,-87.265203,492.55169)">
+            <g
+               id="g90"
+               transform="translate(16.883319,37.443878)">
+              <rect
+                 style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1.99318;stroke-opacity:1;paint-order:stroke fill markers"
+                 id="rect87"
+                 width="30.173428"
+                 height="8.9164581"
+                 x="-78.322105"
+                 y="-497.00992"
+                 transform="scale(1,-1)" />
+              <rect
+                 style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:2.5019;stroke-opacity:1;paint-order:stroke fill markers"
+                 id="rect88"
+                 width="47.541183"
+                 height="8.9164581"
+                 x="-126.38173"
+                 y="-497.00992"
+                 transform="scale(1,-1)" />
+            </g>
+          </g>
+          <rect
+             style="fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:2.17454;stroke-opacity:1;paint-order:stroke fill markers"
+             id="rect91"
+             width="35.914402"
+             height="8.9164581"
+             x="-197.94022"
+             y="-526.29425"
+             transform="scale(-1)" />
+          <text
+             xml:space="preserve"
+             style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:-0.132292px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+             x="525.97968"
+             y="357.8468"
+             id="text92"
+             transform="rotate(30)"><tspan
+               sodipodi:role="line"
+               id="tspan92"
+               style="fill:#1a1a1a;stroke-width:0.900112"
+               x="525.97968"
+               y="357.8468">-5'</tspan></text>
+          <g
+             id="g94"
+             transform="rotate(30,260.27136,638.89033)">
+            <rect
+               style="fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1.23665;stroke-opacity:1;paint-order:stroke fill markers"
+               id="rect92"
+               width="11.615252"
+               height="8.9164581"
+               x="-186.01793"
+               y="-574.52576"
+               transform="scale(-1)" />
+            <rect
+               style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:2.60853;stroke-opacity:1;paint-order:stroke fill markers"
+               id="rect93"
+               width="51.680275"
+               height="8.9164581"
+               x="-238.28738"
+               y="-574.52576"
+               transform="scale(-1)" />
+            <rect
+               style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1.9277;stroke-opacity:1;paint-order:stroke fill markers"
+               id="rect94"
+               width="28.223501"
+               height="8.9164581"
+               x="-173.84355"
+               y="-574.52576"
+               transform="scale(-1)" />
+          </g>
+          <text
+             xml:space="preserve"
+             style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:-0.132292px;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+             x="-353.86346"
+             y="423.57175"
+             id="text94"
+             transform="rotate(-30)"><tspan
+               sodipodi:role="line"
+               id="tspan94"
+               style="fill:#1a1a1a;stroke-width:0.900112"
+               x="-353.86346"
+               y="423.57175">5'-</tspan></text>
+        </g>
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-size:5.81253px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.239767px;fill:#1a1a1a;fill-opacity:1;stroke-width:0.617944;paint-order:stroke fill markers"
          x="189.48256"
-         y="431.97775">P5</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:5.81253px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.239767px;fill:#1a1a1a;fill-opacity:1;stroke-width:0.617944;paint-order:stroke fill markers"
-       x="8.3362389"
-       y="414.5795"
-       id="text32"><tspan
-         sodipodi:role="line"
-         id="tspan32"
-         style="stroke-width:0.617944"
+         y="431.97775"
+         id="text31"><tspan
+           sodipodi:role="line"
+           id="tspan31"
+           style="fill:#1a1a1a;stroke-width:0.617944"
+           x="189.48256"
+           y="431.97775">P5</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:5.81253px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.239767px;fill:#1a1a1a;fill-opacity:1;stroke-width:0.617944;paint-order:stroke fill markers"
          x="8.3362389"
-         y="414.5795">P7</tspan></text>
+         y="414.5795"
+         id="text32"><tspan
+           sodipodi:role="line"
+           id="tspan32"
+           style="stroke-width:0.617944"
+           x="8.3362389"
+           y="414.5795">P7</tspan></text>
+    </g>
     <text
        xml:space="preserve"
        style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.34925px;fill:#ffffff;fill-opacity:1;stroke-width:0.900112;paint-order:stroke fill markers"
@@ -1548,21 +1528,22 @@
     <text
        xml:space="preserve"
        style="font-size:5.22655px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.215595px;fill:#1a1a1a;fill-opacity:1;stroke-width:0.555647;paint-order:stroke fill markers"
-       x="78.912132"
-       y="487.74066"
+       x="66.043213"
+       y="428.24719"
        id="text36"><tspan
          sodipodi:role="line"
          id="tspan36"
          style="fill:#1a1a1a;stroke-width:0.555647"
-         x="78.912132"
-         y="487.74066">All sense strand is P7 to P5 in 5' to 3' origntation, and</tspan><tspan
+         x="66.043213"
+         y="428.24719">All sense strand is P7 to P5 in 5' to 3' origntation, and</tspan><tspan
          sodipodi:role="line"
          style="fill:#1a1a1a;stroke-width:0.555647"
-         x="78.912132"
-         y="494.27383"
+         x="66.043213"
+         y="434.78036"
          id="tspan1">all antisense strand is P5 to P7.</tspan></text>
     <g
-       id="g56">
+       id="g56"
+       transform="matrix(0.86532126,0,0,0.86532126,17.455865,35.356739)">
       <rect
          style="fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.788785;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect43"
@@ -1657,17 +1638,50 @@
          style="fill:#1a1a1a;stroke-width:0.900112"
          x="106.87926"
          y="438.5448" /></text>
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.34925px;fill:#1a1a1a;fill-opacity:1;stroke-width:0.900112;paint-order:stroke fill markers"
-       x="110.64751"
-       y="379.64609"
-       id="text63"><tspan
-         sodipodi:role="line"
-         id="tspan63"
-         style="stroke-width:0.900112"
-         x="110.64751"
-         y="379.64609">PCR</tspan></text>
+    <g
+       id="g6"
+       transform="translate(-6.9273961,-19.329328)">
+      <g
+         id="g80"
+         transform="matrix(0.734036,0,0,0.734036,26.62225,345.91013)">
+        <rect
+           style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+           id="rect79"
+           width="1.9391183"
+           height="14.081847"
+           x="104.03044"
+           y="33.385117"
+           ry="0" />
+        <path
+           sodipodi:type="star"
+           style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.900112;stroke-opacity:1;paint-order:stroke fill markers"
+           id="path79"
+           inkscape:flatsided="true"
+           sodipodi:sides="3"
+           sodipodi:cx="130.08955"
+           sodipodi:cy="51.723511"
+           sodipodi:r1="3.0005183"
+           sodipodi:r2="1.5002592"
+           sodipodi:arg1="1.5707963"
+           sodipodi:arg2="2.6179939"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="m 130.08955,54.724029 -2.59852,-4.500777 5.19705,0 z"
+           inkscape:transform-center-y="0.75012966"
+           transform="translate(-25.089553,-3.1677308)" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.34925px;fill:#1a1a1a;fill-opacity:1;stroke-width:0.900112;paint-order:stroke fill markers"
+         x="108.49452"
+         y="379.15717"
+         id="text63"><tspan
+           sodipodi:role="line"
+           id="tspan63"
+           style="stroke-width:0.900112"
+           x="108.49452"
+           y="379.15717">PCR</tspan></text>
+    </g>
     <text
        xml:space="preserve"
        style="font-size:8.46667px;font-family:Carlito;-inkscape-font-specification:Carlito;text-align:justify;letter-spacing:0.34925px;fill:#1a1a1a;fill-opacity:1;stroke-width:0.900112;paint-order:stroke fill markers"
