@@ -282,20 +282,36 @@ Reads Per Kilobase of transcript per Million reads mapped (RPKM)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. math::
-
-   M_{rpkm} =  \frac{10^3 * 10^6}{Reads_{all}} 
+    
+    \begin{flalign}M_{rpkm} =  10^9
+        \begin{bmatrix}
+        \frac{1}{l_{1,1}} & 0 & \cdots & 0 \\
+        0 & \frac{1}{l_{2,2}} & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & \frac{1}{l_{n,n}}
+        \end{bmatrix}
         \begin{bmatrix}
         d_{1,1} & d_{1,2} & \cdots & d_{1,m} \\
         d_{2,1} & d_{2,2} & \cdots & d_{2,m} \\
         \vdots  & \vdots  & \ddots & \vdots  \\
         d_{n,1} & d_{n,2} & \cdots & d_{n,m}
-       \end{bmatrix}
-       \begin{bmatrix}
-       \frac{1}{l_{1,1}} & 0 & \cdots & 0 \\
-       0 & \frac{1}{l_{2,2}} & \cdots & 0 \\
-       \vdots & \vdots & \ddots & \vdots \\
-       0 & 0 & \cdots & \frac{1}{l_{m,m}}
-       \end{bmatrix}
+        \end{bmatrix}
+        \begin{bmatrix}
+        \frac{1}{r_{1,1}} & 0 & \cdots & 0 \\
+        0 & \frac{1}{r_{2,2}} & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & \frac{1}{r_{m,m}}\end{bmatrix} \end{flalign}
+
+For one sample:
+
+.. math::
+   
+    S = \sum_{i=1}^{n}d_{i}
+
+.. math::
+
+    10^9 \neq 10^9 * \sum_{i=1}^{n} \frac{d_i}{l_i*S} = \frac{10^9}{S} \sum_{i=1}^{n} \frac{d_i}{l_i}
+
 
 
 fragments per kilobase of transcript per million fragments mapped (FPKM)
@@ -313,7 +329,7 @@ Transcripts Per Million (TPM)
 
 .. math::
 
-    M_{tpm} = \frac{10^6}{sum(M_{rpkm})} * M_{rpkm}
+    M_{tpm} = 10^6 * \frac{M_{rpkm}}{sum(M_{rpkm})}
 
 
 
