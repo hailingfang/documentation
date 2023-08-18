@@ -172,37 +172,118 @@ Sequencing
 Quality Control of Data
 --------------------------------
 
+After getting sequencing data, the adapter sequece need be removed if
+it is sequenced when sequencing inserting. The PCR introduced duplications
+need be removed too. And if reads have low qulity base, those base need be
+trimed.
+
+Test quality of sequencing results
+++++++++++++++++++++++++++++++++++++++
+
+The software FastQC is a commonly used tool to test the
+sequencing quality and disclose the petential problems of
+sequencing system.
+
+
+File format of data
+++++++++++++++++++++++++++++++
+
+Fastq file format is commonly used format for sequencing data [8]_ ::
+
+    A FASTQ file has four line-separated fields per sequence:
+
+    Field 1 begins with a '@' character and is followed by a sequence identifier and an optional description (like a FASTA title line).
+    Field 2 is the raw sequence letters.
+    Field 3 begins with a '+' character and is optionally followed by the same sequence identifier (and any description) again.
+    Field 4 encodes the quality values for the sequence in Field 2, and must contain the same number of symbols as letters in the sequence.
+
+
 Test adapter and index sequence and remove it if exist
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there are residual adapter sequence in the reads, then those
+adapter sequence need be removed. The softwase cutadapter can be
+used for this task.
 
 Remove PCR introduce duplications
 ++++++++++++++++++++++++++++++++++++++
 
+The PCR amplification would intruduce complete same reads in the results. those
+reads need be removed. As for the sofrware for this task, iSAMtools rmdup and FastUniq are an tools for
+this.
+
 Trim low quality bases
 +++++++++++++++++++++++++++
 
-Software
-++++++++++++++++++++++
+The quality is caululated by following formula:
+
+**The quality of base is denoted by Q.
+The posibility that the base is incorrect is donoted by P.**
+
+.. math::
+
+    Q & = -10 * \log_{10}(P)
+
+    quality\_char & = chr(Q + 33)
+
+
+For example::
+    
+    The error probility is 0.01, the Q is 20.
+    So, the value add to 33 is 53, the ascii is
+    '7'.
+
+If low quality bases presented, those bases need be removed. Trimmomatic can do this job.
 
 
 Reads Mapping and Counting
 -----------------------------------
 
+The data after QC is ready for reads mapping.
+There are several software existed to do reads mapping.
+They are include *Bwa*, *Bowtie2*, *Star*, *Hisat2*, *Tophat2* and so on.
+
+After reads mapping, software *HTSeq* can be used to count read to each
+transcript or segment of genome.
+
+
 Map reads to reference sequence
 +++++++++++++++++++++++++++++++++++
+
+Here are some example to map the reads data.
+
+.. code:: sh
+
+    # data: sigle seq data: SRR6890845.fastq, genome: GCF_000002035.6_GRCz11_genomic.fna,
+    # transcripts: GCF_000002035.6_GRCz11_rna.fna, annotation data: GCF_000002035.6_GRCz11_genomic.gff.gz.
+
+    #bwa
+    bwa index GCF_000002035.6_GRCz11_genomic.fna
+    bwa mem GCF_000002035.6_GRCz11_genomic.fna SRR6890845.fastq -o SRR6890845-map.sam
+    
+
 
 Count Reads
 ++++++++++++++++++++++++++++++++++
 
+.. code::
+
+    htseq-count SRR6890845-map.sam GCF_000002035.6_GRCz11_genomic.gtf -c read_count.csv
+
+**The Reads Countting Matrix:** :math:`M_{ori}`
+
+.. image:: img-rna-seq/reads-countting-matrix.svg
+
+
 expressing matrix and its normalization
 -------------------------------------------
 
-RPKM
-++++++++++++++++++++++++
+Reads Per Kilobase of transcript per Million reads mapped (RPKM)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. math::
 
-   M_{rpkm} =  \frac{1}{R} 
+   M_{rpkm} =  \frac{10^3 * 10^6}{Reads_{all}} 
         \begin{bmatrix}
         d_{1,1} & d_{1,2} & \cdots & d_{1,m} \\
         d_{2,1} & d_{2,2} & \cdots & d_{2,m} \\
@@ -217,6 +298,24 @@ RPKM
        \end{bmatrix}
 
 
+fragments per kilobase of transcript per million fragments mapped (FPKM)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+FPKM is closely related to RPKM except with fragment (a pair of reads) replacing
+read (the reason for this nomenclature is historical, since initially reads were 
+single-end, but with the advent of paired-end sequencing it now makes more 
+sense to speak of fragments, and hence FPKM) [9]_.
+
+
+Transcripts Per Million (TPM)
+++++++++++++++++++++++++++++++++
+
+
+.. math::
+
+    M_{tpm} = \frac{10^6}{sum(M_{rpkm})} * M_{rpkm}
+
+
 
 Comparison between Samples
 ----------------------------
@@ -224,6 +323,13 @@ Comparison between Samples
 
 de nove assembly for RNA
 ------------------------------
+
+alternative splicing
+----------------------
+
+new gene discovery
+---------------------------
+
 
 Single Cell RNA Sequencing
 ===========================
@@ -246,3 +352,6 @@ Reference
 .. [4] https://bioinformatics.cvr.ac.uk/illumina-adapter-and-primer-sequences/
 .. [5] http://nextgen.mgh.harvard.edu/IlluminaChemistry.html
 .. [6] https://teichlab.github.io/scg_lib_structs/methods_html/Illumina.html
+.. [7] https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm
+.. [8] https://en.wikipedia.org/wiki/FASTQ_format
+.. [9] Misuse of RPKM or TPM normalization when comparing across samples and sequencing protocols
