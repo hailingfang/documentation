@@ -272,7 +272,15 @@ Count Reads
 
 **The Reads Countting Matrix:** :math:`M_{ori}`
 
-.. image:: img-rna-seq/reads-countting-matrix.svg
+.. math::
+
+    M_{ori} = \begin{bmatrix}
+        d_{1,1} & d_{1,2} & \cdots & d_{1,m} \\
+        d_{2,1} & d_{2,2} & \cdots & d_{2,m} \\
+        \vdots  & \vdots  & \ddots & \vdots  \\
+        d_{n,1} & d_{n,2} & \cdots & d_{n,m}
+        \end{bmatrix}
+
 
 
 expressing matrix and its normalization
@@ -280,6 +288,8 @@ expressing matrix and its normalization
 
 Reads Per Kilobase of transcript per Million reads mapped (RPKM)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+within sample.
 
 .. math::
     
@@ -289,13 +299,7 @@ Reads Per Kilobase of transcript per Million reads mapped (RPKM)
         0 & \frac{1}{l_{2,2}} & \cdots & 0 \\
         \vdots & \vdots & \ddots & \vdots \\
         0 & 0 & \cdots & \frac{1}{l_{n,n}}
-        \end{bmatrix}
-        \begin{bmatrix}
-        d_{1,1} & d_{1,2} & \cdots & d_{1,m} \\
-        d_{2,1} & d_{2,2} & \cdots & d_{2,m} \\
-        \vdots  & \vdots  & \ddots & \vdots  \\
-        d_{n,1} & d_{n,2} & \cdots & d_{n,m}
-        \end{bmatrix}
+        \end{bmatrix} M_{ori}
         \begin{bmatrix}
         \frac{1}{r_{1,1}} & 0 & \cdots & 0 \\
         0 & \frac{1}{r_{2,2}} & \cdots & 0 \\
@@ -326,11 +330,21 @@ sense to speak of fragments, and hence FPKM) [9]_.
 Transcripts Per Million (TPM)
 ++++++++++++++++++++++++++++++++
 
+Within sample.
 
 .. math::
 
     M_{tpm} = 10^6 * \frac{M_{rpkm}}{sum(M_{rpkm})}
 
+
+
+
+TMM
+++++++++++++++++++++++
+
+
+normalization method of DEseq2
++++++++++++++++++++++++++++++++++++++
 
 
 Comparison between Samples
