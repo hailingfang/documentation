@@ -281,7 +281,16 @@ Count Reads
         d_{n,1} & d_{n,2} & \cdots & d_{n,m}
         \end{bmatrix}
 
+**The read countting of one sameple** :math:`V_i`
 
+.. math::
+
+    V_i = \begin{bmatrix}d_{1,i}\\
+           d_{2,i}\\
+           \vdots\\
+           d_{n,i}\end{bmatrix}
+    
+    i \in \{1, 2, \cdots, m\}
 
 expressing matrix and its normalization
 -------------------------------------------
@@ -289,32 +298,22 @@ expressing matrix and its normalization
 Reads Per Kilobase of transcript per Million reads mapped (RPKM)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-within sample.
+within sample comparison.
 
-.. math::
-    
-    \begin{flalign}M_{rpkm} =  10^9
-        \begin{bmatrix}
-        \frac{1}{l_{1,1}} & 0 & \cdots & 0 \\
-        0 & \frac{1}{l_{2,2}} & \cdots & 0 \\
-        \vdots & \vdots & \ddots & \vdots \\
-        0 & 0 & \cdots & \frac{1}{l_{n,n}}
-        \end{bmatrix} M_{ori}
-        \begin{bmatrix}
-        \frac{1}{r_{1,1}} & 0 & \cdots & 0 \\
-        0 & \frac{1}{r_{2,2}} & \cdots & 0 \\
-        \vdots & \vdots & \ddots & \vdots \\
-        0 & 0 & \cdots & \frac{1}{r_{m,m}}\end{bmatrix} \end{flalign}
-
-For one sample:
+For sample i:
 
 .. math::
    
-    S = \sum_{i=1}^{n}d_{i}
+
+    d\_rpkm_{j,i} = d_{j, i} * \frac{10^9}{\sum_{j = 1}^{n}d_{j,i} * l_j}
+
+.. math::
+   
+    S = \sum_{j=1}^{n}d_{j,i}
 
 .. math::
 
-    10^9 \neq 10^9 * \sum_{i=1}^{n} \frac{d_i}{l_i*S} = \frac{10^9}{S} \sum_{i=1}^{n} \frac{d_i}{l_i}
+    10^9 \neq 10^9 * \sum_{j=1}^{n} \frac{d_{j,i}}{l_j*S} = \frac{10^9}{S} \sum_{j=1}^{n} \frac{d_{j,i}}{l_j}
 
 
 
@@ -334,13 +333,27 @@ Within sample.
 
 .. math::
 
-    M_{tpm} = 10^6 * \frac{M_{rpkm}}{sum(M_{rpkm})}
+    V\_tpm_{j, i} = 10^6 * \frac{d_{j,i}/l_j}{\sum_{j=1}^{n}(d_{j,i}/l_j)}
 
 
+trimmed mean of M values (TMM)
+++++++++++++++++++++++++++++++++++
+
+normalized for comparison across samples [10]_.
+
+Define Y gk as the observed count for gene g in library k summarized from the raw reads, μ gk as the true and unknown expression level (number of transcripts), L g as the length of gene g and N k as total number of reads for library k. 
 
 
-TMM
-++++++++++++++++++++++
+.. math::
+
+    E[Y_{gk}] = \frac{\mu_{gk}L_g}{S_k} * N_k
+
+    where S_k = \sum_{g=1}^{G}\mu_{gk}L_g
+
+    M_g = \log_2 \frac{Y_{gk}/N_k}{Y_{gk'}/N_{k'}}
+
+    A_g = \frac{1}{2} \log_2 (Y_{gk} / Nk * Y_{gk'}/N_{k'}) for Y_g \neq 0
+
 
 
 normalization method of DEseq2
@@ -385,3 +398,4 @@ Reference
 .. [7] https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm
 .. [8] https://en.wikipedia.org/wiki/FASTQ_format
 .. [9] Misuse of RPKM or TPM normalization when comparing across samples and sequencing protocols
+.. [10] A scaling normalization method for differential expression analysis of RNA-seq data
