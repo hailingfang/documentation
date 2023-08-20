@@ -336,8 +336,8 @@ Within sample.
     V\_tpm_{j, i} = 10^6 * \frac{d_{j,i}/l_j}{\sum_{j=1}^{n}(d_{j,i}/l_j)}
 
 
-trimmed mean of M values (TMM)
-++++++++++++++++++++++++++++++++++
+trimmed mean of M values (TMM) adopted by edgeR 
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 normalized for comparison across samples [10]_.
 
@@ -356,8 +356,28 @@ Define Y gk as the observed count for gene g in library k summarized from the ra
 
 
 
-normalization method of DEseq2
+RLE used by DESeq2
 +++++++++++++++++++++++++++++++++++++
+
+Here is code from DESeq2 manual.
+
+.. code::
+
+    # see vignette for suggestions on generating
+    # count tables from RNA-Seq data
+    cnts <- matrix(rnbinom(n=1000, mu=100, size=1/0.5), ncol=10)
+    cond <- factor(rep(1:2, each=5))
+    # object construction
+    dds <- DESeqDataSetFromMatrix(cnts, DataFrame(cond), ~ cond)
+    # standard analysis
+    dds <- DESeq(dds)
+    res <- results(dds)
+    # moderated log2 fold changes
+    resultsNames(dds)
+    resLFC <- lfcShrink(dds, coef=2, type="apeglm")
+    # an alternate analysis: likelihood ratio test
+    ddsLRT <- DESeq(dds, test="LRT", reduced= ~ 1)
+    resLRT <- results(ddsLRT)
 
 
 Comparison between Samples
