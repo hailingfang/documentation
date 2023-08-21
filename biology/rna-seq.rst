@@ -397,6 +397,20 @@ new gene discovery
 Single Cell RNA Sequencing
 ===========================
 
+Cell separating
+----------------
+
+Library Making
+----------------
+
+
+Sequencing
+------------------
+
+
+Data analysis 
+-------------------------
+empty droplet deletion, dimensional reduction, prediction of cellular type, analysis of trajectories/pseudotime and unsupervised clustering
 
 
 
