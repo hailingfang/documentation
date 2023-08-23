@@ -397,8 +397,33 @@ new gene discovery
 Single Cell RNA Sequencing
 ===========================
 
-Cell separating
-----------------
+.. image:: img-rna-seq/droplets-based-scRNA-seq.svg
+
+
+.. image:: img-rna-seq/smart-seq2.svg
+
+Single cell isolation
+--------------------------
+
+Microfluidics method
+++++++++++++++++++++++++++++++++++++++++
+
+Emploied by:
+
+
+droplet-based
++++++++++++++++++++++
+
+
+
+Plate based
++++++++++++++++++++
+
+
+Microwell
+++++++++++++++++
+
+
 
 Library Making
 ----------------
@@ -416,6 +441,41 @@ empty droplet deletion, dimensional reduction, prediction of cellular type, anal
 
 Spatial RNA Sequencing
 ===========================
+
+
+
+Sequencing machines
+========================
+
+A machine Used to sequencing.
+
+Illumina
+---------------------
+
+* NextSeq® 550
+
+* HiSeq 4000(discontinued)
+
+
+
+Library preparation kits
+==============================
+
+Used to perpare sequencing library.
+
+Illumina
+--------------
+
+* TruSeq® library preparation kit
+
+
+Sequencing kits
+========================
+
+Used when squencing, including reagent, flow cell, and buffer.
+
+Illumina
+----------------
 
 
 
