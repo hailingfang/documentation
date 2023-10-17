@@ -7,9 +7,9 @@ version gff3
 
     [%info](dsp="gff file format"; filetype="plaintext"; encode="ascii")
     
-    [1] <string; ="##gff-version 3"> (dsp="gff version line")
+    [1] <string; ="##gff-version 3"> (dsp="gff version line"; end="\n")
     [$*] {
-        [1] <string; ="##.+"> (dsp="defination line"; re=$TRUE)
+        [1] <string; ="##.+"> (dsp="defination line"; re=$TRUE, end="\n")
     }
 
     [$+] {
@@ -36,6 +36,6 @@ version gff3
                 }
 
             } (dsp="attribute")        
-        } (dsp="one line of file"; sep=$TAB; end="\n"; NA=".")
+        } (dsp="one line of file"; sep=$TAB; end="\n")
     
     }
