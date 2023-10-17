@@ -1,4 +1,4 @@
-Docs related to biology
+Biology
 ==========================
 
 .. toctree::

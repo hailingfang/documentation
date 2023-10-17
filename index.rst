@@ -23,7 +23,7 @@ and so on.
     :caption: Contents
     
     biology/index
-    file-layout-markup-language/index
+    flml/index
     file-format/index
     computer/index
     lists/index

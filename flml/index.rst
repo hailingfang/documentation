@@ -1,8 +1,7 @@
-FLML
-=============
+File Layout Markup Language
+==============================
 
 Documents of File Layout Markup Language.
-
 
 .. toctree::
     :maxdepth: 1
