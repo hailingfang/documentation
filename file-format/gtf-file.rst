@@ -2,12 +2,13 @@ GTF file
 =============
 
 GTF file FLML description
+----------------------------
 
 
 .. code::
     
     [%deflabel fieldname "the name of line fields"]
-    [%info](dsp="gtf file"; filetype="plaintext"; encode="ascii")\
+    [%info](dsp="gtf file"; filetype="plaintext"; encode="ascii")
     [1]<string; ="#gtf-version 2.2">(dsp="gtf version line", re="^#gtf-version\s\d+\.\d+", end="\n")
     [$*] <string>(dsp="gtf information lines"; re="^#!.+")
     [$+] {
@@ -36,5 +37,7 @@ GTF file FLML description
 
 Reference
 ---------------
+
 https://pcingola.github.io/SnpEff/se_build_db_gff_gtf/
+
 https://useast.ensembl.org/info/website/upload/gff.html
