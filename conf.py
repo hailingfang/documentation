@@ -35,4 +35,4 @@ html_theme_options = {
 
 #change the logo
 github_url = "https://github.com/benjaminfang/documentation"
-html_logo = "img/BF-doc-logo.svg"
+html_logo = "img/doc-logo.svg"
