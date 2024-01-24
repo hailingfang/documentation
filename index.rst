@@ -22,10 +22,11 @@ and so on.
     :maxdepth: 1
     :caption: Contents
     
+    mathematics/index
+    computer/index
     biology/index
     flml/index
     file-format/index
-    computer/index
     lists/index
 
 ------------------------
