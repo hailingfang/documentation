@@ -1,7 +1,9 @@
 Benjamin Fang's documentation project
 ======================================
 
-This is repository of my documentation project.
+.. image:: ./img/doc-logo.svg
+
+This is the repository of my documentation project.
 
 This project using reST and sphinx, as tools, to
 generate other strucuture rich docs.
