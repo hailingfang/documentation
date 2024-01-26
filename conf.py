@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Benjamin Fang's Docs"
-copyright = '2023, Benjamin Fang'
+copyright = '2023-2024, Benjamin Fang'
 author = 'Benjamin Fang'
 release = '0.1'
 
