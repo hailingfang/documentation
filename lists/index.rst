@@ -5,7 +5,7 @@ My Lists
     :maxdepth: 1
     :numbered:
 
-    my-favorite-music
-    my-favorite-movies
-    my-wishlist
+    music
+    movies
+    wishlist
 
