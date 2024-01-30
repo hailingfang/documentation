@@ -25,7 +25,6 @@ and so on.
     mathematics/index
     computer/index
     biology/index
-    flml/index
     file-format/index
     lists/index
 
