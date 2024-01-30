@@ -1,12 +1,11 @@
 ======================================================
-Reference of File Layout Markup Language 
+File Layout Markup Language Specification
 ======================================================
 
-version: 1.1.0; by Benjamin Fang
-
-create: 20230401; update: 20230627
-
-
+:Authors: Benjamin Fang
+:Version: 1.2.0
+:Create Date: 20230401
+:Update Date: 20240130
 
 
 Introdution
@@ -53,6 +52,9 @@ Using a modified BNF grammar notation. Which can be defined as::
     flml-sentences     ::= "[" square-bracket-part "]" ( "<" angled-bracket-part ">" | "{" flml-sentences "}" ) "(" round-parenthese-part ")"
 
 
+
+Terminologies and Concepts
+============================
 
 
 Data types
