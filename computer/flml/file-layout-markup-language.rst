@@ -11,40 +11,61 @@ File Layout Markup Language Specification
 Introdution
 ======================
 
-In my work in software development, I often need to parse files,
-which can be either binary or plaintext. To understand the structure and
-content of these files, I typically refer to documentation in the form
-of descriptive text or tables that outline the meaning of each field and
-its associated data type. My goal is to create an easy-to-use and accurate
-markup language that can be used to describe the layout of both binary and
-plaintext files. Once I have designed this language, I plan to use it to
-document commonly used file formats in the biological field and other areas. 
+File Layout Markup Language (FLML) is an markup language for descirbing the
+layout/structure of binary or plaintext text files. It is sample and accurate
+to reprent the layout of a file.
 
-This method is simple. For example, if you want to describe a binary file organized as follows::
+File Layout Markup Language (FLML) is a markup language for describing the
+layout/structure of binary or plaintext text files. It is simple and accurate
+in representing the layout of a file.
+
+For example, we have a binary file whose layout is::
 
     3 integers; 1 char, whose value is 255; 1 integer which have a value "X"; "X" floats.
 
-You can describe the layout using FLML like following::
+The corresponding FLML is following::
 
-    [3] <int> (dsp="3 integers")
-    [1] <char; =255> (dsp="one char, whose value is 255")
-    [1] <int; $x> (dsp="one int, the value stored by this int is assigned to variable $x")
-    [$x] <float> (dsp="the amount of float is $x")
+    [3] <int> (dsp="three integers")
+    [1] <char; =255> (dsp="one char, whose value equals to 255")
+    [1] <int; $x> (dsp="one int, the value is assigned to a variable $x")
+    [$x] <float> (dsp="$x float number")
 
+Here is another example of plaintext file::
 
-An FLML description is composed of FLML sentences. Each sentence consist of three parts:
-:code:`[square-bracket-part] <angled-bracket-part> (round-parenthese-part)` or
-:code:`[square-bracket-part] {curly-bracket-part} (round-parenthese-part)`.
+    ID gender name point
+    12  0   ben 2.32
+    8   1   lewis   5.6
 
-The primarily role of the :code:`square-bracket-part` part is to describe
-the number of :code:`block`. The :code:`angled-bracket-part` is used to
-recorde the :code:`block` type(or say data type). And the last part, within :code:`round-parenthese-part`
-is made up of several labels, in form :code:`label=value`. These labels and their values are
-used to descirbe the :code:`[] ()` part. :code:`curly-bracket-part` is made up of FLML sentences.
+The corresponding FLML is::
 
-In above example, the first sentence is :code:`[3] <int> (dsp="3 integers")`. The "3" in "[]" is reveal the
-number of block which is a "int" written in "<>". "dsp" in "()" is a label, which is used to offer
-information about square-bracket-part and angled-bracket-part/curly-bracket-part.
+    [4] <string; =["ID", "gender", "name", "point"]> (sep="\s"; end="\n")
+    [$+] {
+        [1] <string> (dtype=int)
+        [1] <string> (dtype=bool)
+        [1] <string; ="\w+"> (re=True, dsp="names")
+        [1] <string> (dtype=float)
+    } (sep="\s"; end="\n")
+
+A FLML file is consist of sentences, and each sentence used to descirbe a
+:code:`block`. A :code:`block` is made of one or more same elements. Generally, 
+a FLML sentence has three components, There are
+enclosed by square bracket, angled bracket and round parenthese respectively.
+Namely, The tree components is :code:`element number` component,
+:code:`element unit` component and :code:`element label` component.
+
+The :code:`element number` component is used to descirbe the number of :code:`element unit`.
+The :code:`element unit` is the :code:`unit` of the block, and the :code:`element unit`
+can be complex unit. A complex :code:`element unit` is enclosed by curly brackets.
+For example::
+
+    [3] {
+        [1] <int>
+        [2] <float>
+    }
+
+The unit is outer most sentence has one int and three float. The 
+:code:`complex element unit` is
+descirbed by :code:`sample element unit` in the curly brackets.
 
 Using a modified BNF grammar notation. Which can be defined as::
 
@@ -52,9 +73,21 @@ Using a modified BNF grammar notation. Which can be defined as::
     flml-sentences     ::= "[" square-bracket-part "]" ( "<" angled-bracket-part ">" | "{" flml-sentences "}" ) "(" round-parenthese-part ")"
 
 
-
 Terminologies and Concepts
 ============================
+
+File
+    A binary or plaintext file.
+
+Block
+    A consistent data of a file.
+
+Element length
+
+Element type
+
+Element label
+
 
 
 Data types
