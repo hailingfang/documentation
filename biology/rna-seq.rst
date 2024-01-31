@@ -305,7 +305,7 @@ For sample i:
 .. math::
    
 
-    d\_rpkm_{j,i} = d_{j, i} * \frac{10^9}{\sum_{j = 1}^{n}d_{j,i} * l_j}
+    d\_rpkm_{j,i} = \frac{d_{j, i}}{S * l_j} * 10^9
 
 .. math::
    
