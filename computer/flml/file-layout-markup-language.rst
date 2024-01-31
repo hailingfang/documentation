@@ -11,17 +11,13 @@ File Layout Markup Language Specification
 Introdution
 ======================
 
-File Layout Markup Language (FLML) is an markup language for descirbing the
-layout/structure of binary or plaintext text files. It is sample and accurate
-to reprent the layout of a file.
-
 File Layout Markup Language (FLML) is a markup language for describing the
 layout/structure of binary or plaintext text files. It is simple and accurate
 in representing the layout of a file.
 
 For example, we have a binary file whose layout is::
 
-    3 integers; 1 char, whose value is 255; 1 integer which have a value "X"; "X" floats.
+    3 integers; 1 char, whose value is 255; 1 integer which have a value "X"; floats repeated "X" times.
 
 The corresponding FLML is following::
 
@@ -40,11 +36,11 @@ The corresponding FLML is::
 
     [4] <string; =["ID", "gender", "name", "point"]> (sep="\s"; end="\n")
     [$+] {
-        [1] <string> (dtype=int)
-        [1] <string> (dtype=bool)
-        [1] <string; ="\w+"> (re=True, dsp="names")
+        [1] <string> (dtype=int, end="\s")
+        [1] <string, ={"0", "1"}> (dtype=bool, end="\s")
+        [1] <string; ="[a-zA-Z]+"> (re=True, dsp="names", end="\s")
         [1] <string> (dtype=float)
-    } (sep="\s"; end="\n")
+    } (end="\n")
 
 A FLML file is consist of sentences, and each sentence used to descirbe a
 :code:`block`. A :code:`block` is made of one or more same elements. Generally, 
@@ -88,10 +84,53 @@ Element type
 
 Element label
 
+statment
+    A statament in FLML is a expression end by ";". If the statament is last one of a sentence part. the ";" can be omiited.
+
+sentence
+    A FLML sentence looks like :code:`[statment]<statment>(statment)` or :code:`[statment]{sentences}(statament)`.
+    A sentence is have tree **sentence parts**, the first one is called "square bracket part",
+    which include the "[]" marker and statments it containing.
+    The second is called "angled bracket part" or "curly bracket part". The last is called "round parenthese part".
 
 
-Data types
-========================
+block
+    A block is the uint which construct the further data structure. For instance, :code:`[8] <int> ()` (example A),
+    where the "int" is the block, which is inclose by a "<>" parenthese. The main function of "angled bracket part" and
+    "curly bracket part" is to contain block.
+
+sample block and complex block
+    The block can de divided into two tipies: sample block and complex block. A sample block is
+    a basic data type which have beed define in this language, which can not consist of other
+    blocks. For example, the "int", "float", "char" all are sample blocks. The sample block was enclosed
+    by "<>". The complex block, on the other hand, is made up of sample blocks. For example, :code:`[3]{[1]<int>() [1]<float>()}()` (example B).
+    The complex block in the example is consist of one int and one float. The complex block is enclosed by
+    "{}"
+
+block type
+    There many kinds of sample block type, each type reprent the its data type as well as data size. For example,
+    A "uint64" sample block meant that the data is a integer and it consums 64 bits.
+
+block size
+    For a given block, no matter it is a sample block or complex block, the size of it is decided.
+    that is the size of block, or in term, block size. For the example I given above, the block size
+    of "{[1]<int> [1]<float>}" is 8 bytes (here we suppose the size of int is 4 bytes).
+
+
+block multiplier
+    There is a number or variable in "[]" to indicate the amount of block. For example A which given above,
+    "[8]" mean there are 8 "<int>". The number "8" here is a block multiplier, which use to represent the
+    repeated time of the block.
+
+segment, segment length, elements of segment
+    The block multiplied by multiplier of same sentence makes a segment. For example A, :code:`[8]<int>()` make a segment, which have 8 int,
+    the the size is 32 bytes. The block makes a sagments also called the **elements** of segment. The multiplier also termed
+    the length of segment or **segment length**.
+
+
+Variables and Data Types
+=============================
+
 There are two data types in FLML, one is scaler and the other is array. scaler can refer to number, file, and iterater, and
 a order element. On the other hand, array is a collection of scaler.
 
@@ -114,11 +153,8 @@ In BNF::
 
     variable ::= "$" [a-zA-Z*+?] + [0-9]* | "@" [a-zA-Z]+ [0-9]*
 
-
-
-
-Operator, expression and statement
-==========================================
+Operators and Expressions
+=============================
 
 The operator of FLML include :code:`+ - * / : ~ ^ =` The "+ - * /" is same as normally
 itself in algebra. For example::
@@ -142,57 +178,8 @@ In BNF::
     operator   ::= [+-*/:~^]
 
 
-
-
 FLML sentences
 ========================
-
-Terminology
----------------
-
-* statment
-    A statament in FLML is a expression end by ";". If the statament is last one of a sentence part. the ";" can be omiited.
-
-* sentence
-    A FLML sentence looks like :code:`[statment]<statment>(statment)` or :code:`[statment]{sentences}(statament)`.
-    A sentence is have tree **sentence parts**, the first one is called "square bracket part",
-    which include the "[]" marker and statments it containing.
-    The second is called "angled bracket part" or "curly bracket part". The last is called "round parenthese part".
-
-
-* block
-    A block is the uint which construct the further data structure. For instance, :code:`[8] <int> ()` (example A),
-    where the "int" is the block, which is inclose by a "<>" parenthese. The main function of "angled bracket part" and
-    "curly bracket part" is to contain block.
-
-* sample block and complex block
-    The block can de divided into two tipies: sample block and complex block. A sample block is
-    a basic data type which have beed define in this language, which can not consist of other
-    blocks. For example, the "int", "float", "char" all are sample blocks. The sample block was enclosed
-    by "<>". The complex block, on the other hand, is made up of sample blocks. For example, :code:`[3]{[1]<int>() [1]<float>()}()` (example B).
-    The complex block in the example is consist of one int and one float. The complex block is enclosed by
-    "{}"
-
-* block type
-    There many kinds of sample block type, each type reprent the its data type as well as data size. For example,
-    A "uint64" sample block meant that the data is a integer and it consums 64 bits.
-
-* block size
-    For a given block, no matter it is a sample block or complex block, the size of it is decided.
-    that is the size of block, or in term, block size. For the example I given above, the block size
-    of "{[1]<int> [1]<float>}" is 8 bytes (here we suppose the size of int is 4 bytes).
-
-
-* block multiplier
-    There is a number or variable in "[]" to indicate the amount of block. For example A which given above,
-    "[8]" mean there are 8 "<int>". The number "8" here is a block multiplier, which use to represent the
-    repeated time of the block.
-
-* segment, segment length, elements of segment
-    The block multiplied by multiplier of same sentence makes a segment. For example A, :code:`[8]<int>()` make a segment, which have 8 int,
-    the the size is 32 bytes. The block makes a sagments also called the **elements** of segment. The multiplier also termed
-    the length of segment or **segment length**.
-
 
 Square bracket part
 -----------------------
