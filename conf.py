@@ -30,7 +30,6 @@ html_theme = 'sphinx_book_theme'
 html_theme_options = {
     "repository_url": "https://github.com/benjaminfang/documentation",
     "use_repository_button": True,
-    'analytics_id': 'G-VWP9HESP22'
 }
 
 #change the logo
@@ -38,16 +37,5 @@ github_url = "https://github.com/benjaminfang/documentation"
 html_logo = "img/doc-logo.svg"
 html_title = "My site title"
 
-
-# Add Google Analytics tracking code
-html_js_files = ['https://www.googletagmanager.com/gtag/js?id=G-VWP9HESP22']
-html_js_body = """
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'YOUR_TRACKING_ID');
-</script>
-"""
-
+# Add JavaScript file for Google Analytics tracking
+html_js_files = ['_static/analytics.js']
