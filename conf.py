@@ -37,5 +37,7 @@ github_url = "https://github.com/benjaminfang/documentation"
 html_logo = "img/doc-logo.svg"
 html_title = "My site title"
 
-# Add JavaScript file for Google Analytics tracking
-html_js_files = ['_static/analytics.js']
+
+# Add Google Analytics tracking code
+html_js_files = ['https://www.googletagmanager.com/gtag/js?id=G-VWP9HESP22', '_static/analytics.js']
+
