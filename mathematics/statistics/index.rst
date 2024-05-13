@@ -1,0 +1,7 @@
+Statistics
+==============
+
+
+.. toctree::
+
+   statistics

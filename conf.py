@@ -7,22 +7,35 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Benjamin Fang's Docs"
-copyright = '2023, Benjamin Fang'
+copyright = '2023-2024, Benjamin Fang'
 author = 'Benjamin Fang'
-release = '0.1'
+release = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = ["myst_parser", "sphinx_book_theme", "sphinx.ext.mathjax"]
 
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+html_static_path = ['_static']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.rst', 'file-format/README.rst']
 
 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
-html_static_path = ['_static']
+#using rtd theme and modify it's settings
+html_theme = 'sphinx_book_theme'
+html_theme_options = {
+    "repository_url": "https://github.com/benjaminfang/documentation",
+    "use_repository_button": True,
+}
+
+#change the logo
+github_url = "https://github.com/benjaminfang/documentation"
+html_logo = "img/doc-logo.svg"
+html_title = "My site title"
+
+# Add JavaScript file for Google Analytics tracking
+html_js_files = ['_static/analytics.js']

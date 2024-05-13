@@ -3,18 +3,32 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Benjamin Fang's Docs's documentation!
+Welcome to Benjamin Fang's documentation!
 ================================================
 
+
+Introduction
+---------------------
+
+This is my documentation project to document kinds of thing:
+
+    * techinical docs
+    * lists of things
+
+and so on.
+
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 1
+    :caption: Contents
+    
+    mathematics/index
+    computer/index
+    biology/index
+    file-format/index
+    lists/index
 
+------------------------
 
+Built Time: |today|. Source code please see: `github repository <https://github.com/benjaminfang/documentation>`_
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
