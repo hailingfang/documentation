@@ -1,22 +1,19 @@
-.. Benjamin Fang's Docs documentation master file, created by
+.. Hailing Fang's Docs documentation master file, created by
    sphinx-quickstart on Thu Jun  1 14:42:10 2023.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Benjamin Fang's documentation!
-================================================
+Hailing Fang's documentation
+=======================================
 
 
 Introduction
 ---------------------
 
-This is my documentation project to document kinds of thing:
-
-    * techinical docs
-    * lists of things
-
-and so on.
-
+This is my documentation project aimed at documenting technical topics.
+It currently includes three main topics: mathematics, computer science,
+and biology. The classification of documents is determined by the problem
+field they are related to.
 
 .. toctree::
     :maxdepth: 1
@@ -25,10 +22,8 @@ and so on.
     mathematics/index
     computer/index
     biology/index
-    file-format/index
-    lists/index
 
-------------------------
+-----------------------------
 
-Built Time: |today|. Source code please see: `github repository <https://github.com/benjaminfang/documentation>`_
+Built Time: |today|.
 
