@@ -6,10 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Benjamin Fang's Docs"
-copyright = '2023-2024, Benjamin Fang'
-author = 'Benjamin Fang'
-release = '0.2.0'
+project = "Hailing Fang's Docs"
+copyright = '2023-2024, Hailing Fang'
+author = 'Hailing Fang'
+release = '0.2.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
