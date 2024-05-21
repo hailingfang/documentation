@@ -36,6 +36,7 @@ html_theme_options = {
 github_url = "https://github.com/benjaminfang/documentation"
 html_logo = "img/doc-logo.svg"
 html_title = "My site title"
+html_favicon = 'favicon.png'
 
 
 # Add Google Analytics tracking code
