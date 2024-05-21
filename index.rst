@@ -16,7 +16,7 @@ and biology. The classification of documents is determined by the problem
 field they are related to.
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
     :caption: Contents
     
     mathematics/index
