@@ -1,2 +1,6 @@
 Probability
 ================
+
+.. toctree::
+
+   probability
