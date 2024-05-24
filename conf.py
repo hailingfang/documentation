@@ -14,7 +14,7 @@ release = '0.2.1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["sphinx_book_theme", "sphinx.ext.mathjax"]
+extensions = ["myst_parser", "sphinx_book_theme", "sphinx.ext.mathjax"]
 
 templates_path = ['_templates']
 html_static_path = ['_static']

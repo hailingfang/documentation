@@ -6,7 +6,7 @@ Those files include both binary and plaintext format.
 I use FLML(File layout markup language) to describe file layout.
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 2
 
     plink-bed-file
     gcta-besd-file
