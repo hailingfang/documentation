@@ -85,7 +85,7 @@ method to extract RNA. For example,
 rRNA depletion or enrichment of interested RNA
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Above method would isolate all RNA from sample. Different RNA types have differenct abandence, for example, rRNA account for about 80% of all RNA in mammal cells. A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose [1]_.
+Above method would isolate all RNA from sample. Different RNA types have differenct abandence, for example, rRNA account for about 80% of all RNA in mammal cells. A process which erich or deleption specific RNA type maybe need to remove not needed RNA types and achieve specific experimental purpose [#]_.
 
 * rRNA depletion
     
@@ -128,7 +128,7 @@ The isolated RNA sample should stored in cold and RNAase free solution.
 Library Preparation
 ------------------------
 
-The RNA is uausally fragmented before reverse transcription, that is because reverse transcription may cause 3' bias and make read more enriched at 3'. The fragmented RNA is primed by randem primer(6 oligo DNA) and the first strand is sythesised. In order to keep the strand information which strand is RNA and ligend adeptor, when synthesising seconde strand, instead using dTTP, the dUTP is added. This cuase the second strand reprent U where is T originally. The stand contain U can be degraded, and even more, the DNA polymerase would blocked when meet U [2]_.
+The RNA is uausally fragmented before reverse transcription, that is because reverse transcription may cause 3' bias and make read more enriched at 3'. The fragmented RNA is primed by randem primer(6 oligo DNA) and the first strand is sythesised. In order to keep the strand information which strand is RNA and ligend adeptor, when synthesising seconde strand, instead using dTTP, the dUTP is added. This cuase the second strand reprent U where is T originally. The stand contain U can be degraded, and even more, the DNA polymerase would blocked when meet U [#]_.
 
 .. image:: img-rna-seq/library-praperation.svg
 
@@ -139,7 +139,7 @@ The RNA is uausally fragmented before reverse transcription, that is because rev
 Fragmente RNA
 +++++++++++++++++++
 
-RNAs can be fragmented with alkaline solutions, solutions with divalent cations, such Mg+ +, Zn++, or enzymes, such RNase III. Fragmentation with alkaline solutions or divalent cations is typically carried out at an elevated temperature, such as 70°C, to mitigate the effect of RNA structure on fragmentation [3]_.
+RNAs can be fragmented with alkaline solutions, solutions with divalent cations, such Mg+ +, Zn++, or enzymes, such RNase III. Fragmentation with alkaline solutions or divalent cations is typically carried out at an elevated temperature, such as 70°C, to mitigate the effect of RNA structure on fragmentation [#]_.
 
 
 Random Primer RT for the first strand
@@ -155,7 +155,7 @@ When syntheseing second strand, instead using dTTP, dUTP was used, this will lab
 ligate adapter
 +++++++++++++++++++++++++++++++++++++
 
-Here is some examples of adapters [4]_.
+Here is some examples of adapters [#]_.
 
 dUTP strand degradation or specific amplification
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -188,7 +188,7 @@ sequencing system.
 File format of data
 ++++++++++++++++++++++++++++++
 
-Fastq file format is commonly used format for sequencing data [8]_ ::
+Fastq file format is commonly used format for sequencing data [#]_ ::
 
     A FASTQ file has four line-separated fields per sequence:
 
@@ -323,7 +323,7 @@ fragments per kilobase of transcript per million fragments mapped (FPKM)
 FPKM is closely related to RPKM except with fragment (a pair of reads) replacing
 read (the reason for this nomenclature is historical, since initially reads were 
 single-end, but with the advent of paired-end sequencing it now makes more 
-sense to speak of fragments, and hence FPKM) [9]_.
+sense to speak of fragments, and hence FPKM) [#]_.
 
 
 Transcripts Per Million (TPM)
@@ -339,7 +339,7 @@ Within sample.
 trimmed mean of M values (TMM) adopted by edgeR 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-normalized for comparison across samples [10]_.
+normalized for comparison across samples [#]_.
 
 Define Y gk as the observed count for gene g in library k summarized from the raw reads, μ gk as the true and unknown expression level (number of transcripts), L g as the length of gene g and N k as total number of reads for library k. 
 
@@ -483,13 +483,16 @@ Illumina
 Reference
 ===========================
 
-.. [1] Non-coding RNA: what is functional and what is junk? 
-.. [2] https://hbctraining.github.io/rnaseq-cb321/lectures/Lib_prep.pdf
-.. [3] RNA-Seq methods for transcriptome analysis
-.. [4] https://bioinformatics.cvr.ac.uk/illumina-adapter-and-primer-sequences/
-.. [5] http://nextgen.mgh.harvard.edu/IlluminaChemistry.html
-.. [6] https://teichlab.github.io/scg_lib_structs/methods_html/Illumina.html
-.. [7] https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm
-.. [8] https://en.wikipedia.org/wiki/FASTQ_format
-.. [9] Misuse of RPKM or TPM normalization when comparing across samples and sequencing protocols
-.. [10] A scaling normalization method for differential expression analysis of RNA-seq data
+.. [#] Non-coding RNA: what is functional and what is junk? 
+.. [#] https://hbctraining.github.io/rnaseq-cb321/lectures/Lib_prep.pdf
+.. [#] RNA-Seq methods for transcriptome analysis
+.. [#] https://bioinformatics.cvr.ac.uk/illumina-adapter-and-primer-sequences/
+.. [#] https://en.wikipedia.org/wiki/FASTQ_format
+.. [#] Misuse of RPKM or TPM normalization when comparing across samples and sequencing protocols
+.. [#] A scaling normalization method for differential expression analysis of RNA-seq data
+
+http://nextgen.mgh.harvard.edu/IlluminaChemistry.html
+
+https://teichlab.github.io/scg_lib_structs/methods_html/Illumina.html
+
+https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm
