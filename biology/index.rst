@@ -7,7 +7,7 @@ Biology
 
     genomic-features
     subsystem-of-cell
-    rna-seq
+    rna-seq/rna-seq
     bioinformatics-software
     experiment-lan
     sex-determination-in-zebrafish

@@ -14,7 +14,7 @@ RNA Isolation
 ---------------------
 
 
-.. image:: img-rna-seq/RNA-isolation.svg
+.. image:: imgs/RNA-isolation.svg
 
 Figure 1. RNA Isolation process
 
@@ -130,7 +130,7 @@ Library Preparation
 
 The RNA is uausally fragmented before reverse transcription, that is because reverse transcription may cause 3' bias and make read more enriched at 3'. The fragmented RNA is primed by randem primer(6 oligo DNA) and the first strand is sythesised. In order to keep the strand information which strand is RNA and ligend adeptor, when synthesising seconde strand, instead using dTTP, the dUTP is added. This cuase the second strand reprent U where is T originally. The stand contain U can be degraded, and even more, the DNA polymerase would blocked when meet U [#]_.
 
-.. image:: img-rna-seq/library-praperation.svg
+.. image:: imgs/library-praperation.svg
 
 .. note::
 
@@ -166,7 +166,7 @@ Library Amplification
 Sequencing
 -----------------
 
-.. image:: img-rna-seq/sequencing.svg
+.. image:: imgs/sequencing.svg
 
 
 Quality Control of Data
@@ -397,10 +397,10 @@ new gene discovery
 Single Cell RNA Sequencing
 ===========================
 
-.. image:: img-rna-seq/droplets-based-scRNA-seq.svg
+.. image:: imgs/droplets-based-scRNA-seq.svg
 
 
-.. image:: img-rna-seq/smart-seq2.svg
+.. image:: imgs/smart-seq2.svg
 
 Single cell isolation
 --------------------------
