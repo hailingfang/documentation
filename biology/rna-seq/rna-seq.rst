@@ -4,7 +4,7 @@ RNA Sequencing
 
 .. contents:: Contents
    :depth: 1
-
+   :local:
 
 Bulk RNA Sequencing
 ==========================
