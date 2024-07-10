@@ -10,3 +10,4 @@ Computer
    flml/index
    file-format/index
    software-building/index
+   restructuredtext/restructuredtext
