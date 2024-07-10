@@ -1,11 +1,10 @@
-
-.. .. contents:: Contents
-   :depth: 1
-   
-
 ==========================
 RNA Sequencing
 ==========================
+
+.. contents:: Contents
+   :depth: 1
+
 
 Bulk RNA Sequencing
 ==========================
