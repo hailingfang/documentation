@@ -6,6 +6,7 @@
 Hailing Fang's documentation
 =======================================
 
+Built Time: |today|.
 
 Introduction
 ---------------------
@@ -24,7 +25,4 @@ field they are related to.
     chemistry/index
     biology/index
 
------------------------------
-
-Built Time: |today|.
 
