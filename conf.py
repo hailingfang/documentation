@@ -49,5 +49,6 @@ html_favicon = 'favicon.png'
 
 
 # Add Google Analytics tracking code
+html_static_path = ["_static"]
 html_js_files = ['https://www.googletagmanager.com/gtag/js?id=G-VWP9HESP22', 'google_analytics.js']
 
