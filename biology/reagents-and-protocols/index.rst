@@ -1,6 +1,17 @@
 Reagents and Protocols
 ===============================
 
+Reagents
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   reagents/taq-polymerase
+   reagents/seawater
+   reagents/em3
+
+
 Protocols
 ------------------
 
@@ -8,4 +19,5 @@ Protocols
     :maxdepth: 1
 
     protocols/nucleic-acids-extraction
+    protocols/pcr-amplification
     
