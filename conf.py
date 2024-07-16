@@ -28,7 +28,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.rst', 'computer/
 #using rtd theme and modify it's settings
 html_theme = 'sphinx_book_theme'
 html_theme_options = {
-    "repository_url": "https://github.com/benjaminfang/documentation",
+    "repository_url": "https://github.com/hailingfang/documentation",
     "use_repository_button": True,
     "navbar_end": [],
 #    "icon_links": [
