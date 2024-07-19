@@ -6,11 +6,11 @@ build Python(version 3.11 used here).
 
 * dbm and gdbm
 
-    gdbm_
+    gdbm_ (build with *--enable-libgdbm-compat* option).
 
 * nsl
 
-    libtirpc_ and libnsl_
+    libtirpc_ and libnsl_.
 
 
 .. _gdbm: https://www.gnu.org.ua/software/gdbm/
