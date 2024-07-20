@@ -14,5 +14,5 @@ build Python(version 3.11 used here).
 
 
 .. _gdbm: https://www.gnu.org.ua/software/gdbm/
-.. _libtirpc: https://github.com/benjaminfang/libnsl
-.. _libnsl: https://github.com/benjaminfang/libnsl
+.. _libtirpc: https://github.com/hailingfang/libnsl
+.. _libnsl: https://github.com/hailingfang/libnsl
