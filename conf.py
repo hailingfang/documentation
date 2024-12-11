@@ -34,7 +34,7 @@ html_theme_options = {
 }
 
 #change the logo
-html_logo = "img/doc-logo.svg"
+html_logo = "_static/doc-logo.svg"
 html_title = "Documentation | Hailing Fang"
 html_favicon = 'favicon.png'
 
