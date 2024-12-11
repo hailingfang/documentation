@@ -7,7 +7,6 @@ Reagents
 .. toctree::
    :maxdepth: 1
 
-   reagents/taq-polymerase
    reagents/seawater
    reagents/em3
 
