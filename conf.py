@@ -30,16 +30,7 @@ html_theme = 'sphinx_book_theme'
 html_theme_options = {
     "repository_url": "https://github.com/hailingfang/documentation",
     "use_repository_button": True,
-    "navbar_end": [],
-#    "icon_links": [
-#        {
-#            "name": "Home",
-#            "url": "https://benjaminfang.github.io",
-#            "icon": "_static/favicon.png",
-#            "type": "url"
-#        }
-#   ]
-
+    "navbar_start": ["mybutton.html"]
 }
 
 #change the logo
