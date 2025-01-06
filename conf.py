@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Hailing Fang's Docs"
-copyright = '2023-2024, Hailing Fang'
+copyright = '2023-2025, Hailing Fang'
 author = 'Hailing Fang'
 release = '0.2.1'
 
