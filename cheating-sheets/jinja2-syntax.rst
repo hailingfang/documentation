@@ -134,7 +134,17 @@ Jinja2 Syntax Notes
     <p>Total: {{ total }}</p>
 
 
-10. Comments
+10. Raw Blocks
+---------------------
+
+.. code::
+
+    {% raw %}
+    {{ this_will_not_be_rendered }}
+    {% endraw %}
+
+
+11. Comments
 ------------------------------
 
 .. code::
