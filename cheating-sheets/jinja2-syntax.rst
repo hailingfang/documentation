@@ -122,7 +122,8 @@ Jinja2 Syntax Notes
     safe (disable autoescape)
     default("value")
 
-
+.. image:: ./jinja2-syntax/jinja2-builtin-filters.png
+   :width: 98%
 
 
 9. Set Variables in Template
