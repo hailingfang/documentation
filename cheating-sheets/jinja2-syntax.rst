@@ -156,7 +156,25 @@ Jinja2 Syntax Notes
 
 ---------------------------------------------------
 
+An jinja2 API example
+--------------------------
+
+
+.. code:: python
+
+    import jinja2
+
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader("./templates"))
+    temp = env.get_template("content.html")
+    html = temp.render(add_block2=True, title="<h1>Test</h1>")
+    print(html)
+
+----------------------------------------------------
+
+
 References
 -------------------
 
 https://jinja.palletsprojects.com/en/stable/templates/
+
+https://jinja.palletsprojects.com/en/stable/api/
