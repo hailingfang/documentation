@@ -3,7 +3,7 @@ Cheating Sheets
 
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 1
     :numbered: 0
 
     jinja2-syntax
