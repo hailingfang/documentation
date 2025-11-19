@@ -226,6 +226,8 @@ Directives
     .. citations::
     .. raw::
     .. include::
+    .. note::
+    .. warning::
 
 
 Roles
