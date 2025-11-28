@@ -9,3 +9,4 @@ Cheating Sheets
     jinja2-syntax
     latex-symbols
     restructuredtext
+    javascript
