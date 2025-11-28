@@ -10,3 +10,4 @@ Cheating Sheets
     latex-symbols
     restructuredtext
     javascript
+    english-phonetic-alphabet
