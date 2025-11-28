@@ -11,3 +11,4 @@ Cheating Sheets
     restructuredtext
     javascript
     english-phonetic-alphabet
+    french-phonetic-alphabet
