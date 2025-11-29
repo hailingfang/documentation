@@ -1,4 +1,4 @@
-French Phonetic Alphabets
+French Phonetic Alphabet
 ==================================
 
 alphabet phonétique français
