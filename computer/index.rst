@@ -9,3 +9,4 @@ Computer
    firewall
    software-building/index
    jinja2/index
+   restructuredtext/index

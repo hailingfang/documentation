@@ -22,7 +22,7 @@ Titles
 
 **Rendered Results**:
 
-.. image:: ./restructuredtext/p1-title.png
+.. image:: p1-title.png
 
 
 Paragraph
@@ -41,7 +41,7 @@ Paragraph
 
 **Rendered Results**:
 
-.. image:: restructuredtext/p2-paragraph.png
+.. image:: p2-paragraph.png
 
 
 Text styles
@@ -53,7 +53,7 @@ Text styles
 
 **Rendered Results**:
 
-.. image:: restructuredtext/p3-text-style.png
+.. image:: p3-text-style.png
 
 
 Lists
@@ -80,7 +80,7 @@ Lists
 
 **Rendered Results**:
 
-.. image:: restructuredtext/p4-lists.png
+.. image:: p4-lists.png
 
 
 Preformatting
@@ -95,7 +95,7 @@ Preformatting
 
 **Rendered Results**:
 
-.. image:: restructuredtext/p5-preformatted.png
+.. image:: p5-preformatted.png
 
     
 Field Lists
@@ -112,7 +112,7 @@ Field Lists
 
 **Rendered Results**:
 
-.. image:: restructuredtext/p6-field-lists.png
+.. image:: p6-field-lists.png
 
 Tables
 ~~~~~~~~~~~~~~~~~~~
@@ -145,7 +145,7 @@ Tables
 
 **Rendered Results**:
 
-.. image:: restructuredtext/p7-tables.png
+.. image:: p7-tables.png
 
 
 
@@ -205,7 +205,7 @@ Replacement
 
 **Rendered Results**
 
-.. image:: restructuredtext/p8-substitution.png
+.. image:: p8-substitution.png
 
 
 Directives
