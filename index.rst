@@ -25,6 +25,6 @@ field they are related to.
     chemistry/index
     biology/index
     file-format/index
-    cheat-sheets/index
+    misc/index
 
 
