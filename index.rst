@@ -22,7 +22,6 @@ field they are related to.
     
     mathematics/index
     computer/index
-    chemistry/index
     biology/index
     misc/index
 

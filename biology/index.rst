@@ -12,3 +12,4 @@ Biology
     experiment-lan
     sex-determination-in-zebrafish
     reagents-and-protocols/index
+    terms-in-bioinformatics
