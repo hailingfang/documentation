@@ -9,4 +9,4 @@ Mathematics
     linear-algebra/index
     probability/index
     statistics/index
-    latex-symbols/index
+    latex/index
