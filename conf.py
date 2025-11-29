@@ -18,7 +18,7 @@ extensions = ["myst_parser", "sphinx_book_theme", "sphinx.ext.mathjax"]
 
 templates_path = ['_templates']
 html_static_path = ['_static']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.rst', 'file-format/file-format/README.rst']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.rst']
 
 
 
