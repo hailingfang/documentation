@@ -1,13 +1,66 @@
 Software in Bioinformatics
 ===============================
 
-Read Quality of Sequencing
+:Authors: Hailing Fang
+:Created: 20260412
+:Updated: 20260412
+
+
+
+QC for Dequencing Data
 ----------------------------
 
-`FastQC <https://www.bioinformatics.babraham.ac.uk/projects/fastqc/>`_
+- FastQC
 
-`cutadapt <https://cutadapt.readthedocs.io/en/stable/guide.html>`_
+- cutadapt
 
-`Trimmomatic <http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf>`_
+- Trimmomatic
 
-`fastp <https://github.com/OpenGene/fastp>`_
+- fastp
+
+
+Read Aligner
+--------------------------
+
+- BWA
+
+- bowtie2
+
+- Hisat2
+
+- STAR
+
+- Minimap2
+
+- Salmon
+
+- kallisto
+
+
+Sam File manipulation
+------------------------
+
+- Samtools
+
+- bcftools
+
+
+
+scRNA-seq Clustering
+--------------------------
+
+- Seurat
+
+- Scanpy
+
+- Monocle
+
+- SingleR
+
+- Harmony
+
+- scvi-tools
+
+- CellBender
+
+
