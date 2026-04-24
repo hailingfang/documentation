@@ -7,7 +7,7 @@ Computer
    :numbered: 3
 
    firewall
-   software-building/index
+   software-build/index
    jinja2/index
    restructuredtext/index
    html-css-javascript/index
