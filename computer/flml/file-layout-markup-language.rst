@@ -435,6 +435,7 @@ A sentence whose '[...]' part start with '#', the sentence is
 regard as a comment.
 
 For example::
+
     [# this is a comment]<int>()
 
 Line comment
