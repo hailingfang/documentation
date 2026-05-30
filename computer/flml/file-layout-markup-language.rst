@@ -47,7 +47,7 @@ char between '[...]', '<...>', '{...}' and '(...)' is ignored.
 The Data Types in FLML
 =======================================
 
-1. Number
+Number
 -------------------
 
 A number in FLML can be a integer, float or char. A char is a 8-bits
@@ -59,7 +59,7 @@ Example::
     [3.14159]
     ['A']
 
-2. String
+String
 --------------------
 
 String data type is support in FLML. The string should parenthesized by
@@ -68,7 +68,7 @@ Example::
 
     ["hello world"]
 
-3. List
+List
 ------------------
 
 A list date type in FLML works same as the list date type in Pythons.
@@ -79,7 +79,7 @@ Example::
     [list_d[1]]
     [list_d.append("hello")]
 
-4. Dictionary
+Dictionary
 -------------------
 
 A dictionary date type in FLML works same as the dictionary date type in Pythons.
@@ -91,7 +91,7 @@ Example::
     [dic["cc"] = 12]
 
 
-5. Built in Functions
+Built in Functions
 -------------------------
 
 The built in functions of FLML include::
@@ -108,7 +108,7 @@ Example::
 The Variable and Expression in FLML
 =======================================
 
-1. The Variable
+The Variable
 -----------------------
 
 A variable in FLML consists of English characters, numbers or '_', and
@@ -120,7 +120,7 @@ For example::
     [bb13]
     [_cCd]
 
-2. The Expression
+The Expression
 --------------------------
 
 A expression in FLML is composed by literal, variables and operators. 
@@ -130,12 +130,12 @@ Example::
     [x = 3 * 2 + 1]
     [y = x**2]
 
-2.1 Arithmetic Operators
+Arithmetic Operators
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The arithmetic operators'+', '-', '*', '/', '%' and '//' and '=' is supported.
 
-2.2 Relational and Logical Operators
+Relational and Logical Operators
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 THe supported relational operators are '>', '>=', '<', '<=', '==', '!='.
@@ -147,7 +147,7 @@ Example::
     [a = 3;
      a > 1 && a <= 3]
 
-2.3 Bitwise Operators
+Bitwise Operators
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The supported bitwise operators include::
@@ -164,7 +164,7 @@ Example::
     [a = 31;
      a << 2]
 
-3. The Statament
+The Statament
 --------------------------
 
 A statament is a expression end with ';'. The ';' of last expression in '[...]'
@@ -302,7 +302,7 @@ Example::
 The loop sentence
 =============================
 
-1. For Loop
+For Loop
 -----------------------
 
 .. code::
@@ -334,7 +334,7 @@ Example 2::
         [5]<int>
     }
 
-2. Whild Loop
+Whild Loop
 -----------------------
 
 .. code::
@@ -363,7 +363,6 @@ Example::
 
 The jump sentence
 ============================
-
 
 .. code::
 
@@ -429,7 +428,8 @@ Example::
 Comment
 ============================
 
-1.Segment comment 
+Segment comment
+---------------------------
 
 A sentence whose '[...]' part start with '#', the sentence is
 regard as a comment.
@@ -437,7 +437,8 @@ regard as a comment.
 For example::
     [# this is a comment]<int>()
 
-2. Line comment
+Line comment
+------------------------
 
 A line start with '//', the line is a comment.
 
@@ -445,7 +446,8 @@ For example::
 
     // [3]<int>
 
-3. Block comment
+Block comment
+-------------------------
 
 Contents within '/*' and '*/' are regard as comments.
 
