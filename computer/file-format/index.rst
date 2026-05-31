@@ -18,4 +18,5 @@ I use FLML(File layout markup language) to describe file layout.
     gtf-file
     zlib-and-gzip-file
     bed-file
+    tiff
 
