@@ -91,20 +91,6 @@ Example::
     [dic["cc"] = 12]
 
 
-Built in Functions
--------------------------
-
-The built in functions of FLML include::
-    
-    sum(), len(), int(), str(), float().
-
-The built in functions in Python may supported in FLML expression.
-
-Example::
-
-    [ld = [1,2,3];
-     sum_num = sum(ld)]
-
 The Variable and Expression in FLML
 =======================================
 
@@ -167,8 +153,37 @@ Example::
 The Statament
 --------------------------
 
-A statament is a expression end with ';'. The ';' of last expression in '[...]'
-can be omiited.
+A statament is a expression end with ';' or other statament with a key work.
+The ';' of last expression in '[...]' can be omiited.
+
+Some Statament::
+
+    return, assert, raise, continue, break, import
+    if, for, while, goto
+
+
+Built ins
+==========================
+
+Built in Functions
+----------------------------
+
+::
+
+    sum(), len(), int(), str(), float()
+    open(), byte_to_int(), int_to_byte()
+
+Example::
+
+    [ld = [1,2,3];
+     sum_num = sum(ld)]
+
+Built in Object
+------------------------
+
+::
+
+    fileself, None
 
 
 The '[...]' Part
@@ -202,7 +217,8 @@ The element types include::
     float, double
     string
 
-In '<...>', the value of element or elements can be assigned with a value or values.
+In '<...>', the value of element or values of elements can compare with
+a value or values.
 
 Example::
 
@@ -210,9 +226,9 @@ Example::
     [2]<char; =[5, 18]> 
     [4]<float; [2]=3.14>
 
-The first line indicate the assignment of 19 to element. The second is the
-assignment of 5, 18 to the elements. The third show how to assign 3.14 to the
-third elemet of the data block.
+The first line indicate the the value store in element should equals 19.
+The second indicate that the stored values should same as [5, 18].
+The third show the value should in third elemet of elements should equals to 3.14.
 
 
 In '<...>', a variable can be introduced to refer to element or elements representd by
@@ -254,6 +270,7 @@ The labels defined in FLML::
     greateqthan number  the element should great equal than a specific value
     lesseqthan  number  the element should less equal than a specific value
     choices     {items...}  items the element can be
+    elechoices
     elementnum  the value calculated in '[...]' is number of element in '<...>' or '{...}' 
     offset      the value calculated in '[...]' is offset from begain of file
     bytelen     the value calculated in '[...]' is length of byte of block
