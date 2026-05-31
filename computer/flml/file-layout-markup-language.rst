@@ -383,7 +383,7 @@ The jump sentence
 
 .. code::
 
-    [goto offset] {
+    [goto (offset)] {
         FLML sentences
     }
 
@@ -397,7 +397,7 @@ The offset if offset from file's begaining in byte.
 Example::
 
     [x = 1024]
-    [goto x]{
+    [goto (x)]{
         [2]<int>
         [4]<float>
     }
@@ -458,11 +458,11 @@ For example::
 Line comment
 ------------------------
 
-A line start with '//', the line is a comment.
+A line start with '#', the line is a comment.
 
 For example::
 
-    // [3]<int>
+    # [3]<int>
 
 Block comment
 -------------------------
