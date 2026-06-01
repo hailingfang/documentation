@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Hailing Fang's Docs"
-copyright = '2023-2025, Hailing Fang'
+copyright = '2023-2026, Hailing Fang'
 author = 'Hailing Fang'
-release = '0.2.1'
+release = '0.3.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -49,6 +49,5 @@ html_favicon = 'favicon.png'
 
 
 # Add Google Analytics tracking code
-html_static_path = ["_static"]
 html_js_files = ['https://www.googletagmanager.com/gtag/js?id=G-VWP9HESP22', 'google_analytics.js']
 
