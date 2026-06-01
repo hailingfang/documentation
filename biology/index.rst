@@ -3,7 +3,7 @@ Biology
 
 .. toctree::
     :maxdepth: 3
-    :numbered: 3
+    :numbered: 0
 
     genomic-features
     subsystem-of-cell

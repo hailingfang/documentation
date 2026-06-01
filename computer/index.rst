@@ -4,7 +4,7 @@ Computer
 
 .. toctree::
    :maxdepth: 3
-   :numbered: 3
+   :numbered: 0
 
    firewall
    software-build/index
